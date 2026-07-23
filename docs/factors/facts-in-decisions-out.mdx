@@ -1,0 +1,122 @@
+---
+sidebar_position: 5
+title: Facts In, Decisions Out
+hide_title: true
+tags:
+  - Factor
+principle: "Governance decisions should be computed from structured requests and return explicit results."
+---
+
+<GovernanceFactor title="Facts In, Decisions Out">
+
+<Principle>
+Governance decisions should be computed from structured requests and return explicit results.
+</Principle>
+
+<Problem>
+
+Without a visible decision boundary and a defined request shape, governance
+becomes a vague mixture of scripts, tickets and human memory. Hidden chains and
+UI-only toggles cannot explain why they permitted or denied—or what obligations
+followed.
+
+</Problem>
+
+<PositiveExamples>
+
+- “May this agent call this tool on this dataset?”
+- “May this branch be promoted?”
+- “May this app raise this FDC3 intent with this context?”
+- “Permit with obligations: encrypt, notify, record.”
+
+</PositiveExamples>
+
+<NegativeExamples>
+
+- Hidden script chains
+- Approval by tribal knowledge
+- UI-only toggles with no decision record
+- Policies that cannot explain why they denied
+
+</NegativeExamples>
+
+<Tools>
+
+- Cedar
+- OPA
+- XACML
+- DMN
+- Gatekeeper
+- FDC3 app directories and intents
+
+</Tools>
+
+<AntiPatterns>
+
+- Policy as workflow
+- Assumptions instead of facts
+- Allow/deny with no rationale
+
+</AntiPatterns>
+
+<Diagram>
+
+A structured request enters a policy engine; an explicit result—with reasons and obligations—comes out.
+
+```mermaid
+flowchart LR
+Request[Principal Action Resource Context] --> Engine
+Engine --> Result[Permit Deny Obligations Reasons]
+```
+
+</Diagram>
+
+<Discussion>
+
+The strongest lineage behind this factor runs through policy and decision
+engines. XACML formalised request/response evaluation and obligations; Cedar
+defines principals, resources, actions and optional context in schema; OPA
+accepts structured input and can return arbitrary structured output; DMN
+provides a business-readable format for explicit decision logic. These systems
+differ in style, but they agree on the important thing: the decision boundary
+must be visible and the request must have a defined shape.
+
+That makes this factor easy to explain in plain language. Governance should
+answer concrete questions with concrete answers. It should be possible to
+inspect what facts were considered, which policy logic applied, what result was
+produced, and what obligations or remediation followed. Without that boundary,
+governance becomes a vague mixture of scripts, tickets and human memory.
+
+</Discussion>
+
+<RelatedPrinciples>
+
+- Separate Facts from Decisions
+- Typed Context In
+- Explicit Decisions Out
+- Decisions Are Data
+- Policy Is Not Workflow
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
+- [Continuous Governance](/docs/factors/continuous-governance)
+- [Evidence by Default](/docs/factors/evidence-by-default)
+
+</RelatedPrinciples>
+
+<Interactions>
+
+This factor depends on [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
+and feeds [Continuous Governance](/docs/factors/continuous-governance) and
+[Evidence by Default](/docs/factors/evidence-by-default).
+
+</Interactions>
+
+<References>
+
+- [Cedar](https://www.cedarpolicy.com/)
+- [Open Policy Agent](https://www.openpolicyagent.org/)
+- [FDC3](https://fdc3.finos.org/)
+- [Gemara](https://gemara.openssf.org/)
+
+</References>
+
+</GovernanceFactor>

@@ -1,0 +1,173 @@
+.factor {
+  max-width: 72ch;
+  color: var(--gf-ink, var(--ifm-font-color-base));
+}
+
+.header {
+  margin: 0 0 2.75rem;
+  padding: 0 0 2rem;
+  border-bottom: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  background: var(--gf-accent-soft, var(--ifm-color-emphasis-100));
+  border-radius: 4px;
+}
+
+.title {
+  margin: 0 0 1.35rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(2rem, 4vw, 2.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.principle {
+  margin: 0;
+  padding: 1.15rem 1.35rem;
+  background: var(--gf-accent-soft, var(--ifm-color-emphasis-100));
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 0 8px 8px 0;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.principle :global(p) {
+  margin: 0;
+}
+
+.principleLabel {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+}
+
+.section {
+  margin: 0 0 1.75rem;
+  padding: 1.25rem 1.35rem 1.35rem;
+  background: var(--gf-surface-raised, var(--ifm-background-surface-color));
+  border: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+  border-left-width: 4px;
+  border-left-color: var(--gf-rule, var(--ifm-color-emphasis-300));
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 1px 2px rgba(20, 40, 28, 0.03);
+}
+
+.sectionPositive {
+  border-left-color: var(--gf-positive, var(--ifm-color-primary));
+  background: linear-gradient(
+    105deg,
+    var(--gf-positive-soft, transparent) 0%,
+    var(--gf-surface-raised, var(--ifm-background-surface-color)) 42%
+  );
+}
+
+.sectionNegative {
+  border-left-color: var(--gf-negative, #8b3a2a);
+  background: linear-gradient(
+    105deg,
+    var(--gf-negative-soft, transparent) 0%,
+    var(--gf-surface-raised, var(--ifm-background-surface-color)) 42%
+  );
+}
+
+.sectionWarn {
+  border-left-color: var(--gf-warn, #8a6a1a);
+  background: linear-gradient(
+    105deg,
+    var(--gf-warn-soft, transparent) 0%,
+    var(--gf-surface-raised, var(--ifm-background-surface-color)) 42%
+  );
+}
+
+.sectionAccent {
+  border-left-color: var(--ifm-color-primary);
+}
+
+.sectionTitle {
+  margin: 0 0 0.85rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--gf-ink, var(--ifm-heading-color));
+}
+
+.sectionBody {
+  color: var(--gf-ink, var(--ifm-font-color-base));
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.listContent :global(ul) {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.listContent :global(li) {
+  padding-left: 0.2rem;
+}
+
+.listContent :global(li + li) {
+  margin-top: 0.55rem;
+}
+
+.listContent :global(li::marker) {
+  color: var(--ifm-color-primary);
+}
+
+.sectionNegative .listContent :global(li::marker),
+.sectionWarn .listContent :global(li::marker) {
+  color: inherit;
+  opacity: 0.55;
+}
+
+.prose {
+  line-height: 1.7;
+}
+
+.prose :global(p) {
+  margin: 0 0 1rem;
+}
+
+.prose :global(p:last-child) {
+  margin-bottom: 0;
+}
+
+.prose :global(a) {
+  font-weight: 500;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.diagramContent :global(.docusaurus-mermaid-container),
+.diagramContent :global(pre) {
+  margin: 1.1rem 0 0;
+  padding: 1.15rem;
+  background: var(--gf-accent-soft, var(--ifm-color-emphasis-100));
+  border: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.diagramContent :global(.docusaurus-mermaid-container:first-child),
+.diagramContent :global(pre:first-child) {
+  margin-top: 0;
+}

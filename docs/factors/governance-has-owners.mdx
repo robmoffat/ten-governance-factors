@@ -1,0 +1,127 @@
+---
+sidebar_position: 10
+title: Governance Has Owners
+hide_title: true
+tags:
+  - Factor
+principle: "Every governed thing must have accountable humans."
+---
+
+<GovernanceFactor title="Governance Has Owners">
+
+<Principle>
+Every governed thing must have accountable humans.
+</Principle>
+
+<Problem>
+
+One thing that repeatedly kills governance initiatives is that systems,
+datasets, repositories and AI agents become governance orphans. If nobody owns
+it, nobody governs it—and the other factors become informational rather than
+operational.
+
+</Problem>
+
+<PositiveExamples>
+
+- A repo with a named owning team
+- An AI-agent twin with an approver and escalation path
+- A data product with a risk owner
+- A service catalogue entry with steward and contact
+- Time-bounded exceptions assigned to named approvers
+
+</PositiveExamples>
+
+<NegativeExamples>
+
+- “Platform owns it” with no person or team
+- Orphaned agents
+- Datasets with no steward
+- Expired exceptions with no reviewer
+- Incident actions assigned to nobody
+
+</NegativeExamples>
+
+<Tools>
+
+- Backstage ownership relations
+- CMDB records
+- Issue trackers with code owners and approvers
+- IAM / group directories
+- Service catalogues
+
+</Tools>
+
+<AntiPatterns>
+
+- Shared responsibility as nobody’s responsibility
+- Unnamed approvers
+- Governance orphans
+
+</AntiPatterns>
+
+<Diagram>
+
+Ownership connects things to accountable humans: owners, approvers and escalation paths.
+
+```mermaid
+flowchart LR
+Thing --> Owner
+Thing --> Approver
+Thing --> Escalation
+Owner --> Decision
+```
+
+</Diagram>
+
+<Discussion>
+
+One thing that repeatedly kills governance initiatives is that systems,
+datasets, repositories and AI agents become governance orphans.
+
+Backstage, Kubernetes, DORA, SRE and modern platform engineering all discovered
+the same thing: if nobody owns it, nobody governs it.
+
+A governance twin should therefore include owners, approvers, escalation paths,
+delegated authority and stewardship responsibilities. Backstage’s catalogue
+model is especially useful here because it makes ownership and relations visible
+at the entity level, even while explicitly warning that catalogue ownership is
+not itself a run-time authorisation system. That is exactly the right boundary
+for this factor: ownership is about accountability, not magical permission
+inheritance.
+
+This is especially important for AI systems, where ownership is often diffuse.
+Who owns this agent? Who accepts this risk? Who can approve an exception? Who
+gets paged? Without ownership, all the other factors become informational rather
+than operational.
+
+</Discussion>
+
+<RelatedPrinciples>
+
+- Everything Has an Owner
+- Accountability Is Explicit
+- Governance Follows Responsibility
+- Named Risk Owners
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin)
+- [Continuous Governance](/docs/factors/continuous-governance)
+- [Governance Is Composable](/docs/factors/governance-is-composable)
+
+</RelatedPrinciples>
+
+<Interactions>
+
+This factor depends on [Build a Governance Twin](/docs/factors/build-a-governance-twin)
+and strengthens [Continuous Governance](/docs/factors/continuous-governance) and
+[Governance Is Composable](/docs/factors/governance-is-composable).
+
+</Interactions>
+
+<References>
+
+- [Backstage](https://backstage.io/)
+- [GitHub CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+
+</References>
+
+</GovernanceFactor>

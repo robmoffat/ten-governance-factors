@@ -1,0 +1,130 @@
+---
+sidebar_position: 8
+title: Govern Dependencies
+hide_title: true
+tags:
+  - Factor
+principle: "Your risks are inherited from your dependencies."
+---
+
+<GovernanceFactor title="Govern Dependencies">
+
+<Principle>
+Your risks are inherited from your dependencies.
+</Principle>
+
+<Problem>
+
+Systems inherit risk from the things they depend upon. Flat inventories and
+“just libraries” thinking leave pipelines, tools, models, services and
+organisations off the graph—so a green local status can sit on a red edge.
+
+</Problem>
+
+<PositiveExamples>
+
+- SBOM-backed release gates
+- App twins showing upstream services and data stores
+- AI-agent policy that distinguishes approved and unapproved tools
+- Build pipelines that reason about signing keys and dependencies
+- Service catalogues with dependency relations
+
+</PositiveExamples>
+
+<NegativeExamples>
+
+- Treating dependencies as “just libraries”
+- Green status on a service with a red pipeline
+- Approving an agent without tool or model provenance
+- Ignoring transitive risk
+
+</NegativeExamples>
+
+<Tools>
+
+- CycloneDX
+- Backstage relations
+- Cloud Asset Inventory
+- AWS Config
+- ServiceNow CMDB
+- NIST C-SCRM guidance
+
+</Tools>
+
+<AntiPatterns>
+
+- Flat inventories
+- First-order thinking
+- Isolating assets from the graph they live in
+
+</AntiPatterns>
+
+<Diagram>
+
+Risk propagates across dependency edges—not only inside isolated nodes.
+
+```mermaid
+flowchart LR
+App --> Pipeline
+App --> Database
+Agent --> Tool
+Service --> Library
+Risk --> App
+Risk --> Agent
+```
+
+</Diagram>
+
+<Discussion>
+
+Modern incidents and attacks increasingly look like
+`Dependency → Dependency → Dependency → Compromise` or
+`Agent → Tool → Data → Exfiltration`. The important point is simple: systems
+inherit risk from the things they depend upon. NIST’s supply-chain risk guidance
+centres exactly that problem, and standards such as CycloneDX exist to make
+component and dependency relationships visible in machine-readable form.
+Backstage, CMDBs, AWS Config and Cloud Asset Inventory make the same idea
+operational by tracking relationships between entities and resources.
+
+Dependencies are not just libraries. A dependency may be a repository, a human
+approver, a cloud service, an AI tool, a model, a workflow or another
+organisation. The governance twin therefore needs to represent
+`Thing → Depends on → Other Thing`, because posture propagates across those
+edges. That is what makes a supply-chain lens, an agent-tool lens and a
+service-ownership lens part of the same governance architecture rather than
+three separate conversations.
+
+</Discussion>
+
+<RelatedPrinciples>
+
+- Relationships Matter
+- Dependencies Are First-Class
+- Attack Paths Matter
+- Composition Creates Risk
+- Graph the Relationships
+- Software Supply Chain Visibility
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin)
+- [Evidence by Default](/docs/factors/evidence-by-default)
+- [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately)
+
+</RelatedPrinciples>
+
+<Interactions>
+
+This factor leans on [Build a Governance Twin](/docs/factors/build-a-governance-twin)
+and [Evidence by Default](/docs/factors/evidence-by-default), and it sharpens
+[Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately).
+
+</Interactions>
+
+<References>
+
+- [CycloneDX](https://cyclonedx.org/)
+- [Backstage](https://backstage.io/)
+- [AWS Config](https://aws.amazon.com/config/)
+- [NIST SP 800-161](https://csrc.nist.gov/pubs/sp/800/161/r1/final)
+
+</References>
+
+</GovernanceFactor>

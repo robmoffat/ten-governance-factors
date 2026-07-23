@@ -1,0 +1,121 @@
+---
+sidebar_position: 9
+title: Governance Is Composable
+hide_title: true
+tags:
+  - Factor
+principle: "Build governance from smaller governance artefacts."
+---
+
+<GovernanceFactor title="Governance Is Composable">
+
+<Principle>
+Build governance from smaller governance artefacts.
+</Principle>
+
+<Problem>
+
+Large organisations are federated. If every new product, agent or regulator
+requires a fresh governance stack—or a giant monolithic policy file—the model
+has already failed. Without import, overlay, precedence and traceable
+exceptions, scale becomes replacement rather than composition.
+
+</Problem>
+
+<PositiveExamples>
+
+- Enterprise controls tailored into team profiles
+- Shared policy templates with local bindings
+- Layered exceptions
+- One catalogue reused across multiple twins
+- Policy sets combined with explicit precedence
+
+</PositiveExamples>
+
+<NegativeExamples>
+
+- One giant monolithic policy file
+- Copy-paste forks for every team
+- Local spreadsheets that duplicate central controls
+- “Replace the whole framework” governance programmes
+
+</NegativeExamples>
+
+<Tools>
+
+- OSCAL profiles
+- Cedar policy templates
+- XACML combining algorithms
+- Gemara mappings and layered artefacts
+
+</Tools>
+
+<AntiPatterns>
+
+- Monolith governance
+- Uncontrolled forks
+- Inheritance with no override rules
+
+</AntiPatterns>
+
+<Diagram>
+
+Baselines, overlays and bindings assemble into the policy that is actually evaluated.
+
+```mermaid
+flowchart LR
+BasePolicy --> TeamProfile --> AppPolicy
+BaseCatalog --> Overlay --> Assessment
+Template --> Binding --> Decision
+```
+
+</Diagram>
+
+<Discussion>
+
+Large organisations are federated. They have enterprise policies, business-unit
+policies, project policies, customer overlays, and time-bounded exceptions.
+Governance systems therefore need composition rather than replacement. OSCAL
+profiles are a particularly clean example: they can import, merge and modify
+controls from one or more catalogues, and can themselves serve as sources for
+further profiles. XACML formalises policy and rule-combining algorithms, while
+Cedar supports reusable policy templates that are later bound to specific
+principals and resources.
+
+This matters because scale is mostly a composition problem. If every new
+product, agent or regulator requires a fresh governance stack, the model has
+already failed. A better approach is to assemble governance from reusable parts:
+stable semantics, reusable controls, local overlays, explicit precedence and
+traceable exceptions. That makes governance flexible without making it vague.
+
+</Discussion>
+
+<RelatedPrinciples>
+
+- Federated Governance
+- Policy Layering
+- Policy Reuse
+- Profiles and Overlays
+- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled)
+- [Governance Has Owners](/docs/factors/governance-has-owners)
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
+
+</RelatedPrinciples>
+
+<Interactions>
+
+This factor builds on [Governance is Version Controlled](/docs/factors/governance-is-version-controlled)
+and supports [Governance Has Owners](/docs/factors/governance-has-owners) and
+[Facts In, Decisions Out](/docs/factors/facts-in-decisions-out).
+
+</Interactions>
+
+<References>
+
+- [OSCAL](https://pages.nist.gov/OSCAL/)
+- [Cedar](https://www.cedarpolicy.com/)
+- [Gemara](https://gemara.openssf.org/)
+
+</References>
+
+</GovernanceFactor>

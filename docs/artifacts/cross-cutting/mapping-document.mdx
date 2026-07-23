@@ -1,0 +1,123 @@
+---
+sidebar_position: 2
+title: Mapping Document
+sidebar_label: Mapping Document
+hide_title: true
+tags:
+  - Artifact
+  - Cross-cutting
+description: "Crosswalks between Gemara entries and external frameworks."
+---
+
+<GovernanceArtifact
+  title="Mapping Document"
+  gemaraType="MappingDocument"
+  layer="cross"
+>
+
+<Purpose>
+Declare typed mappings between Gemara entries and external catalogs or frameworks.
+</Purpose>
+
+<LayerRole>
+Cross-cutting. Mapping documents do not sit in a single layer; they relate local guidance, controls, threats or risks to outside taxonomies.
+</LayerRole>
+
+<WhyYouNeedThis>
+Inline “see also OSR” comments do not scale. Without MappingDocument (or equivalent declared mappings), crosswalks rot inside individual YAML files and cannot be reused.
+</WhyYouNeedThis>
+
+<Contains>
+
+- Source and target references
+- **Mapping** entries with relationship types (implements, equivalent, subsumes, no-match, …)
+- Typed links to guidelines, controls, threats, risks, etc.
+
+</Contains>
+
+<KeyFields>
+
+- `source-reference` / `target-reference`
+- `mappings[]` with relationship and entry ids
+- Version metadata for both sides of the crosswalk
+
+</KeyFields>
+
+<LinksUpstream>
+
+- Local [Guidance](/docs/artifacts/layer-1/guidance), [Control](/docs/artifacts/layer-2/control), [Threat](/docs/artifacts/layer-2/threat), [Risk](/docs/artifacts/layer-3/risk)
+- External frameworks (OSCAL profiles, FINOS OSR, industry baselines)
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- Reporting and assurance that must show coverage of external obligations
+- Gap analysis when relationships are `no-match`
+
+</LinksDownstream>
+
+<Example>
+
+When mappings are not yet a separate MappingDocument, they often start embedded in a catalog. A threat catalog can declare an external framework and import entries:
+
+```yaml
+metadata:
+  mapping-references:
+    - id: finos-osr-risks
+      title: FINOS Open Source Readiness Risks
+      version: "2023"
+      url: https://osr.finos.org/docs/bok/Risks/Introduction
+      description: >
+        Enterprise open source risk taxonomy from the FINOS Open Source
+        Readiness Body of Knowledge.
+
+imports:
+  - reference-id: finos-osr-risks
+    entries:
+      - reference-id: data-leakage-risk
+        remarks: https://osr.finos.org/docs/bok/Risks/Data-Leakage-Risk
+```
+
+A dedicated MappingDocument lifts those links into a reusable crosswalk — for example relating Gemara threat `sensitive-data-disclosure` to FINOS OSR `data-leakage-risk` with a pinned framework version — so other catalogs can import the mapping instead of repeating URLs.
+
+</Example>
+
+<AntiPatterns>
+
+- One-off URL comments instead of declared mappings
+- Mapping spreadsheets disconnected from entry ids
+- Claiming “equivalent” without version pins on both sides
+
+</AntiPatterns>
+
+<Discussion>
+
+Composable governance needs explicit crosswalks. MappingDocument is how Gemara keeps external frameworks related without forcing every catalog to become a dumping ground for foreign ids.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Threat](/docs/artifacts/layer-2/threat)
+- [Control](/docs/artifacts/layer-2/control)
+- [Guidance](/docs/artifacts/layer-1/guidance)
+- [Risk](/docs/artifacts/layer-3/risk)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Governance Is Composable](/docs/factors/governance-is-composable)
+- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara schemas — MappingDocument](https://gemara.openssf.org/schema/)
+- [FINOS OSR Risks](https://osr.finos.org/docs/bok/Risks/Introduction)
+
+</References>
+
+</GovernanceArtifact>

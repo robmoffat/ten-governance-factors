@@ -1,0 +1,152 @@
+---
+sidebar_position: 1
+title: Audit Log
+sidebar_label: Audit Log
+hide_title: true
+tags:
+  - Artifact
+  - Layer 7
+description: "Program-level review of strengths, observations, gaps and findings over a period."
+---
+
+<GovernanceArtifact
+  title="Audit Log"
+  gemaraType="AuditLog"
+  layer={7}
+>
+
+<Purpose>
+Record an efficacy review of prior outputs: strengths, observations, gaps and findings against policy criteria.
+</Purpose>
+
+<LayerRole>
+Layer 7 — measurement. Audit looks across Layer 5/6 evidence (and other sources) over a period, not only at a single merge.
+</LayerRole>
+
+<WhyYouNeedThis>
+Point-in-time evaluations do not prove the program works. Audit logs bind criteria to evidence and recommendations so governance can improve, not only gate.
+</WhyYouNeedThis>
+
+<Contains>
+
+- **AuditResult** entries typed as strength / observation / gap / finding
+- Criteria references (controls, plans, guidelines, …)
+- Evidence references (evaluation/enforcement logs, exports)
+- Optional recommendations
+
+</Contains>
+
+<KeyFields>
+
+- Period / scope metadata for the audit
+- `criteria-reference` and `evidence[]` mappings
+- Result classification and narrative description
+
+</KeyFields>
+
+<LinksUpstream>
+
+- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log), [Enforcement Log](/docs/artifacts/layer-6/enforcement-log)
+- [Policy](/docs/artifacts/layer-3/policy), [Control](/docs/artifacts/layer-2/control), [Guidance](/docs/artifacts/layer-1/guidance)
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- Program remediation backlogs and management reporting
+- Updates to catalogs and policy in later versions
+
+</LinksDownstream>
+
+<Example>
+
+Quarterly audit strength citing the Layer 5/6 logs for the PR #417 data-leakage story:
+
+```yaml
+metadata:
+  id: foss-audit-q2-2026
+  type: AuditLog
+  date: "2026-07-21T00:00:00Z"
+  description: >
+    Q2 2026 audit of FOSS contribution program conformance against the
+    FOSS Contribution Policy and control catalog.
+
+summary: >
+  Pre-publication data-leakage controls (foss-ctl-008) are operating effectively:
+  a failed secret scan was blocked before merge and enforcement was recorded.
+  Gaps remain in annual recertification coverage and contributor training
+  completion rates for active FOSS participants.
+
+results:
+  - id: ar-q2-008-strength
+    title: Data-leakage control blocked credential exposure before merge
+    type: Strength
+    description: >
+      Evaluation and enforcement logs for internal-tools PR #417 demonstrate that
+      foss-ctl-008-data-leakage-review detected an uncleared AWS access key,
+      halted the assessment pipeline, blocked merge, and notified the contributor
+      and OSPO.
+    criteria-reference:
+      reference-id: foss-contribution-controls
+      entries:
+        - reference-id: foss-ctl-008-data-leakage-review
+        - reference-id: foss-ctl-008-data-leakage-review.ar01
+    evidence:
+      - id: ev-q2-008-eval
+        type: EvaluationLog
+        location:
+          reference-id: foss-eval-internal-tools-pr417
+        description: >
+          Failed evaluation for foss-ctl-008 with Gitleaks finding
+          GL-2026-07-06-00417-01.
+        collected: "2026-07-06T09:15:09Z"
+      - id: ev-q2-008-enforce
+        type: EnforcementLog
+        location:
+          reference-id: foss-enforcement-internal-tools-pr417
+        description: >
+          Merge block and OSPO notification tied to failed foss-ctl-008
+          assessment.
+        collected: "2026-07-06T09:15:12Z"
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Audits that only attach screenshots
+- Findings with no criteria reference
+- Audits that ignore enforcement evidence
+
+</AntiPatterns>
+
+<Discussion>
+
+Audit is continuous monitoring’s reflective mode. Structured audit logs keep Layer 7 aligned with the same ids used in definition and measurement—so improvement actions stay traceable.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log)
+- [Enforcement Log](/docs/artifacts/layer-6/enforcement-log)
+- [Policy](/docs/artifacts/layer-3/policy)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Evidence by Default](/docs/factors/evidence-by-default)
+- [Continuous Governance](/docs/factors/continuous-governance)
+- [Governance Has Owners](/docs/factors/governance-has-owners)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas — AuditLog](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

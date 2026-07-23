@@ -1,13 +1,14 @@
 ---
 sidebar_position: 10
 title: Governance Has Owners
+sidebar_label: X. Governance Has Owners
 hide_title: true
 tags:
   - Factor
-principle: "Every governed thing must have accountable humans."
+description: "Every governed thing must have accountable humans."
 ---
 
-<GovernanceFactor title="Governance Has Owners">
+<GovernanceFactor title="Governance Has Owners" number={10}>
 
 <Principle>
 Every governed thing must have accountable humans.
@@ -24,21 +25,49 @@ operational.
 
 <PositiveExamples>
 
-- A repo with a named owning team
-- An AI-agent twin with an approver and escalation path
-- A data product with a risk owner
-- A service catalogue entry with steward and contact
-- Time-bounded exceptions assigned to named approvers
+<RevealItem title="A repo with a named owning team">
+Clear accountability for a concrete entity, not a nickname with no steward.
+</RevealItem>
+
+<RevealItem title="An AI-agent twin with an approver and escalation path">
+Ownership for agents where risk acceptance and paging paths are often diffuse.
+</RevealItem>
+
+<RevealItem title="A data product with a risk owner">
+Someone empowered to accept or refuse risk for a governed dataset.
+</RevealItem>
+
+<RevealItem title="A service catalogue entry with steward and contact">
+Discoverability paired with a human who can answer and escalate.
+</RevealItem>
+
+<RevealItem title="Time-bounded exceptions assigned to named approvers">
+Exceptions that expire to a person, not to an orphaned inbox.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- “Platform owns it” with no person or team
-- Orphaned agents
-- Datasets with no steward
-- Expired exceptions with no reviewer
-- Incident actions assigned to nobody
+<RevealItem title="“Platform owns it” with no person or team">
+Shared branding that functions as nobody’s responsibility.
+</RevealItem>
+
+<RevealItem title="Orphaned agents">
+AI systems with posture but no accountable human behind them.
+</RevealItem>
+
+<RevealItem title="Datasets with no steward">
+Data products that cannot escalate, remediate or accept risk.
+</RevealItem>
+
+<RevealItem title="Expired exceptions with no reviewer">
+Deviation state that outlives accountability.
+</RevealItem>
+
+<RevealItem title="Incident actions assigned to nobody">
+Remediation that cannot land because ownership was never modelled.
+</RevealItem>
 
 </NegativeExamples>
 

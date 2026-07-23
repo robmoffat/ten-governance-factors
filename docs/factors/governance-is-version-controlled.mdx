@@ -1,13 +1,14 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Governance is Version Controlled
+sidebar_label: III. Governance is Version Controlled
 hide_title: true
 tags:
   - Factor
-principle: "Treat governance artefacts as code: versioned, testable, reviewable, composable and deployable."
+description: "Treat governance artefacts as code: versioned, testable, reviewable, composable and deployable."
 ---
 
-<GovernanceFactor title="Governance is Version Controlled">
+<GovernanceFactor title="Governance is Version Controlled" number={3}>
 
 <Principle>
 Treat governance artefacts as code: versioned, testable, reviewable, composable and deployable.
@@ -25,20 +26,45 @@ delivery.
 
 <PositiveExamples>
 
-- Policies in Git
-- OSCAL control profiles in YAML
-- Exceptions with pull requests and expiry dates
-- Signed provenance documents
-- Machine-readable assessment results
+<RevealItem title="Policies in Git">
+Plaintext policy that can be diffed, reviewed and promoted like any other code change.
+</RevealItem>
+
+<RevealItem title="OSCAL control profiles in YAML">
+Machine-readable control catalogues and profiles that tools can validate and compose.
+</RevealItem>
+
+<RevealItem title="Exceptions with pull requests and expiry dates">
+Deviations tracked as reviewable artefacts with an explicit lifecycle, not tribal memory.
+</RevealItem>
+
+<RevealItem title="Signed provenance documents">
+Verifiable build and release claims stored as first-class artefacts.
+</RevealItem>
+
+<RevealItem title="Machine-readable assessment results">
+Assessment outputs that systems can consume without reconstructing PDF narratives.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Screenshot-based evidence packs
-- PDF-only controls
-- Spreadsheet-only exception logs
-- Untracked policy edits in wikis
+<RevealItem title="Screenshot-based evidence packs">
+Evidence that cannot be diffed, verified or regenerated from the system of record.
+</RevealItem>
+
+<RevealItem title="PDF-only controls">
+Controls trapped in prose formats that machines cannot execute or compose.
+</RevealItem>
+
+<RevealItem title="Spreadsheet-only exception logs">
+Exception state that drifts, forks and disappears outside version control.
+</RevealItem>
+
+<RevealItem title="Untracked policy edits in wikis">
+Silent changes with no review history, tests or rollback path.
+</RevealItem>
 
 </NegativeExamples>
 
@@ -85,7 +111,7 @@ Across those ecosystems, the direction is the same: governance that cannot be
 diffed, reviewed, validated and deployed by machines does not keep up with
 modern delivery.
 
-For the microsite, the key point is not that every moral judgement becomes code.
+For Ten Factor Governance, the key point is not that every moral judgement becomes code.
 It is that the operational part of governance should use the disciplines that
 already make software reliable: plaintext, version history, tests, review,
 promotion and rollback. Human-readable policy still matters, but the executable

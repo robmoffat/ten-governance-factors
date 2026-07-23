@@ -1,13 +1,14 @@
 ---
 sidebar_position: 7
 title: Continuous Governance
+sidebar_label: VII. Continuous Governance
 hide_title: true
 tags:
   - Factor
-principle: "Governance should run continuously and, where appropriate, in the path of change and execution."
+description: "Governance should run continuously and, where appropriate, in the path of change and execution."
 ---
 
-<GovernanceFactor title="Continuous Governance">
+<GovernanceFactor title="Continuous Governance" number={7}>
 
 <Principle>
 Governance should run continuously and, where appropriate, in the path of change and execution.
@@ -23,20 +24,45 @@ action leave risk in the path of change without interruption or remediation.
 
 <PositiveExamples>
 
-- Admission-time checks on deploys
-- Run-time audits of existing resources
-- A denied production release that opens a remediation flow
-- Conditional permit for an AI action with logging and approval
-- Continuous posture updates in a twin
+<RevealItem title="Admission-time checks on deploys">
+Inline evaluation before unsafe state is persisted.
+</RevealItem>
+
+<RevealItem title="Run-time audits of existing resources">
+Continuous re-checking of what already exists, not only what is changing.
+</RevealItem>
+
+<RevealItem title="A denied production release that opens a remediation flow">
+Enforcement that connects denial to workflow: escalate, fix, re-evaluate.
+</RevealItem>
+
+<RevealItem title="Conditional permit for an AI action with logging and approval">
+Inline control that is not only hard deny—obligations and human review in the path.
+</RevealItem>
+
+<RevealItem title="Continuous posture updates in a twin">
+Twin state that moves as reality moves, ready for the next decision.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Quarterly-only assessments
-- Reports with no effect
-- Failed checks that nobody consumes
-- Approvals that happen after the action
+<RevealItem title="Quarterly-only assessments">
+Observational cadence that cannot interrupt risky change in time.
+</RevealItem>
+
+<RevealItem title="Reports with no effect">
+Governance output that nobody consumes to enforce or remediate.
+</RevealItem>
+
+<RevealItem title="Failed checks that nobody consumes">
+Signals without a closed loop back into decisioning or ownership.
+</RevealItem>
+
+<RevealItem title="Approvals that happen after the action">
+Post-hoc ceremony that cannot prevent what already occurred.
+</RevealItem>
 
 </NegativeExamples>
 
@@ -81,7 +107,7 @@ Workflow engines add the piece after a decision: approve, escalate, remediate,
 notify, record evidence. Gemara’s measurement layers map well onto the same
 loop: evaluate, enforce, audit.
 
-This is also the factor that keeps the microsite from sounding ceremonial.
+This is also the factor that keeps Ten Factor Governance from sounding ceremonial.
 Governance that only generates reports is observational. Governance that can
 interrupt a risky deployment, deny an unsafe context share, require human review
 for an AI-produced release, or start a remediation flow is substantive. The

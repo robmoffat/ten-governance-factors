@@ -1,0 +1,141 @@
+---
+sidebar_position: 1
+title: Lexicon
+sidebar_label: Lexicon
+hide_title: true
+tags:
+  - Artifact
+  - Cross-cutting
+description: "Shared vocabulary that keeps every other artifact speaking the same language."
+---
+
+<GovernanceArtifact
+  title="Lexicon"
+  gemaraType="Lexicon"
+  layer="cross"
+>
+
+<Purpose>
+Shared terms so catalogs, policies and logs use consistent language.
+</Purpose>
+
+<LayerRole>
+Cross-cutting support for Layer 1 (and anything that cites lexicon terms). Definitions live beside guidance rather than inside measurement logs.
+</LayerRole>
+
+<WhyYouNeedThis>
+Without a lexicon, “CLA”, “company-moderated”, and “sensitive commit” mean different things in guidance, threats and policy. Cross-references and audits become ambiguous.
+</WhyYouNeedThis>
+
+<Contains>
+
+- **LexiconTerm** — `id`, `title`, `definition`
+- Optional synonyms and external references per term
+
+</Contains>
+
+<KeyFields>
+
+- `metadata.id`, `metadata.type: Lexicon`, `metadata.version`, `gemara-version`
+- Term entries with stable ids used elsewhere by reference
+
+</KeyFields>
+
+<LinksUpstream>
+
+- External glossaries, legal definitions, and organisational style guides (as citations on terms)
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Principle](/docs/artifacts/layer-1/principle), [Guidance](/docs/artifacts/layer-1/guidance), and other catalogs may declare `metadata.lexicon`
+- Humans and tools resolve wording consistently when reading controls and logs
+
+</LinksDownstream>
+
+<Example>
+
+A FOSS contribution lexicon defines shared terms such as CLA variants and project categories used across guidance, policy and controls:
+
+```yaml
+terms:
+  - id: cla
+    title: Contributor License Agreement
+    synonyms:
+      - CLA
+    definition: >
+      A contract between the FOSS project and either an individual developer
+      or the company contributing code. CLAs may be categorized as Individual
+      CLAs or Corporate CLAs (CCLA).
+
+  - id: corporate-cla
+    title: Corporate CLA
+    synonyms:
+      - CCLA
+    definition: >
+      Provides direct corporate authority for employees of a company to make
+      contributions with explicit authority for a patent grant in an open
+      source license. Corporate CLAs must be signed by an authorized
+      signatory to be valid.
+
+  - id: company-moderated-project
+    title: Company Moderated Project
+    definition: >
+      An open-source project initiated by the company where the company acts as
+      the primary project moderator or maintainer.
+
+  - id: company-interest-major-project
+    title: Company Interest (Major) Project
+    definition: >
+      An open-source project consumed in company applications, moderated by a
+      non-company entity, where the company wishes to influence project
+      direction or contribute significant functionality.
+
+  - id: personal-contribution-project
+    title: Personal Contribution Project
+    definition: >
+      An open-source contribution effort conducted by employees outside regular
+      company-contracted activities for projects that are not company moderated
+      or company interest and provide no benefit to the company.
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Defining terms only in prose PDFs with no stable ids
+- Duplicating conflicting definitions inside every catalog
+- Renaming terms without updating references
+
+</AntiPatterns>
+
+<Discussion>
+
+A lexicon is small but high leverage. Gemara treats shared vocabulary as a first-class artifact so machine-readable governance does not silently diverge on everyday words. Keep terms short, stable, and cited where they come from outside the organisation.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Guidance](/docs/artifacts/layer-1/guidance)
+- [Principle](/docs/artifacts/layer-1/principle)
+- [Policy](/docs/artifacts/layer-3/policy)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled)
+- [Governance Is Composable](/docs/factors/governance-is-composable)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

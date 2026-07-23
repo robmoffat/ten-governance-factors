@@ -1,13 +1,14 @@
 ---
 sidebar_position: 9
 title: Governance Is Composable
+sidebar_label: IX. Governance Is Composable
 hide_title: true
 tags:
   - Factor
-principle: "Build governance from smaller governance artefacts."
+description: "Build governance from smaller governance artefacts."
 ---
 
-<GovernanceFactor title="Governance Is Composable">
+<GovernanceFactor title="Governance Is Composable" number={9}>
 
 <Principle>
 Build governance from smaller governance artefacts.
@@ -24,20 +25,45 @@ exceptions, scale becomes replacement rather than composition.
 
 <PositiveExamples>
 
-- Enterprise controls tailored into team profiles
-- Shared policy templates with local bindings
-- Layered exceptions
-- One catalogue reused across multiple twins
-- Policy sets combined with explicit precedence
+<RevealItem title="Enterprise controls tailored into team profiles">
+Shared baselines specialised without forking the whole catalogue.
+</RevealItem>
+
+<RevealItem title="Shared policy templates with local bindings">
+Reusable decision shapes applied to specific principals and resources.
+</RevealItem>
+
+<RevealItem title="Layered exceptions">
+Time-bounded overlays with explicit precedence instead of root-policy edits.
+</RevealItem>
+
+<RevealItem title="One catalogue reused across multiple twins">
+Stable semantics applied many times without copy-paste divergence.
+</RevealItem>
+
+<RevealItem title="Policy sets combined with explicit precedence">
+Composition that can show which rule won and why.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- One giant monolithic policy file
-- Copy-paste forks for every team
-- Local spreadsheets that duplicate central controls
-- “Replace the whole framework” governance programmes
+<RevealItem title="One giant monolithic policy file">
+A single blob that cannot be reused, tailored or reasoned about in parts.
+</RevealItem>
+
+<RevealItem title="Copy-paste forks for every team">
+Baselines that diverge until nobody knows what the enterprise standard is.
+</RevealItem>
+
+<RevealItem title="Local spreadsheets that duplicate central controls">
+Shadow catalogues that break composition and auditability.
+</RevealItem>
+
+<RevealItem title="“Replace the whole framework” governance programmes">
+Replacement culture instead of assembling from smaller artefacts.
+</RevealItem>
 
 </NegativeExamples>
 

@@ -1,13 +1,14 @@
 ---
 sidebar_position: 8
 title: Govern Dependencies
+sidebar_label: VIII. Govern Dependencies
 hide_title: true
 tags:
   - Factor
-principle: "Your risks are inherited from your dependencies."
+description: "Your risks are inherited from your dependencies."
 ---
 
-<GovernanceFactor title="Govern Dependencies">
+<GovernanceFactor title="Govern Dependencies" number={8}>
 
 <Principle>
 Your risks are inherited from your dependencies.
@@ -23,20 +24,45 @@ organisations off the graph—so a green local status can sit on a red edge.
 
 <PositiveExamples>
 
-- SBOM-backed release gates
-- App twins showing upstream services and data stores
-- AI-agent policy that distinguishes approved and unapproved tools
-- Build pipelines that reason about signing keys and dependencies
-- Service catalogues with dependency relations
+<RevealItem title="SBOM-backed release gates">
+Promotion decisions that consume dependency evidence, not just local tests.
+</RevealItem>
+
+<RevealItem title="App twins showing upstream services and data stores">
+Inherited posture made visible across service and data edges.
+</RevealItem>
+
+<RevealItem title="AI-agent policy that distinguishes approved and unapproved tools">
+Agent risk governed through the tools and models it depends on.
+</RevealItem>
+
+<RevealItem title="Build pipelines that reason about signing keys and dependencies">
+Factory decisions that treat keys and inputs as first-class trust edges.
+</RevealItem>
+
+<RevealItem title="Service catalogues with dependency relations">
+Catalogue graphs that let governance follow `depends on` links.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Treating dependencies as “just libraries”
-- Green status on a service with a red pipeline
-- Approving an agent without tool or model provenance
-- Ignoring transitive risk
+<RevealItem title="Treating dependencies as “just libraries”">
+Ignores services, tools, models, pipelines and organisations on the trust graph.
+</RevealItem>
+
+<RevealItem title="Green status on a service with a red pipeline">
+Local posture that hides inherited factory or upstream failure.
+</RevealItem>
+
+<RevealItem title="Approving an agent without tool or model provenance">
+Agent trust without knowing what it depends on to act.
+</RevealItem>
+
+<RevealItem title="Ignoring transitive risk">
+Stopping at direct edges while compromise travels further down the chain.
+</RevealItem>
 
 </NegativeExamples>
 

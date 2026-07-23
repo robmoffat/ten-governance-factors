@@ -1,0 +1,160 @@
+---
+sidebar_position: 2
+title: Policy
+sidebar_label: Policy
+hide_title: true
+tags:
+  - Artifact
+  - Layer 3
+description: "Organisation-specific rules: imports, risk treatment, assessment plans, enforcement methods."
+---
+
+<GovernanceArtifact
+  title="Policy"
+  gemaraType="Policy"
+  layer={3}
+>
+
+<Purpose>
+The organisation-specific policy document: scope, imported catalogs, mitigated risks, assessment plans, and enforcement methods.
+</Purpose>
+
+<LayerRole>
+Layer 3 — risk and policy. Policy says *how* assessment requirements are evaluated and what enforcement methods exist when they fail.
+</LayerRole>
+
+<WhyYouNeedThis>
+Controls alone do not schedule evaluation or name gates. Without policy, there is no plan frequency, no accepted evaluation methods, and no declared enforcement behaviour.
+</WhyYouNeedThis>
+
+<Contains>
+
+- Scope (`in` / `out`), contacts / RACI
+- Imports of control and guidance catalogs
+- Mitigated / accepted risks
+- **AssessmentPlan** per requirement (`requirement-id`, frequency, methods, evidence expectations)
+- **AcceptedMethod** for evaluation and enforcement (modes such as gate / remediation)
+
+</Contains>
+
+<KeyFields>
+
+- `imports.catalogs` / guidance imports
+- `adherence.assessment-plans[]`
+- Enforcement method ids cited by [Enforcement Log](/docs/artifacts/layer-6/enforcement-log)
+- `mapping-references` for local and external documents
+
+</KeyFields>
+
+<LinksUpstream>
+
+- [Control](/docs/artifacts/layer-2/control), [Risk](/docs/artifacts/layer-3/risk), [Guidance](/docs/artifacts/layer-1/guidance), [Lexicon](/docs/artifacts/cross-cutting/lexicon)
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log) executes plans
+- [Enforcement Log](/docs/artifacts/layer-6/enforcement-log) applies methods justified by evaluations
+- [Audit Log](/docs/artifacts/layer-7/audit-log) reviews conformance to policy criteria
+
+</LinksDownstream>
+
+<Example>
+
+A FOSS contribution policy imports the control catalog, treats data-leakage as mitigated, and defines a per-contribution assessment plan:
+
+```yaml
+title: Free and Open Source Software Contribution Policy
+
+imports:
+  catalogs:
+    - reference-id: foss-contribution-controls
+  guidance:
+    - reference-id: foss-contribution-guidance
+
+risks:
+  mitigated:
+    - id: risk-data-leakage
+      risk:
+        reference-id: foss-risk-catalog
+        entry-id: data-leakage
+
+assessment-plans:
+  - id: ap-foss-008-data-leakage-review
+    requirement-id: foss-ctl-008-data-leakage-review.ar01
+    frequency: per-contribution
+    evaluation-methods:
+      - id: automated-secret-scan
+        type: Behavioral
+        mode: Automated
+        description: automated secret scan
+      - id: automated-sensitive-data-scan
+        type: Behavioral
+        mode: Automated
+        description: automated sensitive data scan
+      - id: manual-review
+        type: Intent
+        mode: Manual
+        description: manual review
+    evidence-requirements: >
+      Aggregated evaluation outputs from secret scan, sensitive-data scan, and
+      manual reviewer sign-off showing no uncleared prohibited disclosures.
+
+enforcement-methods:
+  - id: em-foss-block-merge
+    type: Gate
+    mode: Automated
+    required: true
+    description: >
+      Block pull-request merge when contribution compliance evaluation fails.
+  - id: em-foss-notify-noncompliance
+    type: Remediation
+    mode: Automated
+    required: true
+    description: >
+      Notify contributor, OSPO, and required reviewers of compliance findings.
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Policy that duplicates control text instead of referencing requirement ids
+- Assessment plans with no frequency or methods
+- Enforcement methods that cannot be cited from logs
+
+</AntiPatterns>
+
+<Discussion>
+
+Policy is the binding organisational layer: it imports shared catalogs and adds the local how—plans, methods, scope, and risk treatment. That is what turns a control library into an operable program.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Control](/docs/artifacts/layer-2/control)
+- [Risk](/docs/artifacts/layer-3/risk)
+- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log)
+- [Enforcement Log](/docs/artifacts/layer-6/enforcement-log)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
+- [Governance Is Composable](/docs/factors/governance-is-composable)
+- [Continuous Governance](/docs/factors/continuous-governance)
+- [Governance Has Owners](/docs/factors/governance-has-owners)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas — Policy](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

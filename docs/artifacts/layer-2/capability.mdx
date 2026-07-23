@@ -1,0 +1,115 @@
+---
+sidebar_position: 1
+title: Capability
+sidebar_label: Capability
+hide_title: true
+tags:
+  - Artifact
+  - Layer 2
+description: "System capabilities that create attack surface for sensitive activities."
+---
+
+<GovernanceArtifact
+  title="Capability"
+  gemaraType="CapabilityCatalog"
+  layer={2}
+>
+
+<Purpose>
+Catalog of system capabilities that create contribution or change attack surface.
+</Purpose>
+
+<LayerRole>
+Layer 2 — threats and controls. Capabilities name *what the system can do* that enables threats, without yet stating the negative outcome.
+</LayerRole>
+
+<WhyYouNeedThis>
+Threats without capabilities float free of the platform. “Data leakage” means little until you know which publication, merge, or identity capabilities make it possible.
+</WhyYouNeedThis>
+
+<Contains>
+
+- **Capability** — `id`, `title`, `description`, optional `group`
+
+</Contains>
+
+<KeyFields>
+
+- Stable ids referenced by [Threat](/docs/artifacts/layer-2/threat) entries
+- Catalog metadata envelope
+
+</KeyFields>
+
+<LinksUpstream>
+
+- Architecture inventories, platform feature lists, SCM/CI capabilities
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Threat](/docs/artifacts/layer-2/threat) lists enabling capabilities
+- Indirectly informs which [Control](/docs/artifacts/layer-2/control) surfaces matter
+
+</LinksDownstream>
+
+<Example>
+
+Capabilities that create contribution attack surface — publishing publicly and contributing from company infrastructure:
+
+```yaml
+capabilities:
+  - id: public-source-publication
+    title: Public Source Publication
+    description: >
+      Ability to publish source code, configuration, or build artifacts to
+      publicly accessible FOSS repositories or collaboration platforms.
+    group: publication
+
+  - id: company-infrastructure-contribution
+    title: Company Infrastructure Contribution
+    description: >
+      Ability to perform FOSS contribution activity from the company network
+      or on company-managed hardware using company-approved tooling.
+    group: infrastructure
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Capabilities that are really threats (“users steal data”)
+- Mixing organisational process into capability catalogs
+- Capabilities never cited by any threat
+
+</AntiPatterns>
+
+<Discussion>
+
+Capabilities keep threat models grounded in the real estate of the platform. They are the Layer 2 input that says which doors exist before you argue which doors are dangerous.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Threat](/docs/artifacts/layer-2/threat)
+- [Vector](/docs/artifacts/layer-1/vector)
+- [Control](/docs/artifacts/layer-2/control)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin)
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas — CapabilityCatalog](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

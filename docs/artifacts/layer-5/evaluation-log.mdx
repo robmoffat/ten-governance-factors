@@ -1,0 +1,153 @@
+---
+sidebar_position: 1
+title: Evaluation Log
+sidebar_label: Evaluation Log
+hide_title: true
+tags:
+  - Artifact
+  - Layer 5
+description: "Measurement of whether assessment plans passed for a concrete target."
+---
+
+<GovernanceArtifact
+  title="Evaluation Log"
+  gemaraType="EvaluationLog"
+  layer={5}
+>
+
+<Purpose>
+Record the result of running policy assessment plans against a concrete target (intent and behaviour evaluation).
+</Purpose>
+
+<LayerRole>
+Layer 5 — measurement. Evaluation logs are evidence that plans ran: steps, pass/fail, messages, links back to controls and requirements.
+</LayerRole>
+
+<WhyYouNeedThis>
+Without evaluation logs, “we scanned it” is hearsay. Continuous governance and audits need attributable results tied to requirement and plan ids.
+</WhyYouNeedThis>
+
+<Contains>
+
+- Log envelope with `target` resource
+- **ControlEvaluation** / **AssessmentLog** entries with `result`, steps, timestamps
+- Links to control, assessment requirement, and assessment plan
+
+</Contains>
+
+<KeyFields>
+
+- `target` (id, name, type, uri, environment, owner)
+- Per-assessment `requirement`, `plan`, `result`, `message`, optional confidence
+- Tool step identifiers for reproducibility
+
+</KeyFields>
+
+<LinksUpstream>
+
+- [Policy](/docs/artifacts/layer-3/policy) assessment plans and methods
+- [Control](/docs/artifacts/layer-2/control) assessment requirements
+- A [Sensitive Activity](/docs/artifacts/layer-4/sensitive-activity) instance as the thing evaluated
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Enforcement Log](/docs/artifacts/layer-6/enforcement-log) justified by failed (or cleared) evaluations
+- [Audit Log](/docs/artifacts/layer-7/audit-log) cites evaluation evidence
+
+</LinksDownstream>
+
+<Example>
+
+Failed per-contribution evaluation for company-moderated PR #417: IP review passes; data-leakage secret scan fails:
+
+```yaml
+metadata:
+  id: foss-eval-internal-tools-pr417
+  type: EvaluationLog
+  date: "2026-07-06T09:15:00Z"
+  description: >
+    Failed per-contribution evaluation for company-moderated pull request #417
+
+result: Failed
+
+target:
+  id: foss-engagement-internal-tools
+  name: example-corp/internal-tools
+  type: Software
+  environment: company-moderated
+
+evaluations:
+  - name: foss-ctl-008-data-leakage-review
+    result: Failed
+    message: >
+      Secret scan detected an uncleared AWS access key in
+      src/config/defaults.yaml.
+    control:
+      reference-id: foss-contribution-controls
+      entry-id: foss-ctl-008-data-leakage-review
+    assessment-logs:
+      - requirement:
+          reference-id: foss-contribution-controls
+          entry-id: foss-ctl-008-data-leakage-review.ar01
+        plan:
+          reference-id: foss-contribution-policy
+          entry-id: ap-foss-008-data-leakage-review
+        description: >
+          Aggregate pre-publication evaluation outputs for prohibited disclosure
+          checks on pull request #417.
+        result: Failed
+        message: >
+          Gitleaks finding GL-2026-07-06-00417-01: AWS access key pattern in
+          src/config/defaults.yaml line 42. Sensitive-data and manual review
+          steps were not executed because the secret scan halted the assessment.
+        steps:
+          - ospo/scanner/gitleaks.scanPullRequest
+        confidence-level: High
+        recommendation: >
+          Remove the credential from the diff, rotate the exposed key, and
+          re-run the compliance pipeline before requesting merge.
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Evaluations with no plan or requirement ids
+- Screenshots instead of structured results
+- Re-running tools without recording the log artifact
+
+</AntiPatterns>
+
+<Discussion>
+
+Evaluation logs are where Evidence by Default becomes literal. They should be normal exhaust of CI and review systems, shaped so enforcement and audit can consume them without translation.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Policy](/docs/artifacts/layer-3/policy)
+- [Control](/docs/artifacts/layer-2/control)
+- [Enforcement Log](/docs/artifacts/layer-6/enforcement-log)
+- [Audit Log](/docs/artifacts/layer-7/audit-log)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Evidence by Default](/docs/factors/evidence-by-default)
+- [Continuous Governance](/docs/factors/continuous-governance)
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas — EvaluationLog](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

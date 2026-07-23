@@ -1,0 +1,128 @@
+---
+sidebar_position: 2
+title: Vector
+sidebar_label: Vector
+hide_title: true
+tags:
+  - Artifact
+  - Layer 1
+description: "Pathways by which contribution or change can go wrong."
+---
+
+<GovernanceArtifact
+  title="Vector"
+  gemaraType="VectorCatalog"
+  layer={1}
+>
+
+<Purpose>
+Catalog of contribution or attack pathways that inform guidance and threats.
+</Purpose>
+
+<LayerRole>
+Layer 1 — definition. Vectors describe *how* harm can unfold before Layer 2 binds them to capabilities and threats.
+</LayerRole>
+
+<WhyYouNeedThis>
+If pathways stay implicit (“people might leak stuff”), threats and controls cannot share a common attack story. Guidance also cannot point at the scenarios it is trying to prevent.
+</WhyYouNeedThis>
+
+<Contains>
+
+- **Vector** — `id`, `title`, `description`, optional `group`, `applicability`
+
+</Contains>
+
+<KeyFields>
+
+- Stable vector ids referenced by guidance and threats
+- Catalog metadata and optional groups
+
+</KeyFields>
+
+<LinksUpstream>
+
+- Incident history, threat intel, and operational anecdotes that name pathways
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Guidance](/docs/artifacts/layer-1/guidance) may cite vectors
+- [Threat](/docs/artifacts/layer-2/threat) entries often list vectors as attack paths
+
+</LinksDownstream>
+
+<Example>
+
+Contribution pathways that can go wrong — sensitive commits, company-identity misuse, and ungoverned contribution:
+
+```yaml
+vectors:
+  - id: accidental-sensitive-commit
+    title: Accidental Commit of Sensitive Information
+    group: publication
+    description: >
+      A contributor inadvertently includes credentials, client data, internal
+      hostnames, security procedures, or other non-public information in a
+      public commit, issue, or document.
+    applicability:
+      - company-moderated-projects
+      - company-interest-major-projects
+      - company-interest-minor-projects
+
+  - id: company-identity-misuse
+    title: Company Identity Misuse
+    group: identity-and-infrastructure
+    description: >
+      A contributor uses a company-associated identity for personal activity,
+      continues using a company email after employment ends, or fails to use
+      the required company external identity for company contributions.
+
+  - id: ungoverned-project-contribution
+    title: Ungoverned Project Contribution
+    group: governance-process
+    description: >
+      Contribution proceeds without required OSPO registration, approval, or
+      inventory association.
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Vectors that are really controls (“must run a scanner”)
+- One vague vector that swallows every failure mode
+- Vectors never linked from threats or guidance
+
+</AntiPatterns>
+
+<Discussion>
+
+Vectors keep Layer 1 honest about failure modes without jumping straight to technology controls. They are the shared storyboard that threats specialise and guidance answers.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Guidance](/docs/artifacts/layer-1/guidance)
+- [Threat](/docs/artifacts/layer-2/threat)
+- [Capability](/docs/artifacts/layer-2/capability)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
+- [Govern Dependencies](/docs/factors/govern-dependencies)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas — VectorCatalog](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

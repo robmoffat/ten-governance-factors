@@ -1,13 +1,14 @@
 ---
 sidebar_position: 1
 title: Govern Sensitive Activities
+sidebar_label: I. Govern Sensitive Activities
 hide_title: true
 tags:
   - Factor
-principle: "Model governance around the actions that introduce risk."
+description: "Model governance around the actions that introduce risk."
 ---
 
-<GovernanceFactor title="Govern Sensitive Activities">
+<GovernanceFactor title="Govern Sensitive Activities" number={1}>
 
 <Principle>
 Model governance around the actions that introduce risk.
@@ -24,20 +25,45 @@ collapses into tidy documentation.
 
 <PositiveExamples>
 
-- Releasing to production
-- Sharing FDC3 context between desktop apps
-- Approving an AI agent tool call
-- Rotating a signing key
-- Granting database access
+<RevealItem title="Releasing to production">
+A concrete sensitive activity where policy can evaluate whether a change may land before state is mutated.
+</RevealItem>
+
+<RevealItem title="Sharing context between desktop apps">
+An inter-app action with actor, intent and context—exactly the shape an activity-centred gate can decide.
+</RevealItem>
+
+<RevealItem title="Approving an AI agent tool call">
+A high-risk agent action that should be typed, authorised and evidenced at the point of invocation.
+</RevealItem>
+
+<RevealItem title="Rotating a signing key">
+A privileged operational action whose approval path and evidence trail must be explicit.
+</RevealItem>
+
+<RevealItem title="Granting database access">
+An access-grant action that introduces lasting risk and should not hide behind a static “application” category.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Governing only “applications” as static categories
-- Annual control checklists detached from action points
-- Risk registers with no action model
-- Blanket policy statements such as “AI must be safe”
+<RevealItem title="Governing only “applications” as static categories">
+Treats systems as inventory labels instead of evaluating what they are about to do.
+</RevealItem>
+
+<RevealItem title="Annual control checklists detached from action points">
+Assessment theatre that never meets deploy, share, grant or invoke moments.
+</RevealItem>
+
+<RevealItem title="Risk registers with no action model">
+Lists risks without binding them to the activities that create or reduce them.
+</RevealItem>
+
+<RevealItem title="Blanket policy statements such as “AI must be safe”">
+Sounds governing while providing no evaluable request, decision or evidence path.
+</RevealItem>
 
 </NegativeExamples>
 
@@ -47,7 +73,6 @@ collapses into tidy documentation.
 - Cedar
 - OPA
 - XACML
-- FDC3
 - Kubernetes admission control
 
 </Tools>
@@ -82,10 +107,10 @@ captures a simple truth: governance becomes operational when it is asked to
 evaluate what a person, system or agent is about to do. That same
 activity-centred shape appears elsewhere too: XACML models requests and
 responses; Cedar formalises principal, action, resource and context; OPA
-evaluates structured input; FDC3 combines context and intents; and Kubernetes
+evaluates structured input; and Kubernetes
 admission control intercepts requests before state changes are persisted.
 
-For the microsite, this factor keeps the whole manifesto grounded. Instead of
+For Ten Factor Governance, this factor keeps the whole methodology grounded. Instead of
 starting from abstract catalogues, readers start from concrete moments of risk:
 deploy, approve, disclose, invoke, share, sign, grant, delete. Once those
 activities are visible, the rest of the architecture follows naturally: which
@@ -120,7 +145,6 @@ This factor drives [Facts In, Decisions Out](/docs/factors/facts-in-decisions-ou
 - [Gemara](https://gemara.openssf.org/)
 - [Cedar](https://www.cedarpolicy.com/)
 - [Open Policy Agent](https://www.openpolicyagent.org/)
-- [FDC3](https://fdc3.finos.org/)
 
 </References>
 

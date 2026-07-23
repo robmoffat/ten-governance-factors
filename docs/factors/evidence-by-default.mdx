@@ -1,13 +1,14 @@
 ---
 sidebar_position: 6
 title: Evidence by Default
+sidebar_label: VI. Evidence by Default
 hide_title: true
 tags:
   - Factor
-principle: "Make evidence a normal exhaust of the system, not a special exercise before an audit."
+description: "Make evidence a normal exhaust of the system, not a special exercise before an audit."
 ---
 
-<GovernanceFactor title="Evidence by Default">
+<GovernanceFactor title="Evidence by Default" number={6}>
 
 <Principle>
 Make evidence a normal exhaust of the system, not a special exercise before an audit.
@@ -23,20 +24,45 @@ week”—cannot explain posture with receipts, and turns governance into theatr
 
 <PositiveExamples>
 
-- Build provenance emitted automatically
-- SBOMs attached to releases
-- Signed assessment results
-- Policy decision logs
-- Machine-readable approvals and exception expiries
+<RevealItem title="Build provenance emitted automatically">
+Release evidence produced as part of the build, not assembled afterwards.
+</RevealItem>
+
+<RevealItem title="SBOMs attached to releases">
+Composition evidence that travels with the artefact consumers will verify.
+</RevealItem>
+
+<RevealItem title="Signed assessment results">
+Control assessment outputs that are attributable and machine-readable.
+</RevealItem>
+
+<RevealItem title="Policy decision logs">
+Telemetry of what was asked, which policy applied, and what was decided.
+</RevealItem>
+
+<RevealItem title="Machine-readable approvals and exception expiries">
+Approval and exception state that systems can reconcile without chat archaeology.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Screenshot collections
-- Manual attestation spreadsheets
-- “Evidence week” before an audit
-- Approvals that exist only in chat
+<RevealItem title="Screenshot collections">
+Unverifiable images that stand in for system-emitted evidence.
+</RevealItem>
+
+<RevealItem title="Manual attestation spreadsheets">
+Human-typed claims disconnected from identity, time and integrity.
+</RevealItem>
+
+<RevealItem title="“Evidence week” before an audit">
+A scramble that proves evidence was not a normal exhaust of operations.
+</RevealItem>
+
+<RevealItem title="Approvals that exist only in chat">
+Permission granted with no durable, attributable decision record.
+</RevealItem>
 
 </NegativeExamples>
 
@@ -83,7 +109,7 @@ machine-readable form. OSCAL assessment results do the same for control
 assessment data. In each case, evidence is generated as part of normal operation
 rather than stitched together later.
 
-For a governance microsite, the anti-pattern is easy to state: if your audit
+For Ten Factor Governance, the anti-pattern is easy to state: if your audit
 starts with screenshots, you are already too late. A governance twin should
 accumulate attributable evidence continuously so that posture is explained by
 receipts, not reconstructed by memory. That is what turns dashboards into

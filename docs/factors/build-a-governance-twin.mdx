@@ -1,13 +1,14 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 title: Build a Governance Twin
+sidebar_label: II. Build a Governance Twin
 hide_title: true
 tags:
   - Factor
-principle: "Maintain a continuously synchronised, machine-readable governance representation of the real resources, activities and relationships."
+description: "Maintain a continuously synchronised, machine-readable governance representation of the real resources, activities and relationships."
 ---
 
-<GovernanceFactor title="Build a Governance Twin">
+<GovernanceFactor title="Build a Governance Twin" number={2}>
 
 <Principle>
 Maintain a continuously synchronised, machine-readable governance representation of the real resources, activities and relationships.
@@ -24,20 +25,45 @@ from the things teams actually operate.
 
 <PositiveExamples>
 
-- A repository twin with provenance, owner and release gates
-- A data twin for a regulated bucket
-- An AI-agent twin showing approved tools and current exceptions
-- A build twin for a release pipeline
-- An FDC3 app twin for context-sharing posture
+<RevealItem title="A repository twin with provenance, owner and release gates">
+Binds release posture to a concrete repo identity instead of a generic “application” policy.
+</RevealItem>
+
+<RevealItem title="A data twin for a regulated bucket">
+Resolves storage policy to a specific dataset with controls, risks and evidence attached.
+</RevealItem>
+
+<RevealItem title="An AI-agent twin showing approved tools and current exceptions">
+Makes agent posture inspectable: which tools are allowed and which deviations are live.
+</RevealItem>
+
+<RevealItem title="A build twin for a release pipeline">
+Represents the factory’s governance state separately from the product it ships.
+</RevealItem>
+
+<RevealItem title="A desktop app twin for context-sharing posture">
+Tracks what a desktop app may share, with whom, and under which decisions.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Policies that apply only to “object storage” in general
-- CMDB rows with no controls or risks
-- Spreadsheets of “critical apps” with no live links to reality
-- Dashboards disconnected from source systems
+<RevealItem title="Policies that apply only to “object storage” in general">
+Never resolves to a bucket, owner or live posture you can act on.
+</RevealItem>
+
+<RevealItem title="CMDB rows with no controls or risks">
+Inventory without governance semantics—discoverable, but not governable.
+</RevealItem>
+
+<RevealItem title="Spreadsheets of “critical apps” with no live links to reality">
+Static lists that drift away from the systems they claim to describe.
+</RevealItem>
+
+<RevealItem title="Dashboards disconnected from source systems">
+Status colours without a twin identity or attributable evidence behind them.
+</RevealItem>
 
 </NegativeExamples>
 

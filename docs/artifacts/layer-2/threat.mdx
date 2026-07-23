@@ -1,0 +1,136 @@
+---
+sidebar_position: 2
+title: Threat
+sidebar_label: Threat
+hide_title: true
+tags:
+  - Artifact
+  - Layer 2
+description: "Negative-impact opportunities linked to capabilities and vectors."
+---
+
+<GovernanceArtifact
+  title="Threat"
+  gemaraType="ThreatCatalog"
+  layer={2}
+>
+
+<Purpose>
+Catalog of threats: negative-impact opportunities tied to capabilities and pathways.
+</Purpose>
+
+<LayerRole>
+Layer 2 — threats and controls. Threats specialise vectors onto capabilities and feed both controls and organisational risks.
+</LayerRole>
+
+<WhyYouNeedThis>
+Controls without threats become generic checklists. Risks without threats cannot explain which technical opportunities create organisational exposure.
+</WhyYouNeedThis>
+
+<Contains>
+
+- **Threat** — `id`, `title`, `description`, `group`
+- Required links to capabilities; optional vectors and actors
+
+</Contains>
+
+<KeyFields>
+
+- `capabilities` (required in schema practice)
+- Optional `vectors`, `actors[]`
+- `mapping-references` / imports for external taxonomies (e.g. FINOS OSR risks)
+
+</KeyFields>
+
+<LinksUpstream>
+
+- [Capability](/docs/artifacts/layer-2/capability), [Vector](/docs/artifacts/layer-1/vector)
+- External risk taxonomies via imports or mapping references
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Control](/docs/artifacts/layer-2/control) mitigates threats
+- [Risk](/docs/artifacts/layer-3/risk) materialises organisational risk from threats
+
+</LinksDownstream>
+
+<Example>
+
+Threat of sensitive-data disclosure, linked to capabilities, vectors, and an external FINOS OSR risk category:
+
+```yaml
+threats:
+  - id: sensitive-data-disclosure
+    title: Disclosure of Sensitive or Non-Public Information
+    description: >
+      A contributor may publish confidential, proprietary, client, security,
+      credential, architectural, or other non-public information in source
+      code, documentation, comments, or community communications.
+    group: information-disclosure
+    capabilities:
+      - reference-id: foss-contribution-capabilities
+        entries:
+          - reference-id: public-source-publication
+          - reference-id: company-infrastructure-contribution
+          - reference-id: community-engagement
+      - reference-id: finos-osr-risks
+        entries:
+          - reference-id: data-leakage-risk
+            remarks: >
+              Aligns with FINOS OSR Data Leakage Risk for contribution context.
+    vectors:
+      - reference-id: foss-contribution-vectors
+        entries:
+          - reference-id: accidental-sensitive-commit
+          - reference-id: unreviewed-public-release
+    actors:
+      - id: employee-contributor
+        name: Company Employee Contributor
+        type: Human
+        description: >
+          An employee contributing to a FOSS project from company or personal
+          infrastructure.
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Threats with no enabling capability
+- Copying CVE lists wholesale as if they were organisational threats
+- Threats that prescribe controls in their description
+
+</AntiPatterns>
+
+<Discussion>
+
+Threats are the hinge of Layer 2: they look up at pathways and capabilities, and down at controls and risks. Keep them opportunity-shaped (“sensitive data can be disclosed via public publication”), not control-shaped.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Capability](/docs/artifacts/layer-2/capability)
+- [Control](/docs/artifacts/layer-2/control)
+- [Risk](/docs/artifacts/layer-3/risk)
+- [Mapping Document](/docs/artifacts/cross-cutting/mapping-document)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
+- [Govern Dependencies](/docs/factors/govern-dependencies)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [FINOS OSR — Data Leakage Risk](https://osr.finos.org/docs/bok/Risks/Data-Leakage-Risk)
+
+</References>
+
+</GovernanceArtifact>

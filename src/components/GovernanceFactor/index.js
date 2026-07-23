@@ -73,7 +73,7 @@ function getSlot(children, Slot) {
 }
 
 /**
- * Structured template for a single governance factor.
+ * Structured template for a single Ten Factor Governance factor.
  *
  * Content sections are provided as nested tags (not props), so MDX authors can
  * use ordinary markdown inside each part:
@@ -92,9 +92,10 @@ function getSlot(children, Slot) {
  *
  * @param {object} props
  * @param {string} props.title
+ * @param {number} [props.number] - Factor ordinal 1–10 (sets colour + Roman eyebrow)
  * @param {React.ReactNode} props.children - Slot tags listed above
  */
-export default function GovernanceFactor({title, children}) {
+export default function GovernanceFactor({title, number, children}) {
   const principle = getSlot(children, SLOTS.Principle);
   const problem = getSlot(children, SLOTS.Problem);
   const positiveExamples = getSlot(children, SLOTS.PositiveExamples);
@@ -107,10 +108,21 @@ export default function GovernanceFactor({title, children}) {
   const interactions = getSlot(children, SLOTS.Interactions);
   const references = getSlot(children, SLOTS.References);
 
+  const n = Number(number);
+  const factorClass =
+    Number.isFinite(n) && n >= 1 && n <= 10 ? styles[`factor${n}`] : '';
+
   return (
-    <article className={styles.factor}>
+    <article
+      className={`${styles.factor}${factorClass ? ` ${factorClass}` : ''}`}
+      data-factor={Number.isFinite(n) ? n : undefined}
+    >
       <header className={styles.header}>
-        <p className={styles.eyebrow}>Governance factor</p>
+        <p className={styles.eyebrow}>
+          {Number.isFinite(n)
+            ? `Factor ${['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][n - 1] ?? n}`
+            : 'Factor'}
+        </p>
         <h1 className={styles.title}>{title}</h1>
         {principle && (
           <div className={styles.principle}>
@@ -128,7 +140,7 @@ export default function GovernanceFactor({title, children}) {
         id="positive-examples"
         title="Positive examples"
         variant="positive"
-        bodyClassName={styles.listContent}
+        bodyClassName={`${styles.listContent} ${styles.revealList}`}
       >
         {positiveExamples}
       </Section>
@@ -137,7 +149,7 @@ export default function GovernanceFactor({title, children}) {
         id="negative-examples"
         title="Negative examples"
         variant="negative"
-        bodyClassName={styles.listContent}
+        bodyClassName={`${styles.listContent} ${styles.revealList}`}
       >
         {negativeExamples}
       </Section>

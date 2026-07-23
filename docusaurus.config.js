@@ -1,7 +1,7 @@
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Ten Governance Factors',
-  tagline: 'Exploring governance factors',
+  title: 'Ten Factor Governance',
+  tagline: 'A methodology for operable, auditable governance',
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config
@@ -48,7 +48,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Governance Factors',
+        title: 'Ten Factor Governance',
         logo: {
           alt: 'FINOS Logo',
           src: 'img/logo.svg',
@@ -73,8 +73,8 @@ const config = {
                 to: '/docs/',
               },
               {
-                label: 'Govern Sensitive Activities',
-                to: '/docs/factors/govern-sensitive-activities',
+                label: 'The Factors',
+                to: '/docs/factors/',
               },
             ],
           },

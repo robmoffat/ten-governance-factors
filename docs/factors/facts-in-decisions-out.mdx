@@ -1,13 +1,14 @@
 ---
 sidebar_position: 5
 title: Facts In, Decisions Out
+sidebar_label: V. Facts In, Decisions Out
 hide_title: true
 tags:
   - Factor
-principle: "Governance decisions should be computed from structured requests and return explicit results."
+description: "Governance decisions should be computed from structured requests and return explicit results."
 ---
 
-<GovernanceFactor title="Facts In, Decisions Out">
+<GovernanceFactor title="Facts In, Decisions Out" number={5}>
 
 <Principle>
 Governance decisions should be computed from structured requests and return explicit results.
@@ -24,19 +25,41 @@ followed.
 
 <PositiveExamples>
 
-- “May this agent call this tool on this dataset?”
-- “May this branch be promoted?”
-- “May this app raise this FDC3 intent with this context?”
-- “Permit with obligations: encrypt, notify, record.”
+<RevealItem title="“May this agent call this tool on this dataset?”">
+A concrete question with principal, action, resource and context—answerable by an engine.
+</RevealItem>
+
+<RevealItem title="“May this branch be promoted?”">
+A promotion decision that should return permit/deny, reasons and any obligations.
+</RevealItem>
+
+<RevealItem title="“May this app raise this intent with this context?”">
+An inter-app request with an explicit shape and an inspectable result.
+</RevealItem>
+
+<RevealItem title="“Permit with obligations: encrypt, notify, record.”">
+A decision that is more than a boolean—obligations travel with the permit.
+</RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-- Hidden script chains
-- Approval by tribal knowledge
-- UI-only toggles with no decision record
-- Policies that cannot explain why they denied
+<RevealItem title="Hidden script chains">
+Outcomes produced by opaque automation with no request/response boundary.
+</RevealItem>
+
+<RevealItem title="Approval by tribal knowledge">
+Decisions that live only in people’s heads and cannot be audited or reused.
+</RevealItem>
+
+<RevealItem title="UI-only toggles with no decision record">
+State changes that look like policy but leave no facts, reasons or evidence.
+</RevealItem>
+
+<RevealItem title="Policies that cannot explain why they denied">
+Opaque deny/allow with no rationale, obligations or inspectable inputs.
+</RevealItem>
 
 </NegativeExamples>
 
@@ -47,7 +70,7 @@ followed.
 - XACML
 - DMN
 - Gatekeeper
-- FDC3 app directories and intents
+- App directories and typed intents
 
 </Tools>
 
@@ -114,7 +137,6 @@ and feeds [Continuous Governance](/docs/factors/continuous-governance) and
 
 - [Cedar](https://www.cedarpolicy.com/)
 - [Open Policy Agent](https://www.openpolicyagent.org/)
-- [FDC3](https://fdc3.finos.org/)
 - [Gemara](https://gemara.openssf.org/)
 
 </References>

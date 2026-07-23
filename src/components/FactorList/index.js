@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
 /**
- * Numbered index of governance factors from the category-listing plugin.
+ * Numbered index of Ten Factor Governance factors from the category-listing plugin.
  * Docs tagged "Factor" are listed in sidebar_position order.
  */
 export default function FactorList({tag = 'Factor'} = {}) {
@@ -20,19 +20,26 @@ export default function FactorList({tag = 'Factor'} = {}) {
   return (
     <ol className={styles.list}>
       {factors.map((factor, index) => {
-        const principle =
-          factor.frontMatter?.principle ?? factor.description ?? '';
+        const description =
+          factor.description ?? factor.frontMatter?.description ?? '';
+        const n = index + 1;
         return (
-          <li key={factor.permalink} className={styles.item}>
+          <li
+            key={factor.permalink}
+            className={`${styles.item}${styles[`factor${n}`] ? ` ${styles[`factor${n}`]}` : ''}`}
+            data-factor={n}
+          >
             <h3 className={styles.heading}>
               <span className={styles.numeral} aria-hidden="true">
-                {ROMAN[index] ?? String(index + 1)}.
+                {ROMAN[index] ?? String(n)}.
               </span>{' '}
               <Link className={styles.title} to={factor.permalink}>
                 {factor.title}
               </Link>
             </h3>
-            {principle ? <p className={styles.principle}>{principle}</p> : null}
+            {description ? (
+              <p className={styles.principle}>{description}</p>
+            ) : null}
           </li>
         );
       })}

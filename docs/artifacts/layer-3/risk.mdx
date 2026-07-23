@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+title: Risk
+sidebar_label: Risk
+hide_title: true
+tags:
+  - Artifact
+  - Layer 3
+description: "Organisational risks aggregated from Layer 2 threats."
+---
+
+<GovernanceArtifact
+  title="Risk"
+  gemaraType="RiskCatalog"
+  layer={3}
+>
+
+<Purpose>
+Catalog of organisational risks linked to Layer 2 threats for policy-level treatment.
+</Purpose>
+
+<LayerRole>
+Layer 3 — risk and policy. Risks translate technical threats into organisational language: severity, appetite, owners.
+</LayerRole>
+
+<WhyYouNeedThis>
+Policy that only lists controls cannot explain *why* the organisation cares. Risk entries give mitigated/accepted treatment a named exposure with severity and ownership.
+</WhyYouNeedThis>
+
+<Contains>
+
+- **Risk** — `id`, `title`, `description`, `severity`, optional impact
+- Links to threats; optional owner / RACI
+- Risk categories with appetite / max severity where used
+
+</Contains>
+
+<KeyFields>
+
+- `threats` mappings into [Threat](/docs/artifacts/layer-2/threat)
+- Severity and ownership fields for accountability
+- Catalog metadata and groups
+
+</KeyFields>
+
+<LinksUpstream>
+
+- [Threat](/docs/artifacts/layer-2/threat)
+
+</LinksUpstream>
+
+<LinksDownstream>
+
+- [Policy](/docs/artifacts/layer-3/policy) `risks.mitigated` / `risks.accepted`
+- Reporting and audit narratives that speak in risk language
+
+</LinksDownstream>
+
+<Example>
+
+Organisational data-leakage risk aggregating the sensitive-data-disclosure threat, with owners:
+
+```yaml
+risks:
+  - id: data-leakage
+    title: Disclosure of Non-Public or Sensitive Information
+    group: information-protection
+    severity: High
+    description: >
+      A contributor may disclose confidential, proprietary, client, customer,
+      security-sensitive, regulated, credential, key, architectural, or other
+      non-public information through a public FOSS contribution.
+    impact: >
+      Could result in regulatory breach, client harm, security exposure,
+      contractual breach, reputational damage, and loss of trust.
+    threats:
+      - reference-id: foss-contribution-threat-catalog
+        entries:
+          - reference-id: sensitive-data-disclosure
+    owner:
+      responsible:
+        - name: FOSS Contributor
+        - name: FOSS Project Administrator
+      accountable:
+        - name: Open Source Program Office
+          affiliation: Company OSPO
+```
+
+</Example>
+
+<AntiPatterns>
+
+- Risks with no linked threats
+- Treating risk catalogs as another control checklist
+- Severity labels with no owner who can accept residual risk
+
+</AntiPatterns>
+
+<Discussion>
+
+Risks are the organisational face of Layer 2. They should be few, named, and tied to threats—so policy can mitigate or accept them without inventing a parallel universe of concerns.
+
+</Discussion>
+
+<RelatedArtifacts>
+
+- [Threat](/docs/artifacts/layer-2/threat)
+- [Policy](/docs/artifacts/layer-3/policy)
+- [Control](/docs/artifacts/layer-2/control)
+
+</RelatedArtifacts>
+
+<RelatedFactors>
+
+- [Governance Has Owners](/docs/factors/governance-has-owners)
+- [Govern Dependencies](/docs/factors/govern-dependencies)
+
+</RelatedFactors>
+
+<References>
+
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara schemas — RiskCatalog](https://gemara.openssf.org/schema/)
+
+</References>
+
+</GovernanceArtifact>

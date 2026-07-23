@@ -1,0 +1,76 @@
+.item {
+  margin: 0;
+  border: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+  border-radius: 8px;
+  background: var(--gf-surface-raised, var(--ifm-background-surface-color));
+  overflow: hidden;
+}
+
+.item + .item {
+  margin-top: 0.55rem;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::marker {
+  content: '';
+}
+
+.summary:hover {
+  background: var(--gf-accent-soft, rgba(31, 107, 58, 0.06));
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+}
+
+.chevron {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+  opacity: 0.85;
+}
+
+.item[open] .chevron {
+  transform: rotate(225deg);
+  margin-top: 0.2rem;
+}
+
+.body {
+  padding: 0 0.9rem 0.85rem;
+  color: var(--gf-ink-muted, var(--ifm-color-content-secondary));
+  font-size: 0.97rem;
+  font-weight: 400;
+  line-height: 1.55;
+  border-top: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+  padding-top: 0.75rem;
+  margin: 0 0.15rem;
+}
+
+.body :global(p) {
+  margin: 0 0 0.65rem;
+}
+
+.body :global(p:last-child) {
+  margin-bottom: 0;
+}

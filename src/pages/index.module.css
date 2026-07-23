@@ -116,6 +116,21 @@
   padding-top: 2.75rem;
 }
 
+.manifesto {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--gf-ink, var(--ifm-font-color-base));
+}
+
+.manifesto p {
+  margin: 0 0 1.15rem;
+}
+
+.manifesto p:last-child {
+  margin-bottom: 0;
+}
+
 .sectionTitle {
   margin: 0 0 0.5rem;
   font-family: var(--ifm-heading-font-family);

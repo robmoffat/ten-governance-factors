@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 2
-description: "Technology capabilities that can be leveraged to implement security controls."
+description: "Capabilities are the features or elements of useful behaviour provided by a sensitive activity."
 ---
 
 <GovernanceArtifact
@@ -17,17 +17,18 @@ description: "Technology capabilities that can be leveraged to implement securit
 
 <Purpose>
 
-Technology capabilities that can be leveraged to implement security controls.
+Capabilities are the features or elements of useful behaviour provided by a
+sensitive activity.
 
 </Purpose>
 
 <Role>
 
-Capabilities describe what the system *can do*—the attack surface and the
-levers available to defenders. Publishing source to a public forge, accepting a
-Corporate CLA, or contributing from company infrastructure are capabilities.
-Threats attach to them; controls constrain them. Without naming capabilities,
-threat models float free of the real platform.
+Capabilities name what the activity *can do* for users and systems—useful
+behaviour that also creates attack surface and therefore needs governing.
+
+Without naming capabilities, threat
+models and controls float free of the real activity.
 
 </Role>
 
@@ -39,6 +40,8 @@ The ability to publish source, configuration or build artefacts to publicly
 accessible FOSS platforms. That capability is what makes accidental disclosure
 and unreviewed release possible—and what publication controls must govern.
 
+**Source:** [Public Source Publication](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/capability.yaml) (`public-source-publication`) in *FOSS Contribution Capability Catalog*.
+
 </RevealItem>
 
 <RevealItem title="Contributor agreement acceptance">
@@ -47,6 +50,8 @@ The ability to accept CLAs, Corporate CLAs or Developer Certificates of Origin
 on behalf of the company. Legal and IP controls exist because this capability
 creates lasting obligations.
 
+**Source:** [Contributor Agreement Acceptance](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/capability.yaml) (`contributor-agreement-acceptance`) in *FOSS Contribution Capability Catalog*.
+
 </RevealItem>
 
 <RevealItem title="Company infrastructure contribution">
@@ -54,6 +59,39 @@ creates lasting obligations.
 The ability to contribute from the company network or managed hardware using
 approved tooling. Infrastructure and scanning controls bind to this capability
 rather than to “the internet” in general.
+
+**Source:** [Company Infrastructure Contribution](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/capability.yaml) (`company-infrastructure-contribution`) in *FOSS Contribution Capability Catalog*.
+
+</RevealItem>
+
+<RevealItem title="Storage buckets">
+
+Object storage provides uniquely identifiable segmentations in which data
+elements may be stored. Buckets are the unit of organisation—and of many
+access, replication and lifecycle decisions that threats and controls must
+address.
+
+**Source:** [Storage Buckets](https://ccc.finos.org/catalogs/storage/object/capabilities) (`CCC.ObjStor.CP01`) in [*FINOS CCC Object Storage*](https://ccc.finos.org/catalogs/storage/object).
+
+</RevealItem>
+
+<RevealItem title="Lifecycle policies">
+
+The ability to define policies that automate data management—especially cost
+and retention tasks. Useful behaviour that also creates a path for premature
+destruction or unintended exposure if misconfigured.
+
+**Source:** [Lifecycle Policies](https://ccc.finos.org/catalogs/storage/object/capabilities) (`CCC.ObjStor.CP08`) in [*FINOS CCC Object Storage*](https://ccc.finos.org/catalogs/storage/object).
+
+</RevealItem>
+
+<RevealItem title="Object-level access control">
+
+The ability to control access to specific objects within the store—not only at
+bucket scope. Fine-grained permission surfaces are exactly what access-control
+threats and controls attach to.
+
+**Source:** [Object Level Access Control](https://ccc.finos.org/catalogs/storage/object/capabilities) (`CCC.ObjStor.CP10`) in [*FINOS CCC Object Storage*](https://ccc.finos.org/catalogs/storage/object).
 
 </RevealItem>
 
@@ -68,8 +106,6 @@ rather than to “the internet” in general.
 <LinksDownstream>
 
 - [Threat](/docs/artifacts/definitions/threat) lists enabling capabilities
-- Indirectly informs which [Control](/docs/artifacts/definitions/control) surfaces
-  matter
 
 </LinksDownstream>
 
@@ -102,6 +138,7 @@ dangerous or governable ability each affords.
 <References>
 
 - [Gemara Capability Catalog schema](https://gemara.openssf.org/schema/)
+- [FINOS CCC Object Storage](https://ccc.finos.org/catalogs/storage/object)
 - [Gemara](/docs/tools/gemara)
 
 </References>

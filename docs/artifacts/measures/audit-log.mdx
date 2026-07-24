@@ -25,8 +25,9 @@ Review of organizational policy and conformance.
 
 Audit steps back from a single merge or deploy: it reviews whether the programme
 is operating—strengths, observations, gaps and findings against policy and
-control criteria, citing prior evaluation and enforcement evidence. It is
-efficacy review, not a substitute for day-to-day evaluation.
+control criteria, citing prior evaluation and enforcement evidence. 
+
+It is an efficacy review of the operating governance system.
 
 </Role>
 
@@ -35,11 +36,13 @@ efficacy review, not a substitute for day-to-day evaluation.
 <RevealItem title="Q2 FOSS contribution programme audit" defaultOpen>
 
 Internal Audit reviews the FOSS contribution programme against policy and the
-control catalog. Strengths include effective pre-publication data-leakage
+control catalog:  "Strengths include effective pre-publication data-leakage
 controls: PR #417’s failed secret scan was blocked and enforcement recorded. IP
 review dispositions are present for sampled engagements. Gaps remain in annual
 recertification coverage and contributor training completion—findings that feed
-the next policy and control revision.
+the next policy and control revision."
+
+**Source:** [Q2 2026 FOSS Contribution Programme Audit](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/audit/foss-contribution-q2-2026.yaml) (`foss-audit-q2-2026`).
 
 </RevealItem>
 
@@ -49,24 +52,23 @@ The audit cites policy criteria and guidance expectations explicitly, so
 findings are not free-floating opinions. Evaluation and enforcement logs for
 sampled PRs are attached as evidence.
 
+**Source:** `criteria` and mapped evaluation/enforcement evidence in the [Q2 2026 Audit Log](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/audit/foss-contribution-q2-2026.yaml).
+
 </RevealItem>
 
 </Examples>
 
 <LinksUpstream>
 
-- [Evaluation Log](/docs/artifacts/measures/evaluation-log),
-  [Enforcement Log](/docs/artifacts/measures/enforcement-log)
-- [Policy](/docs/artifacts/definitions/policy),
-  [Control](/docs/artifacts/definitions/control),
-  [Guidance](/docs/artifacts/definitions/guidance)
+- [Evaluation Log](/docs/artifacts/measures/evaluation-log) — inspection evidence
+- [Enforcement Log](/docs/artifacts/measures/enforcement-log) — action evidence
 
 </LinksUpstream>
 
 <LinksDownstream>
 
-- Programme remediation backlogs and management reporting
-- Updates to catalogs and policy in later versions
+Audit closes the measurement loop: findings feed programme remediation and later
+definition updates rather than another log type.
 
 </LinksDownstream>
 
@@ -83,6 +85,13 @@ were not emitted continuously, Layer 7 cannot review them.
 
 Observations that never cite which policy or control failed. Remediation cannot
 target a definition.
+
+</RevealItem>
+
+<RevealItem title="Unactioned audit recommendation">
+
+A finding or recommendation is recorded—and then sits.  Audit without remediation is a
+report, not a control loop.
 
 </RevealItem>
 

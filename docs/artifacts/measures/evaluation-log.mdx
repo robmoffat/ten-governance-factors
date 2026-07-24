@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 5
-description: "Inspection of code, configurations, and deployments against policies and controls."
+description: "The results of evaluating a control's assessment requirements."
 ---
 
 <GovernanceArtifact
@@ -17,17 +17,17 @@ description: "Inspection of code, configurations, and deployments against polici
 
 <Purpose>
 
-Inspection of code, configurations, and deployments against policies and
-controls.
+The results of evaluating a control's assessment requirements.
 
 </Purpose>
 
 <Role>
 
 Evaluation is measurement: did this instance of a sensitive activity satisfy the
-assessment plans? The log records targets, control requirements, plan ids,
-pass/fail results and messages. It is evidence of inspection—not the policy
-itself and not yet the enforcement action.
+assessment requirements cited by a policy plan? The log records targets, control
+requirement ids, plan ids, pass/fail results and messages. 
+
+It is evidence of inspection—not the policy itself and not yet the enforcement action.
 
 </Role>
 
@@ -40,6 +40,8 @@ policy. IP review passes with a recorded legal disposition; the data-leakage
 secret scan fails when an uncleared AWS access key is found. The evaluation log
 captures both results against named control requirements and assessment plans.
 
+**Source:** [internal-tools PR #417 Evaluation Log](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/logs/evaluation-internal-tools-pr417.yaml) (`foss-eval-internal-tools-pr417`).
+
 </RevealItem>
 
 <RevealItem title="Passed evaluation on commons-lang PR #482">
@@ -48,16 +50,19 @@ A company-interest contribution clears the same per-contribution plans—showing
 that evaluation is routine exhaust for successful paths, not only failure
 packs.
 
+**Source:** [commons-lang PR #482 Evaluation Log](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/logs/evaluation-commons-lang-pr482.yaml) (`foss-eval-commons-lang-pr482`).
+
 </RevealItem>
 
 </Examples>
 
 <LinksUpstream>
 
-- [Policy](/docs/artifacts/definitions/policy) assessment plans and methods
-- [Control](/docs/artifacts/definitions/control) assessment requirements
-- A [Sensitive Activity](/docs/artifacts/activity/) instance as
-  the thing evaluated
+- [Policy](/docs/artifacts/definitions/policy) — assessment plans and methods that
+  define what to evaluate
+- [Control](/docs/artifacts/definitions/control) — assessment requirements that are the subject of the log's contents
+- [Activity](/docs/artifacts/activity) — the sensitive activity instance under
+  evaluation
 
 </LinksUpstream>
 

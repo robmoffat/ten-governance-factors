@@ -26,8 +26,7 @@ bodies.
 
 Guidance turns principles into linkable expectations—often adapted from
 human-readable policy, frameworks or standards. A guideline is still definition,
-not enforcement: it says what should be true (classify information before
-publication; register FOSS engagements with the OSPO) so controls and policy can
+not enforcement: it says what should be true so that controls and policy can
 implement and assess it.
 
 </Role>
@@ -41,6 +40,8 @@ becomes public, so non-public information is not released through a commit or
 document. Controls later attach assessment requirements—such as secret scanning
 and IP review—to that expectation.
 
+**Source:** [Information Classification for Publication](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/guidance.yaml) (`foss-guidance-information-classification`) in *FOSS Contribution Guidelines*.
+
 </RevealItem>
 
 <RevealItem title="OSPO programme objective and scope">
@@ -49,6 +50,8 @@ Guidelines establish that the company supports certain FOSS contribution
 activities when they benefit the company and do not present unacceptable risk,
 and they carve out FOSS *consumption* as out of scope. Policy and inventory
 controls inherit that boundary.
+
+**Source:** [Programme objective](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/guidance.yaml) (`foss-guidance-program-objective`) in *FOSS Contribution Guidelines*.
 
 </RevealItem>
 
@@ -59,13 +62,20 @@ uphold catalogued principles such as *Least Exposure* and *Auditability*. The
 guidance layer is where “filter before the model sees data” becomes an
 expectation controls can implement.
 
+**Source:** [FINOS AI Governance Framework](https://air-governance-framework.finos.org) mitigations, oriented by [AIR-PRIN](https://grc.store/finos-aigf/air-prin/versions/0.2.0) principles such as *Least Exposure*.
+
 </RevealItem>
 
 </Examples>
 
 <LinksUpstream>
 
-- [Principle](/docs/artifacts/definitions/principle) and [Vector](/docs/artifacts/definitions/vector)
+- [Principle](/docs/artifacts/definitions/principle) — guidelines cite the
+  foundational values they uphold, so each expectation stays anchored to *why*
+  the organisation cares rather than floating as an isolated rule
+- [Vector](/docs/artifacts/definitions/vector) — guidelines may name the pathways
+  they are meant to close (for example premature publication or sensitive
+  commits), so readers can see which failure modes the guidance addresses
 - Shared lexicon terms
 - Human-readable source documents (contribution guidelines, AI frameworks,
   standards)
@@ -76,10 +86,7 @@ expectation controls can implement.
 
 - [Control](/docs/artifacts/definitions/control) entries list guidelines they
   implement
-- [Policy](/docs/artifacts/definitions/policy) and
-  [Sensitive Activity](/docs/artifacts/activity/) bind to those
-  expectations
-- [Audit Log](/docs/artifacts/measures/audit-log) may cite guidelines as criteria
+- [Policy](/docs/artifacts/definitions/policy) is informed by those expectations
 
 </LinksDownstream>
 

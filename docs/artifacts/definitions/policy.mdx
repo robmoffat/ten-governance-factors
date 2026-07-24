@@ -26,9 +26,9 @@ appetite.
 
 Policy is the organisation-specific binding: who is in scope, which catalogs and
 guidance are imported, which risks are mitigated or accepted, and which
-assessment plans and enforcement methods apply. It is not a second copy of the
-control catalog—it says how *this* organisation uses those definitions for a
-governed activity.
+assessment plans and enforcement methods apply. 
+
+It says how an organisation uses those definitions for governing a sensitive activity.
 
 </Role>
 
@@ -41,6 +41,8 @@ company-moderated and company-interest projects, and explicitly excludes FOSS
 *consumption*. Contacts name OSPO, Legal, line managers and contributors in
 RACI form so ownership is not implied.
 
+**Source:** [Free and Open Source Software Contribution Policy](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/policy.yaml) (`foss-contribution-policy`) scope and contacts.
+
 </RevealItem>
 
 <RevealItem title="Mitigated data-leakage with assessment plans">
@@ -48,6 +50,8 @@ RACI form so ownership is not implied.
 The policy imports the FOSS control catalog, lists data-leakage and related
 risks as mitigated, and defines per-contribution assessment plans—such as IP
 review and secret-scan checks—that evaluation logs later execute.
+
+**Source:** Mitigated risks and assessment plans in the [FOSS Contribution Policy](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/policy.yaml).
 
 </RevealItem>
 
@@ -57,47 +61,30 @@ Methods such as blocking merge and notifying the OSPO are declared on the
 policy so enforcement logs cite an authorised response rather than an improvised
 script.
 
+**Source:** [em-foss-block-merge](https://github.com/robmoffat/FOSS-Contribution-Gemara/blob/main/policy.yaml) and related enforcement methods in the *FOSS Contribution Policy*.
+
 </RevealItem>
 
 </Examples>
 
 <LinksUpstream>
 
-- [Control](/docs/artifacts/definitions/control),
-  [Risk](/docs/artifacts/definitions/risk),
-  [Guidance](/docs/artifacts/definitions/guidance),
-  shared lexicon terms
+- [Control](/docs/artifacts/definitions/control) — imported into assessment plans
+- [Risk](/docs/artifacts/definitions/risk) — mitigated or accepted
+- [Guidance](/docs/artifacts/definitions/guidance) — informs organisational rules
 
 </LinksUpstream>
 
 <LinksDownstream>
 
-- [Sensitive Activity](/docs/artifacts/activity/) authorisation
-  and expectations
-- [Evaluation Log](/docs/artifacts/measures/evaluation-log) executes plans
-- [Enforcement Log](/docs/artifacts/measures/enforcement-log) applies methods
-- [Audit Log](/docs/artifacts/measures/audit-log) reviews conformance to policy
-  criteria
+- [Evaluation Log](/docs/artifacts/measures/evaluation-log) — executes assessment
+  plans against activity instances
+- [Enforcement Log](/docs/artifacts/measures/enforcement-log) — applies methods
+  justified by evaluation results
+- [Audit Log](/docs/artifacts/measures/audit-log) — reviews conformance using
+  policy criteria and recorded evidence
 
 </LinksDownstream>
-
-<AntiPatterns>
-
-<RevealItem title="Policy as a pasted control catalog">
-
-Duplicating every control into the policy document. Import the catalog; add
-scope, risk treatment and plans.
-
-</RevealItem>
-
-<RevealItem title="Assessment without enforcement">
-
-Plans that can fail but no declared method for what happens next. Evaluation
-becomes reporting theatre.
-
-</RevealItem>
-
-</AntiPatterns>
 
 <RelatedFactors>
 

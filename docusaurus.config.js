@@ -69,12 +69,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Introduction',
-                to: '/docs/',
-              },
-              {
                 label: 'The Factors',
                 to: '/docs/factors/',
+              },
+              {
+                label: 'Artifacts',
+                to: '/docs/artifacts/',
+              },
+              {
+                label: 'Tools',
+                to: '/docs/tools/',
               },
             ],
           },

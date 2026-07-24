@@ -1,0 +1,29 @@
+---
+sidebar_position: 11
+title: CycloneDX
+sidebar_label: CycloneDX
+hide_title: true
+tags:
+  - Tool
+description: "An OWASP standard for software bills of materials (SBOMs) and related supply-chain inventory formats."
+---
+
+<Tool
+  name="CycloneDX"
+  homepage="https://cyclonedx.org/"
+  description="An OWASP standard for software bills of materials (SBOMs) and related supply-chain inventory formats."
+>
+
+<HelpsWith to="/docs/factors/govern-dependencies" title="Govern Dependencies">
+Makes dependency graphs machine-readable so inherited risk is visible.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/evidence-by-default" title="Evidence by Default">
+SBOMs attach to releases as default evidence of what shipped.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/govern-factory-and-product-separately" title="Govern the Factory and the Product Separately">
+Captures component composition of build outputs the factory ships.
+</HelpsWith>
+
+</Tool>

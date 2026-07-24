@@ -1,0 +1,37 @@
+---
+sidebar_position: 3
+title: Open Policy Agent
+sidebar_label: Open Policy Agent
+hide_title: true
+tags:
+  - Tool
+description: "A general-purpose policy engine (Rego) that evaluates structured input and returns structured decisions."
+---
+
+<Tool
+  name="Open Policy Agent"
+  homepage="https://www.openpolicyagent.org/"
+  description="A general-purpose policy engine (Rego) that evaluates structured input and returns structured decisions."
+>
+
+<HelpsWith to="/docs/factors/govern-sensitive-activities" title="Govern Sensitive Activities">
+Evaluates structured requests about what is about to happen before state changes.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/facts-in-decisions-out" title="Facts In, Decisions Out">
+Accepts JSON facts and can return arbitrary structured decisions, reasons and obligations.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/continuous-governance" title="Continuous Governance">
+Runs as admission, API or pipeline gates so policy stays in the path of change.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/govern-factory-and-product-separately" title="Govern the Factory and the Product Separately">
+Can enforce separate policies for build/factory paths and runtime product paths.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/governance-is-version-controlled" title="Governance is Version Controlled">
+Rego policies are stored, tested and reviewed like any other critical code.
+</HelpsWith>
+
+</Tool>

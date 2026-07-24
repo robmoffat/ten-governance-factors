@@ -3,6 +3,7 @@ import MDXComponents from '@theme-original/MDXComponents';
 import GovernanceFactor, {
   Principle,
   Problem,
+  Characteristics,
   PositiveExamples,
   NegativeExamples,
   Tools,
@@ -29,12 +30,15 @@ import FactorList from '@site/src/components/FactorList';
 import RevealItem from '@site/src/components/RevealItem';
 import LayerPill from '@site/src/components/LayerPill';
 import ArtifactLayerMap from '@site/src/components/ArtifactLayerMap';
+import Tool, {HelpsWith} from '@site/src/components/Tool';
+import ToolList from '@site/src/components/ToolList';
 
 export default {
   ...MDXComponents,
   GovernanceFactor,
   Principle,
   Problem,
+  Characteristics,
   PositiveExamples,
   NegativeExamples,
   Tools,
@@ -59,4 +63,7 @@ export default {
   RevealItem,
   LayerPill,
   ArtifactLayerMap,
+  Tool,
+  HelpsWith,
+  ToolList,
 };

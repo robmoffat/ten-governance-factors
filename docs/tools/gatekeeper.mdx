@@ -1,0 +1,29 @@
+---
+sidebar_position: 4
+title: Gatekeeper
+sidebar_label: Gatekeeper
+hide_title: true
+tags:
+  - Tool
+description: "Kubernetes-native policy controller built on OPA, with admission enforcement and audit modes."
+---
+
+<Tool
+  name="Gatekeeper"
+  homepage="https://open-policy-agent.github.io/gatekeeper/"
+  description="Kubernetes-native policy controller built on OPA, with admission enforcement and audit modes."
+>
+
+<HelpsWith to="/docs/factors/facts-in-decisions-out" title="Facts In, Decisions Out">
+Turns cluster objects into structured admission requests with explicit allow/deny outcomes.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/continuous-governance" title="Continuous Governance">
+Combines inline admission enforcement with audit-mode continuous evaluation of cluster posture.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/govern-factory-and-product-separately" title="Govern the Factory and the Product Separately">
+Governs the running Kubernetes product independently of how images were built.
+</HelpsWith>
+
+</Tool>

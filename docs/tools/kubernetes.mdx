@@ -1,0 +1,29 @@
+---
+sidebar_position: 7
+title: Kubernetes
+sidebar_label: Kubernetes
+hide_title: true
+tags:
+  - Tool
+description: "Container orchestration platform whose admission controllers intercept API requests before persistence."
+---
+
+<Tool
+  name="Kubernetes"
+  homepage="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/"
+  description="Container orchestration platform whose admission controllers intercept API requests before persistence."
+>
+
+<HelpsWith to="/docs/factors/govern-sensitive-activities" title="Govern Sensitive Activities">
+Admission control is a canonical activity gate: evaluate the intended change before it lands.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/continuous-governance" title="Continuous Governance">
+Admission and controllers keep governance in the path of every mutating request.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/govern-factory-and-product-separately" title="Govern the Factory and the Product Separately">
+Runtime cluster controls stay distinct from image build and supply-chain factory controls.
+</HelpsWith>
+
+</Tool>

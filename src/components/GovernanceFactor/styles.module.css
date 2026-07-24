@@ -1,5 +1,4 @@
 .factor {
-  max-width: 72ch;
   color: var(--gf-ink, var(--ifm-font-color-base));
 }
 
@@ -46,6 +45,10 @@
 
 .principle :global(p) {
   margin: 0;
+}
+
+.principle :global(p + p) {
+  margin-top: 0.85rem;
 }
 
 .principleLabel {

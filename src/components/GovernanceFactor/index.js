@@ -41,6 +41,7 @@ function createSlot(displayName) {
 
 export const Principle = createSlot('Principle');
 export const Problem = createSlot('Problem');
+export const Characteristics = createSlot('Characteristics');
 export const PositiveExamples = createSlot('PositiveExamples');
 export const NegativeExamples = createSlot('NegativeExamples');
 export const Tools = createSlot('Tools');
@@ -54,6 +55,7 @@ export const References = createSlot('References');
 const SLOTS = {
   Principle,
   Problem,
+  Characteristics,
   PositiveExamples,
   NegativeExamples,
   Tools,
@@ -98,6 +100,7 @@ function getSlot(children, Slot) {
 export default function GovernanceFactor({title, number, children}) {
   const principle = getSlot(children, SLOTS.Principle);
   const problem = getSlot(children, SLOTS.Problem);
+  const characteristics = getSlot(children, SLOTS.Characteristics);
   const positiveExamples = getSlot(children, SLOTS.PositiveExamples);
   const negativeExamples = getSlot(children, SLOTS.NegativeExamples);
   const tools = getSlot(children, SLOTS.Tools);
@@ -137,6 +140,15 @@ export default function GovernanceFactor({title, number, children}) {
       </Section>
 
       <Section
+        id="characteristics"
+        title="Characteristics"
+        variant="accent"
+        bodyClassName={`${styles.listContent} ${styles.revealList}`}
+      >
+        {characteristics}
+      </Section>
+
+      <Section
         id="positive-examples"
         title="Positive examples"
         variant="positive"
@@ -162,7 +174,7 @@ export default function GovernanceFactor({title, number, children}) {
         id="anti-patterns"
         title="Anti-patterns"
         variant="warn"
-        bodyClassName={styles.listContent}
+        bodyClassName={`${styles.listContent} ${styles.revealList}`}
       >
         {antiPatterns}
       </Section>

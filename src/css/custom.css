@@ -55,27 +55,29 @@
   --gf-layer-cross: #57534e;
   --gf-layer-cross-soft: rgba(87, 83, 78, 0.12);
 
-  /* Ten Factor Governance colours I–X */
-  --gf-factor-1: #0d7c6f;
-  --gf-factor-1-soft: rgba(13, 124, 111, 0.12);
-  --gf-factor-2: #1f6b3a;
-  --gf-factor-2-soft: rgba(31, 107, 58, 0.12);
-  --gf-factor-3: #2a5f8f;
-  --gf-factor-3-soft: rgba(42, 95, 143, 0.12);
-  --gf-factor-4: #b45309;
-  --gf-factor-4-soft: rgba(180, 83, 9, 0.12);
-  --gf-factor-5: #0e7490;
-  --gf-factor-5-soft: rgba(14, 116, 144, 0.12);
-  --gf-factor-6: #9a3412;
-  --gf-factor-6-soft: rgba(154, 52, 18, 0.12);
-  --gf-factor-7: #365314;
-  --gf-factor-7-soft: rgba(54, 83, 20, 0.12);
-  --gf-factor-8: #7c2d12;
-  --gf-factor-8-soft: rgba(124, 45, 18, 0.12);
-  --gf-factor-9: #1e3a5f;
-  --gf-factor-9-soft: rgba(30, 58, 95, 0.12);
-  --gf-factor-10: #57534e;
-  --gf-factor-10-soft: rgba(87, 83, 78, 0.12);
+  /* Ten Factor Governance — one tone, distinct from layer palette */
+  --gf-factor: #4c1d95;
+  --gf-factor-soft: rgba(76, 29, 149, 0.12);
+  --gf-factor-1: var(--gf-factor);
+  --gf-factor-1-soft: var(--gf-factor-soft);
+  --gf-factor-2: var(--gf-factor);
+  --gf-factor-2-soft: var(--gf-factor-soft);
+  --gf-factor-3: var(--gf-factor);
+  --gf-factor-3-soft: var(--gf-factor-soft);
+  --gf-factor-4: var(--gf-factor);
+  --gf-factor-4-soft: var(--gf-factor-soft);
+  --gf-factor-5: var(--gf-factor);
+  --gf-factor-5-soft: var(--gf-factor-soft);
+  --gf-factor-6: var(--gf-factor);
+  --gf-factor-6-soft: var(--gf-factor-soft);
+  --gf-factor-7: var(--gf-factor);
+  --gf-factor-7-soft: var(--gf-factor-soft);
+  --gf-factor-8: var(--gf-factor);
+  --gf-factor-8-soft: var(--gf-factor-soft);
+  --gf-factor-9: var(--gf-factor);
+  --gf-factor-9-soft: var(--gf-factor-soft);
+  --gf-factor-10: var(--gf-factor);
+  --gf-factor-10-soft: var(--gf-factor-soft);
 
   --ifm-background-color: var(--gf-surface);
   --ifm-background-surface-color: var(--gf-surface-raised);
@@ -133,26 +135,28 @@
   --gf-layer-cross: #a8a29e;
   --gf-layer-cross-soft: rgba(168, 162, 158, 0.14);
 
-  --gf-factor-1: #2dd4bf;
-  --gf-factor-1-soft: rgba(45, 212, 191, 0.14);
-  --gf-factor-2: #5ec27d;
-  --gf-factor-2-soft: rgba(94, 194, 125, 0.14);
-  --gf-factor-3: #60a5fa;
-  --gf-factor-3-soft: rgba(96, 165, 250, 0.14);
-  --gf-factor-4: #fbbf24;
-  --gf-factor-4-soft: rgba(251, 191, 36, 0.14);
-  --gf-factor-5: #22d3ee;
-  --gf-factor-5-soft: rgba(34, 211, 238, 0.14);
-  --gf-factor-6: #fb923c;
-  --gf-factor-6-soft: rgba(251, 146, 60, 0.14);
-  --gf-factor-7: #a3e635;
-  --gf-factor-7-soft: rgba(163, 230, 53, 0.14);
-  --gf-factor-8: #f97316;
-  --gf-factor-8-soft: rgba(249, 115, 22, 0.14);
-  --gf-factor-9: #93c5fd;
-  --gf-factor-9-soft: rgba(147, 197, 253, 0.14);
-  --gf-factor-10: #a8a29e;
-  --gf-factor-10-soft: rgba(168, 162, 158, 0.14);
+  --gf-factor: #c4b5fd;
+  --gf-factor-soft: rgba(196, 181, 253, 0.16);
+  --gf-factor-1: var(--gf-factor);
+  --gf-factor-1-soft: var(--gf-factor-soft);
+  --gf-factor-2: var(--gf-factor);
+  --gf-factor-2-soft: var(--gf-factor-soft);
+  --gf-factor-3: var(--gf-factor);
+  --gf-factor-3-soft: var(--gf-factor-soft);
+  --gf-factor-4: var(--gf-factor);
+  --gf-factor-4-soft: var(--gf-factor-soft);
+  --gf-factor-5: var(--gf-factor);
+  --gf-factor-5-soft: var(--gf-factor-soft);
+  --gf-factor-6: var(--gf-factor);
+  --gf-factor-6-soft: var(--gf-factor-soft);
+  --gf-factor-7: var(--gf-factor);
+  --gf-factor-7-soft: var(--gf-factor-soft);
+  --gf-factor-8: var(--gf-factor);
+  --gf-factor-8-soft: var(--gf-factor-soft);
+  --gf-factor-9: var(--gf-factor);
+  --gf-factor-9-soft: var(--gf-factor-soft);
+  --gf-factor-10: var(--gf-factor);
+  --gf-factor-10-soft: var(--gf-factor-soft);
 
   --ifm-background-color: var(--gf-surface);
   --ifm-background-surface-color: var(--gf-surface-raised);
@@ -190,10 +194,6 @@ body {
   font-family: var(--ifm-heading-font-family);
   font-weight: 600;
   letter-spacing: -0.02em;
-}
-
-.markdown {
-  max-width: 72ch;
 }
 
 .markdown h1:first-child {

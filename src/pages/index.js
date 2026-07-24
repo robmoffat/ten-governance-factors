@@ -18,14 +18,14 @@ function HomepageHeader() {
           machine-readable, continuous, and owned.
         </p>
         <div className={styles.actions}>
-          <Link className={styles.primaryCta} to="/docs/">
-            Why Ten Factor Governance
+          <Link className={styles.primaryCta} to="/docs/factors/">
+            Explore the factors
           </Link>
           <Link
             className={styles.secondaryCta}
-            to="/docs/factors/"
+            to="/docs/artifacts/"
           >
-            Explore the factors
+            Browse artifacts
           </Link>
         </div>
       </div>

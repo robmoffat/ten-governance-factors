@@ -11,34 +11,66 @@ description: "Governance decisions should be computed from structured requests a
 <GovernanceFactor title="Facts In, Decisions Out" number={5}>
 
 <Principle>
-Governance decisions should be computed from structured requests and return explicit results.
+
+Governance decisions should be computed from structured requests and return
+explicit results.
+
+A visible decision boundary—facts in, permit/deny/obligations out—turns
+governance from tribal memory into something you can inspect, reuse and prove.
+
 </Principle>
 
 <Problem>
 
-Without a visible decision boundary and a defined request shape, governance
-becomes a vague mixture of scripts, tickets and human memory. Hidden chains and
-UI-only toggles cannot explain why they permitted or denied—or what obligations
-followed.
+Without a defined request shape and an inspectable result, governance becomes a
+mixture of scripts, tickets and human memory. Hidden chains and UI-only toggles
+cannot explain why they permitted or denied—or what obligations followed.
+
+Sensitive activities need concrete questions: may this principal perform this
+action on this resource in this context? If the answer is only a silent state
+change, you have automation, not governance.
 
 </Problem>
+
+<Characteristics>
+
+<RevealItem title="Structured facts" defaultOpen>
+
+Inputs have a shape: principal, action, resource and context. Engines and humans
+can see what was considered.
+
+</RevealItem>
+
+<RevealItem title="Explicit decisions">
+
+Outputs are more than a boolean when needed: permit, deny, obligations, reasons
+and references to evidence.
+
+</RevealItem>
+
+<RevealItem title="A visible boundary">
+
+Policy evaluation is a named step between request and action—not an opaque side
+effect buried in a workflow.
+
+</RevealItem>
+
+</Characteristics>
 
 <PositiveExamples>
 
 <RevealItem title="“May this agent call this tool on this dataset?”">
-A concrete question with principal, action, resource and context—answerable by an engine.
+A concrete question with principal, action, resource and context—answerable by an
+engine and explainable afterwards.
 </RevealItem>
 
 <RevealItem title="“May this branch be promoted?”">
-A promotion decision that should return permit/deny, reasons and any obligations.
+A promotion decision that returns permit/deny, reasons and any obligations.
 </RevealItem>
 
-<RevealItem title="“May this app raise this intent with this context?”">
-An inter-app request with an explicit shape and an inspectable result.
-</RevealItem>
-
-<RevealItem title="“Permit with obligations: encrypt, notify, record.”">
-A decision that is more than a boolean—obligations travel with the permit.
+<RevealItem title="Permit with obligations">
+A decision that is more than a boolean—encrypt, notify, record—travelling with
+the permit into the path of execution.
 </RevealItem>
 
 </PositiveExamples>
@@ -57,28 +89,30 @@ Decisions that live only in people’s heads and cannot be audited or reused.
 State changes that look like policy but leave no facts, reasons or evidence.
 </RevealItem>
 
-<RevealItem title="Policies that cannot explain why they denied">
-Opaque deny/allow with no rationale, obligations or inspectable inputs.
-</RevealItem>
-
 </NegativeExamples>
-
-<Tools>
-
-- Cedar
-- OPA
-- XACML
-- DMN
-- Gatekeeper
-- App directories and typed intents
-
-</Tools>
 
 <AntiPatterns>
 
-- Policy as workflow
-- Assumptions instead of facts
-- Allow/deny with no rationale
+<RevealItem title="Policy as workflow">
+
+Treating a ticket queue as the decision engine. Workflow can orchestrate
+remediation; it should not replace an inspectable policy evaluation.
+
+</RevealItem>
+
+<RevealItem title="Assumptions instead of facts">
+
+Evaluating on implied context that was never stated in the request—so nobody can
+reproduce why the decision went the way it did.
+
+</RevealItem>
+
+<RevealItem title="Allow/deny with no rationale">
+
+Opaque results that cannot cite inputs, rules or obligations. Unexplainable
+decisions are unverifiable ones.
+
+</RevealItem>
 
 </AntiPatterns>
 
@@ -99,48 +133,41 @@ flowchart LR
 
 <Discussion>
 
-The strongest lineage behind this factor runs through policy and decision
-engines. XACML formalised request/response evaluation and obligations; Cedar
-defines principals, resources, actions and optional context in schema; OPA
-accepts structured input and can return arbitrary structured output; DMN
-provides a business-readable format for explicit decision logic. These systems
-differ in style, but they agree on the important thing: the decision boundary
-must be visible and the request must have a defined shape.
+Applying this principle means making every governance decision look like a
+question with an answer.
 
-That makes this factor easy to explain in plain language. Governance should
-answer concrete questions with concrete answers. It should be possible to
-inspect what facts were considered, which policy logic applied, what result was
-produced, and what obligations or remediation followed. Without that boundary,
-governance becomes a vague mixture of scripts, tickets and human memory.
+1. **Define the request shape** for each sensitive activity you evaluate.
+2. **Put policy evaluation on a visible boundary** between request and action.
+3. **Return structured results**—permit/deny, obligations, reasons.
+4. **Record the facts and the decision** so evidence can cite them later.
+5. **Keep workflow for remediation and escalation**, not as a substitute for
+   decisioning.
+
+The lineage is familiar: XACML, Cedar, OPA and DMN differ in style but agree that
+the decision boundary must be visible and the request must have a defined shape.
 
 </Discussion>
 
 <RelatedFactors>
 
-- Separate Facts from Decisions
-- Typed Context In
-- Explicit Decisions Out
-- Decisions Are Data
-- Policy Is Not Workflow
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
-- [Continuous Governance](/docs/factors/continuous-governance)
-- [Evidence by Default](/docs/factors/evidence-by-default)
+Concrete decisions sit on top of scoped activities and feed continuous control:
+
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — which questions deserve a decision boundary
+- [Continuous Governance](/docs/factors/continuous-governance) — where those decisions interrupt or condition change
+- [Evidence by Default](/docs/factors/evidence-by-default) — decision logs as normal exhaust
+- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — policy logic stored as artefacts
+- [Governance Is Composable](/docs/factors/governance-is-composable) — how layered policies combine into one evaluation
 
 </RelatedFactors>
 
-<Interactions>
-
-This factor depends on [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
-and feeds [Continuous Governance](/docs/factors/continuous-governance) and
-[Evidence by Default](/docs/factors/evidence-by-default).
-
-</Interactions>
-
 <References>
 
-- [Cedar](https://www.cedarpolicy.com/)
-- [Open Policy Agent](https://www.openpolicyagent.org/)
-- [Gemara](https://gemara.openssf.org/)
+- [Cedar](/docs/tools/cedar) — principals, resources, actions and schema’d context
+- [Open Policy Agent](/docs/tools/open-policy-agent) — structured input and structured decisions
+- [XACML](/docs/tools/xacml) — request/response evaluation and obligations
+- [DMN](/docs/tools/dmn) — explicit, business-readable decision logic
+- [Gatekeeper](/docs/tools/gatekeeper) — admission-time evaluation of structured requests
+- [Gemara](/docs/tools/gemara) — layered artefacts that decision engines can consume
 
 </References>
 

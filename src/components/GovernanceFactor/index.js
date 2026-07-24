@@ -56,11 +56,9 @@ export const Problem = createSlot('Problem');
 export const Characteristics = createSlot('Characteristics');
 export const PositiveExamples = createSlot('PositiveExamples');
 export const NegativeExamples = createSlot('NegativeExamples');
-export const Tools = createSlot('Tools');
 export const AntiPatterns = createSlot('AntiPatterns');
 export const Discussion = createSlot('Discussion');
 export const RelatedFactors = createSlot('RelatedFactors');
-export const Interactions = createSlot('Interactions');
 export const References = createSlot('References');
 
 /**
@@ -99,12 +97,10 @@ const SLOTS = {
   Characteristics,
   PositiveExamples,
   NegativeExamples,
-  Tools,
   AntiPatterns,
   Diagram,
   Discussion,
   RelatedFactors,
-  Interactions,
   References,
 };
 
@@ -137,12 +133,10 @@ export default function GovernanceFactor({title, number, children}) {
   const characteristics = getSlot(children, SLOTS.Characteristics);
   const positiveExamples = getSlot(children, SLOTS.PositiveExamples);
   const negativeExamples = getSlot(children, SLOTS.NegativeExamples);
-  const tools = getSlot(children, SLOTS.Tools);
   const antiPatterns = getSlot(children, SLOTS.AntiPatterns);
   const diagram = getSlotElement(children, SLOTS.Diagram);
   const discussion = getSlot(children, SLOTS.Discussion);
   const relatedFactors = getSlot(children, SLOTS.RelatedFactors);
-  const interactions = getSlot(children, SLOTS.Interactions);
   const references = getSlot(children, SLOTS.References);
 
   const n = Number(number);
@@ -200,10 +194,6 @@ export default function GovernanceFactor({title, number, children}) {
         {negativeExamples}
       </Section>
 
-      <Section id="tools" title="Tools you can use" bodyClassName={styles.listContent}>
-        {tools}
-      </Section>
-
       <Section
         id="anti-patterns"
         title="Anti-patterns"
@@ -232,10 +222,6 @@ export default function GovernanceFactor({title, number, children}) {
         bodyClassName={styles.listContent}
       >
         {relatedFactors}
-      </Section>
-
-      <Section id="interactions" title="Interactions" bodyClassName={styles.prose}>
-        {interactions}
       </Section>
 
       <Section id="references" title="References" bodyClassName={styles.listContent}>

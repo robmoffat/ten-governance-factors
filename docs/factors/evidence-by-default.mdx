@@ -11,16 +11,52 @@ description: "Make evidence a normal exhaust of the system, not a special exerci
 <GovernanceFactor title="Evidence by Default" number={6}>
 
 <Principle>
-Make evidence a normal exhaust of the system, not a special exercise before an audit.
+
+Make evidence a normal exhaust of the system, not a special exercise before an
+audit.
+
+If posture cannot be explained by attributable receipts, governance is theatre—
+no matter how many dashboards you have.
+
 </Principle>
 
 <Problem>
 
 If an audit starts with screenshots, you are already too late. Evidence created
 only on request—chat approvals, manual attestation spreadsheets, “evidence
-week”—cannot explain posture with receipts, and turns governance into theatre.
+week”—cannot explain posture with receipts. It reconstructs a story after the
+fact instead of recording what happened when it happened.
+
+Governed activities and decisions produce facts worth keeping. When those facts
+are not emitted automatically into durable, attributable form, the twin has
+nothing to show and continuous evaluation has nothing to cite.
 
 </Problem>
+
+<Characteristics>
+
+<RevealItem title="Emitted in the path of work" defaultOpen>
+
+Evidence is produced as the activity or decision runs—not assembled in a scramble
+before an auditor arrives.
+
+</RevealItem>
+
+<RevealItem title="Attributable and machine-readable">
+
+Who, what, when and integrity matter. Formats tools can verify beat images and
+chat logs that cannot.
+
+</RevealItem>
+
+<RevealItem title="Bound to twins and decisions">
+
+Receipts attach to concrete instances and cite the definition versions and
+decision results they support.
+
+</RevealItem>
+
+</Characteristics>
 
 <PositiveExamples>
 
@@ -32,16 +68,12 @@ Release evidence produced as part of the build, not assembled afterwards.
 Composition evidence that travels with the artefact consumers will verify.
 </RevealItem>
 
-<RevealItem title="Signed assessment results">
-Control assessment outputs that are attributable and machine-readable.
-</RevealItem>
-
 <RevealItem title="Policy decision logs">
 Telemetry of what was asked, which policy applied, and what was decided.
 </RevealItem>
 
-<RevealItem title="Machine-readable approvals and exception expiries">
-Approval and exception state that systems can reconcile without chat archaeology.
+<RevealItem title="Signed assessment results">
+Control assessment outputs that are attributable and machine-readable.
 </RevealItem>
 
 </PositiveExamples>
@@ -56,31 +88,33 @@ Unverifiable images that stand in for system-emitted evidence.
 Human-typed claims disconnected from identity, time and integrity.
 </RevealItem>
 
-<RevealItem title="“Evidence week” before an audit">
-A scramble that proves evidence was not a normal exhaust of operations.
-</RevealItem>
-
 <RevealItem title="Approvals that exist only in chat">
 Permission granted with no durable, attributable decision record.
 </RevealItem>
 
 </NegativeExamples>
 
-<Tools>
-
-- SLSA
-- in-toto
-- CycloneDX
-- OSCAL assessment results
-- OpenSSF Scorecard
-
-</Tools>
-
 <AntiPatterns>
 
-- Audit theatre
-- Unverifiable claims
-- Evidence created only on request
+<RevealItem title="Audit theatre">
+
+Producing a pack of artefacts that look compliant without being regenerable from
+the system of record.
+
+</RevealItem>
+
+<RevealItem title="Unverifiable claims">
+
+Statements of posture that cannot be checked against provenance, signatures or
+decision logs.
+
+</RevealItem>
+
+<RevealItem title="Evidence created only on request">
+
+A scramble that proves evidence was never a normal exhaust of operations.
+
+</RevealItem>
 
 </AntiPatterns>
 
@@ -110,49 +144,43 @@ sequenceDiagram
 
 <Discussion>
 
-Supply-chain standards show the pattern clearly. SLSA provenance captures where,
-when and how an artefact was produced. in-toto gathers link metadata for each
-supply-chain step and verifies the delivered product against an authorised
-layout. CycloneDX SBOMs capture components and dependency relationships in
-machine-readable form. OSCAL assessment results do the same for control
-assessment data. In each case, evidence is generated as part of normal operation
-rather than stitched together later.
+Applying this principle means treating evidence as product of normal operation.
 
-For Ten Factor Governance, the anti-pattern is easy to state: if your audit
-starts with screenshots, you are already too late. A governance twin should
-accumulate attributable evidence continuously so that posture is explained by
-receipts, not reconstructed by memory. That is what turns dashboards into
-defensible governance artefacts.
+1. **Instrument** sensitive activities and decision boundaries to emit receipts.
+2. **Prefer machine-readable, attributable formats**—provenance, SBOMs, decision
+   logs, assessment results.
+3. **Store evidence against twins** so posture is explained by what accumulated,
+   not by memory.
+4. **Cite definition versions** so a receipt can say which policy was in force.
+5. **Refuse screenshot-first audits** as the primary control story—use them only
+   as illustrations of regenerable artefacts.
+
+Supply-chain standards (SLSA, in-toto, CycloneDX) and OSCAL assessment results
+show the same pattern: evidence generated as part of the work, not stitched
+together later.
 
 </Discussion>
 
 <RelatedFactors>
 
-- Provenance Before Trust
-- SBOM Everywhere
-- Auditability by Design
-- Immutable Histories
-- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled)
-- [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately)
-- [Continuous Governance](/docs/factors/continuous-governance)
+Evidence makes the rest of the model defensible:
+
+- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — definitions that receipts can cite
+- [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately) — provenance vs runtime receipts stay in their domains
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out) — decision logs as first-class exhaust
+- [Continuous Governance](/docs/factors/continuous-governance) — the loop that records as it enforces
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — where evidence accumulates
 
 </RelatedFactors>
 
-<Interactions>
-
-This factor complements [Governance is Version Controlled](/docs/factors/governance-is-version-controlled),
-[Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately)
-and [Continuous Governance](/docs/factors/continuous-governance).
-
-</Interactions>
-
 <References>
 
-- [SLSA](https://slsa.dev/)
-- [in-toto](https://in-toto.io/)
-- [CycloneDX](https://cyclonedx.org/)
-- [OSCAL](https://pages.nist.gov/OSCAL/)
-- [OpenSSF Scorecard](https://securityscorecards.dev/)
+- [SLSA](/docs/tools/slsa) — provenance as normal build exhaust
+- [in-toto](/docs/tools/in-toto) — signed links for authorised steps
+- [CycloneDX](/docs/tools/cyclonedx) — machine-readable composition evidence
+- [OSCAL](/docs/tools/oscal) — portable assessment results
+- [OpenSSF Scorecard](/docs/tools/openssf-scorecard) — continuous repository posture signals
+- [Gemara](/docs/tools/gemara) — semantics for binding evidence to governance layers
 
 </References>
 

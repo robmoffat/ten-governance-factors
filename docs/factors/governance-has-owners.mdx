@@ -11,17 +11,51 @@ description: "Every governed thing must have accountable humans."
 <GovernanceFactor title="Governance Has Owners" number={10}>
 
 <Principle>
+
 Every governed thing must have accountable humans.
+
+If nobody owns it, nobody governs it. Ownership is accountability—not magical
+permission inheritance.
+
 </Principle>
 
 <Problem>
 
 One thing that repeatedly kills governance initiatives is that systems,
-datasets, repositories and AI agents become governance orphans. If nobody owns
-it, nobody governs it—and the other factors become informational rather than
-operational.
+datasets, repositories and AI agents become governance orphans. Twins without
+stewards, exceptions without approvers and incidents assigned to nobody leave the
+other factors informational rather than operational.
+
+Platform branding (“platform owns it”) without a person or team is the same
+failure mode. Discoverability without a human who can answer, escalate and
+accept risk is not ownership.
 
 </Problem>
+
+<Characteristics>
+
+<RevealItem title="Named accountability" defaultOpen>
+
+A person or team that can be contacted, escalated to and held responsible—not a
+nickname or shared slogan.
+
+</RevealItem>
+
+<RevealItem title="Coverage of governed things">
+
+Owners for twins, activities, exceptions and remediation—not only for “apps” in
+the catalogue.
+
+</RevealItem>
+
+<RevealItem title="Distinct from authorisation">
+
+Ownership answers who is accountable. It does not by itself grant run-time
+permission; decision engines still decide.
+
+</RevealItem>
+
+</Characteristics>
 
 <PositiveExamples>
 
@@ -35,10 +69,6 @@ Ownership for agents where risk acceptance and paging paths are often diffuse.
 
 <RevealItem title="A data product with a risk owner">
 Someone empowered to accept or refuse risk for a governed dataset.
-</RevealItem>
-
-<RevealItem title="A service catalogue entry with steward and contact">
-Discoverability paired with a human who can answer and escalate.
 </RevealItem>
 
 <RevealItem title="Time-bounded exceptions assigned to named approvers">
@@ -57,35 +87,31 @@ Shared branding that functions as nobody’s responsibility.
 AI systems with posture but no accountable human behind them.
 </RevealItem>
 
-<RevealItem title="Datasets with no steward">
-Data products that cannot escalate, remediate or accept risk.
-</RevealItem>
-
 <RevealItem title="Expired exceptions with no reviewer">
 Deviation state that outlives accountability.
 </RevealItem>
 
-<RevealItem title="Incident actions assigned to nobody">
-Remediation that cannot land because ownership was never modelled.
-</RevealItem>
-
 </NegativeExamples>
-
-<Tools>
-
-- Backstage ownership relations
-- CMDB records
-- Issue trackers with code owners and approvers
-- IAM / group directories
-- Service catalogues
-
-</Tools>
 
 <AntiPatterns>
 
-- Shared responsibility as nobody’s responsibility
-- Unnamed approvers
-- Governance orphans
+<RevealItem title="Shared responsibility as nobody’s responsibility">
+
+Diffuse ownership that looks collective on a slide and vacant in an incident.
+
+</RevealItem>
+
+<RevealItem title="Unnamed approvers">
+
+Exception and risk workflows that route to roles nobody staffs.
+
+</RevealItem>
+
+<RevealItem title="Governance orphans">
+
+Twins, agents and datasets that accumulate posture with no steward who can act.
+
+</RevealItem>
 
 </AntiPatterns>
 
@@ -120,51 +146,41 @@ erDiagram
 
 <Discussion>
 
-One thing that repeatedly kills governance initiatives is that systems,
-datasets, repositories and AI agents become governance orphans.
+Applying this principle means making accountability as concrete as the twin.
 
-Backstage, Kubernetes, DORA, SRE and modern platform engineering all discovered
-the same thing: if nobody owns it, nobody governs it.
+1. **Require an owner** on every twin and sensitive activity you govern.
+2. **Name approvers and escalation paths** for exceptions and high-risk decisions.
+3. **Keep ownership visible** in catalogues and twins—steward and contact, not
+   only a label.
+4. **Separate ownership from authorisation**—accountability is not a substitute
+   for a decision engine.
+5. **Refuse orphans**—especially AI agents and datasets where ownership is often
+   diffuse.
 
-A governance twin should therefore include owners, approvers, escalation paths,
-delegated authority and stewardship responsibilities. Backstage’s catalogue
-model is especially useful here because it makes ownership and relations visible
-at the entity level, even while explicitly warning that catalogue ownership is
-not itself a run-time authorisation system. That is exactly the right boundary
-for this factor: ownership is about accountability, not magical permission
-inheritance.
-
-This is especially important for AI systems, where ownership is often diffuse.
-Who owns this agent? Who accepts this risk? Who can approve an exception? Who
-gets paged? Without ownership, all the other factors become informational rather
-than operational.
+Backstage, SRE and platform engineering rediscovered the same rule: if nobody
+owns it, nobody governs it. Without ownership, continuous loops have nowhere to
+page and composition has nobody to accept layered risk.
 
 </Discussion>
 
 <RelatedFactors>
 
-- Everything Has an Owner
-- Accountability Is Explicit
-- Governance Follows Responsibility
-- Named Risk Owners
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin)
-- [Continuous Governance](/docs/factors/continuous-governance)
-- [Governance Is Composable](/docs/factors/governance-is-composable)
+Ownership makes the rest of the model operational:
+
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — where owners are attached
+- [Continuous Governance](/docs/factors/continuous-governance) — who remediates when the loop escalates
+- [Governance Is Composable](/docs/factors/governance-is-composable) — who owns each layer and exception
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — activities that need accountable humans
+- [Evidence by Default](/docs/factors/evidence-by-default) — attributable approvals and exception records
 
 </RelatedFactors>
 
-<Interactions>
-
-This factor depends on [Build a Governance Twin](/docs/factors/build-a-governance-twin)
-and strengthens [Continuous Governance](/docs/factors/continuous-governance) and
-[Governance Is Composable](/docs/factors/governance-is-composable).
-
-</Interactions>
-
 <References>
 
-- [Backstage](https://backstage.io/)
-- [GitHub CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+- [Backstage](/docs/tools/backstage) — ownership and relations at the entity level
+- [GitHub CODEOWNERS](/docs/tools/github-codeowners) — named reviewers for code and policy artefacts
+- [ServiceNow CMDB](/docs/tools/servicenow-cmdb) — CI stewardship and escalation contacts
+- [Gemara](/docs/tools/gemara) — governance semantics that bind to accountable parties
 
 </References>
 

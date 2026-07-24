@@ -11,39 +11,73 @@ description: "Treat governance artefacts as code: versioned, testable, reviewabl
 <GovernanceFactor title="Governance is Version Controlled" number={3}>
 
 <Principle>
-Treat governance artefacts as code: versioned, testable, reviewable, composable and deployable.
+
+Treat governance artefacts as code: versioned, testable, reviewable, composable
+and deployable.
+
+Human-readable policy still matters, but the operational source of truth—controls,
+exceptions, assessment results, provenance—must move with the disciplines that
+already make software reliable.
+
 </Principle>
 
 <Problem>
 
 When the operational part of governance lives in screenshots, PDFs, spreadsheets
 or untracked wiki edits, it cannot be diffed, reviewed, validated or deployed
-with the systems it governs. Human-readable prose still matters, but an
-executable source of truth trapped in attachments does not keep up with modern
-delivery.
+with the systems it governs. Teams then govern by attachment and tribal memory
+while delivery velocity races ahead.
+
+Modern platforms expect change to be reviewable and reversible. Governance that
+cannot keep that pace becomes either theatre or a bottleneck. Version control is
+how definitions stay trustworthy as twins, activities and organisations evolve.
 
 </Problem>
+
+<Characteristics>
+
+<RevealItem title="Plaintext and reviewable" defaultOpen>
+
+Operational artefacts should be readable by people and tools: diffs, pull
+requests and rollback paths, not opaque binary packs.
+
+</RevealItem>
+
+<RevealItem title="Testable and deployable">
+
+Like software, governance changes should be validated before promotion and
+deployed through environments—not pasted into production by hand.
+
+</RevealItem>
+
+<RevealItem title="Lifecycle for exceptions">
+
+Deviations need the same discipline as baselines: review, expiry, ownership and
+history—not silent spreadsheet rows.
+
+</RevealItem>
+
+</Characteristics>
 
 <PositiveExamples>
 
 <RevealItem title="Policies in Git">
-Plaintext policy that can be diffed, reviewed and promoted like any other code change.
+Plaintext policy that can be diffed, reviewed and promoted like any other code
+change, with history that auditors can follow.
 </RevealItem>
 
-<RevealItem title="OSCAL control profiles in YAML">
-Machine-readable control catalogues and profiles that tools can validate and compose.
+<RevealItem title="Machine-readable control profiles">
+Control catalogues and profiles that tools can validate and compose without
+reconstructing PDF narratives.
 </RevealItem>
 
 <RevealItem title="Exceptions with pull requests and expiry dates">
-Deviations tracked as reviewable artefacts with an explicit lifecycle, not tribal memory.
+Deviations tracked as reviewable artefacts with an explicit lifecycle, not
+tribal memory.
 </RevealItem>
 
-<RevealItem title="Signed provenance documents">
-Verifiable build and release claims stored as first-class artefacts.
-</RevealItem>
-
-<RevealItem title="Machine-readable assessment results">
-Assessment outputs that systems can consume without reconstructing PDF narratives.
+<RevealItem title="Signed provenance and assessment results">
+Build claims and assessment outputs stored as first-class, verifiable artefacts.
 </RevealItem>
 
 </PositiveExamples>
@@ -51,15 +85,12 @@ Assessment outputs that systems can consume without reconstructing PDF narrative
 <NegativeExamples>
 
 <RevealItem title="Screenshot-based evidence packs">
-Evidence that cannot be diffed, verified or regenerated from the system of record.
+Evidence that cannot be diffed, verified or regenerated from the system of
+record.
 </RevealItem>
 
 <RevealItem title="PDF-only controls">
 Controls trapped in prose formats that machines cannot execute or compose.
-</RevealItem>
-
-<RevealItem title="Spreadsheet-only exception logs">
-Exception state that drifts, forks and disappears outside version control.
 </RevealItem>
 
 <RevealItem title="Untracked policy edits in wikis">
@@ -68,22 +99,28 @@ Silent changes with no review history, tests or rollback path.
 
 </NegativeExamples>
 
-<Tools>
-
-- OSCAL
-- Gemara schemas
-- OPA / Rego
-- Cedar
-- SLSA
-- in-toto
-
-</Tools>
-
 <AntiPatterns>
 
-- Governance by attachment
-- Copy-paste policy forks
-- Evidence captured after the fact
+<RevealItem title="Governance by attachment">
+
+The “real” policy lives in an email or SharePoint folder while systems run on
+something else. Nobody can say which version was in force.
+
+</RevealItem>
+
+<RevealItem title="Copy-paste policy forks">
+
+Each team forks the baseline into a private document. Divergence grows until the
+enterprise standard is a rumour.
+
+</RevealItem>
+
+<RevealItem title="Evidence captured after the fact">
+
+Definitions and results exist only when someone remembers to write them down for
+an audit—too late to govern change.
+
+</RevealItem>
 
 </AntiPatterns>
 
@@ -109,52 +146,41 @@ gitGraph
 
 <Discussion>
 
-The practical case for this factor is already well established in the standards
-space. OSCAL publishes controls, profiles, SSPs and assessment results in
-machine-readable formats. Gemara does the same for layered GRC artefacts. OPA
-and Cedar assume policies are stored and validated as code-like assets. SLSA and
-in-toto serialise provenance and attestation claims as verifiable artefacts.
-Across those ecosystems, the direction is the same: governance that cannot be
-diffed, reviewed, validated and deployed by machines does not keep up with
-modern delivery.
+Applying this principle means putting operational governance on the same rails
+as software delivery.
 
-For Ten Factor Governance, the key point is not that every moral judgement becomes code.
-It is that the operational part of governance should use the disciplines that
-already make software reliable: plaintext, version history, tests, review,
-promotion and rollback. Human-readable policy still matters, but the executable
-source of truth should not be trapped in prose.
+1. **Store** twin-bound policies, controls and exceptions as plaintext artefacts.
+2. **Review** changes through the same pull-request discipline as application code.
+3. **Test** where possible—schema validation, policy unit tests, dry-run evaluation.
+4. **Promote** through environments; do not hot-edit production definitions.
+5. **Retain history** so evidence can cite which definition was in force when a
+   decision was made.
+
+This factor does not claim every moral judgement becomes code. It claims the
+operational part of governance should be versioned like the systems it governs.
 
 </Discussion>
 
 <RelatedFactors>
 
-- Governance as Code
-- Open Standards First
-- Exceptions as Code
-- Portable Open Artefacts
-- Immutable Histories
-- [Governance Is Composable](/docs/factors/governance-is-composable)
-- [Evidence by Default](/docs/factors/evidence-by-default)
-- [Continuous Governance](/docs/factors/continuous-governance)
+Version control is how definitions stay honest as the rest of the model scales:
+
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — what those versioned artefacts attach to
+- [Governance Is Composable](/docs/factors/governance-is-composable) — how smaller artefacts combine without fork chaos
+- [Evidence by Default](/docs/factors/evidence-by-default) — emitted evidence that cites definition versions
+- [Continuous Governance](/docs/factors/continuous-governance) — deploying and evaluating definitions in the path of change
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out) — executable decision logic stored as artefacts
 
 </RelatedFactors>
 
-<Interactions>
-
-This factor enables [Governance Is Composable](/docs/factors/governance-is-composable),
-[Evidence by Default](/docs/factors/evidence-by-default) and
-[Continuous Governance](/docs/factors/continuous-governance).
-
-</Interactions>
-
 <References>
 
-- [OSCAL](https://pages.nist.gov/OSCAL/)
-- [Gemara](https://gemara.openssf.org/)
-- [Open Policy Agent](https://www.openpolicyagent.org/)
-- [Cedar](https://www.cedarpolicy.com/)
-- [SLSA](https://slsa.dev/)
-- [in-toto](https://in-toto.io/)
+- [OSCAL](/docs/tools/oscal) — machine-readable controls, profiles and assessment results
+- [Gemara](/docs/tools/gemara) — versioned layered GRC artefacts
+- [Open Policy Agent](/docs/tools/open-policy-agent) — policies as testable code
+- [Cedar](/docs/tools/cedar) — reviewable authorisation policy as code
+- [SLSA](/docs/tools/slsa) — provenance as a verifiable artefact
+- [in-toto](/docs/tools/in-toto) — signed supply-chain layouts and links
 
 </References>
 

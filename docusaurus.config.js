@@ -60,6 +60,36 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
+          {
+            href: 'https://riskfirst.org',
+            label: 'Risk-First',
+            position: 'right',
+          },
+          {
+            href: 'https://www.finos.org',
+            label: 'FINOS',
+            position: 'right',
+          },
+          {
+            href: 'https://ccc.finos.org',
+            label: 'CCC',
+            position: 'right',
+          },
+          {
+            href: 'https://air-governance-framework.finos.org',
+            label: 'AI Governance',
+            position: 'right',
+          },
+          {
+            href: 'https://gemara.openssf.org',
+            label: 'Gemara',
+            position: 'right',
+          },
+          {
+            href: 'https://calm.finos.org',
+            label: 'CALM',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -92,6 +122,19 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/finos/governance-factors',
+              },
+            ],
+          },
+          {
+            title: 'Authors',
+            items: [
+              {
+                label: 'Rob Moffat',
+                href: 'https://robmoff.at',
+              },
+              {
+                label: 'Eddie Knight',
+                href: 'https://eddieknight.dev',
               },
             ],
           },

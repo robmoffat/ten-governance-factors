@@ -11,7 +11,14 @@ description: "Governance should run continuously and, where appropriate, in the 
 <GovernanceFactor title="Continuous Governance" number={7}>
 
 <Principle>
-Governance should run continuously and, where appropriate, in the path of change and execution.
+
+Governance should run continuously and, where appropriate, in the path of change
+and execution.
+
+Observational reporting is not enough. Where risk is created by change, evaluation
+should be able to interrupt, condition or remediate—not only describe what already
+went wrong.
+
 </Principle>
 
 <Problem>
@@ -20,7 +27,36 @@ Governance that only generates reports is observational. Quarterly-only
 assessments, failed checks nobody consumes, and approvals that happen after the
 action leave risk in the path of change without interruption or remediation.
 
+A twin with stale posture and decision engines that never sit between request and
+mutation produce the same failure mode: you learn about risk too late to govern
+it.
+
 </Problem>
+
+<Characteristics>
+
+<RevealItem title="In the path of change" defaultOpen>
+
+Where appropriate, evaluate before unsafe state is persisted—admission, promotion,
+tool invocation—not only afterwards.
+
+</RevealItem>
+
+<RevealItem title="Closed loop">
+
+Observe → evaluate → explain → enforce → record → observe again. Signals without
+consumption are not continuous governance.
+
+</RevealItem>
+
+<RevealItem title="More than hard deny">
+
+Inline control can permit with obligations, escalate for human review, or open
+remediation—not only block.
+
+</RevealItem>
+
+</Characteristics>
 
 <PositiveExamples>
 
@@ -32,16 +68,13 @@ Inline evaluation before unsafe state is persisted.
 Continuous re-checking of what already exists, not only what is changing.
 </RevealItem>
 
-<RevealItem title="A denied production release that opens a remediation flow">
+<RevealItem title="A denied release that opens remediation">
 Enforcement that connects denial to workflow: escalate, fix, re-evaluate.
 </RevealItem>
 
-<RevealItem title="Conditional permit for an AI action with logging and approval">
-Inline control that is not only hard deny—obligations and human review in the path.
-</RevealItem>
-
-<RevealItem title="Continuous posture updates in a twin">
-Twin state that moves as reality moves, ready for the next decision.
+<RevealItem title="Conditional permit with logging and approval">
+Inline control that is not only hard deny—obligations and human review in the
+path.
 </RevealItem>
 
 </PositiveExamples>
@@ -56,31 +89,34 @@ Observational cadence that cannot interrupt risky change in time.
 Governance output that nobody consumes to enforce or remediate.
 </RevealItem>
 
-<RevealItem title="Failed checks that nobody consumes">
-Signals without a closed loop back into decisioning or ownership.
-</RevealItem>
-
 <RevealItem title="Approvals that happen after the action">
 Post-hoc ceremony that cannot prevent what already occurred.
 </RevealItem>
 
 </NegativeExamples>
 
-<Tools>
-
-- Kubernetes admission controllers
-- Gatekeeper
-- OPA
-- Flux-style policy gates
-- Workflow engines for remediation
-
-</Tools>
-
 <AntiPatterns>
 
-- Governance as reporting only
-- Deny-only thinking
-- Post-hoc enforcement
+<RevealItem title="Governance as reporting only">
+
+Dashboards and PDFs that never sit in the path of change. Useful for awareness;
+insufficient for control.
+
+</RevealItem>
+
+<RevealItem title="Deny-only thinking">
+
+Treating continuous governance as a wall of hard blocks. Conditional permit,
+obligations and remediation are part of the same loop.
+
+</RevealItem>
+
+<RevealItem title="Post-hoc enforcement">
+
+Discovering violations after the fact and calling it control. Detection without
+timely intervention is observation.
+
+</RevealItem>
 
 </AntiPatterns>
 
@@ -103,56 +139,41 @@ stateDiagram-v2
 
 <Discussion>
 
-This factor is where the prior art becomes most operational. OPA for Kubernetes
-admission control and Gatekeeper’s audit mode show the two halves of the model
-clearly: evaluate requests before persistence, and continuously audit what
-already exists. Kubernetes admission controllers are a canonical example of
-inline control inserted between authenticated requests and state mutation.
-Workflow engines add the piece after a decision: approve, escalate, remediate,
-notify, record evidence. Gemara’s measurement layers map well onto the same
-loop: evaluate, enforce, audit.
+Applying this principle means putting evaluation where change happens—and closing
+the loop.
 
-This is also the factor that keeps Ten Factor Governance from sounding ceremonial.
-Governance that only generates reports is observational. Governance that can
-interrupt a risky deployment, deny an unsafe context share, require human review
-for an AI-produced release, or start a remediation flow is substantive. The
-important subtlety is that inline enforcement need not mean hard denial every
-time; it can also mean conditional permit plus obligations, or automatic
-creation of a workflow for exception handling. That is why decisioning and
-workflow orchestration both matter.
+1. **Place decision points** on deploy, promote, invoke and other sensitive paths.
+2. **Audit continuously** what already exists, not only what is changing.
+3. **Connect denials and obligations to workflow**—escalate, remediate, re-evaluate.
+4. **Update twin posture** as the loop runs so the next decision sees current
+   state.
+5. **Prefer explainable inline control** over silent post-hoc reporting.
 
-This factor is also the best bridge to a live demo. It is the point where the
-governance twin stops being a model and starts behaving like a control plane.
+Admission controllers and audit modes (OPA, Gatekeeper, Kubernetes) show both
+halves: evaluate before persistence, and continuously check what already exists.
+That is where the twin stops being a model and behaves like a control plane.
 
 </Discussion>
 
 <RelatedFactors>
 
-- Continuous Evaluation
-- Inline Enforcement
-- Explainable Decisions
-- Workflow Is Part of Governance
-- Show Posture Continuously
-- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
-- [Evidence by Default](/docs/factors/evidence-by-default)
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin)
+Continuous operation is where prior factors become control:
+
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out) — the decision shape evaluated in the path
+- [Evidence by Default](/docs/factors/evidence-by-default) — what the loop records
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — posture the loop updates
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — which paths deserve inline control
+- [Governance Has Owners](/docs/factors/governance-has-owners) — who remediates when the loop escalates
 
 </RelatedFactors>
 
-<Interactions>
-
-This factor depends on [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
-and [Evidence by Default](/docs/factors/evidence-by-default), and it makes
-[Build a Governance Twin](/docs/factors/build-a-governance-twin) visibly useful.
-
-</Interactions>
-
 <References>
 
-- [Open Policy Agent](https://www.openpolicyagent.org/)
-- [Gatekeeper](https://open-policy-agent.github.io/gatekeeper/)
-- [Kubernetes admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
-- [Gemara](https://gemara.openssf.org/)
+- [Open Policy Agent](/docs/tools/open-policy-agent) — admission and continuous policy evaluation
+- [Gatekeeper](/docs/tools/gatekeeper) — Kubernetes admission and audit modes
+- [Kubernetes](/docs/tools/kubernetes) — admission controllers in the path of change
+- [Flux](/docs/tools/flux) — policy gates in continuous delivery
+- [Gemara](/docs/tools/gemara) — measurement layers that map to evaluate / enforce / audit
 
 </References>
 

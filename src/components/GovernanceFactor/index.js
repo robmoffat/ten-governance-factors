@@ -31,6 +31,18 @@ function Section({id, title, children, bodyClassName, variant}) {
   );
 }
 
+function getSlotElement(children, Slot) {
+  return (
+    Children.toArray(children).find(
+      (child) => isValidElement(child) && child.type === Slot,
+    ) ?? null
+  );
+}
+
+function getSlot(children, Slot) {
+  return getSlotElement(children, Slot)?.props?.children ?? null;
+}
+
 function createSlot(displayName) {
   function Slot({children}) {
     return children;
@@ -46,11 +58,40 @@ export const PositiveExamples = createSlot('PositiveExamples');
 export const NegativeExamples = createSlot('NegativeExamples');
 export const Tools = createSlot('Tools');
 export const AntiPatterns = createSlot('AntiPatterns');
-export const Diagram = createSlot('Diagram');
 export const Discussion = createSlot('Discussion');
-export const RelatedPrinciples = createSlot('RelatedPrinciples');
+export const RelatedFactors = createSlot('RelatedFactors');
 export const Interactions = createSlot('Interactions');
 export const References = createSlot('References');
+
+/**
+ * Diagram body with optional `title` and `description` attributes.
+ *
+ * ```mdx
+ * <Diagram
+ *   title="Where should governance begin?"
+ *   description="Attach it to the sensitive steps…"
+ * >
+ *   ```mermaid
+ *   flowchart LR
+ *   …
+ *   ```
+ * </Diagram>
+ * ```
+ */
+export function Diagram({title, description, children}) {
+  return (
+    <div className={styles.diagramBlock}>
+      {title ? <h3 className={styles.diagramHeading}>{title}</h3> : null}
+      {description ? (
+        <p className={styles.diagramLead}>{description}</p>
+      ) : null}
+      {children != null && children !== false && children !== '' ? (
+        <div className={styles.diagramFigure}>{children}</div>
+      ) : null}
+    </div>
+  );
+}
+Diagram.displayName = 'Diagram';
 
 const SLOTS = {
   Principle,
@@ -62,17 +103,10 @@ const SLOTS = {
   AntiPatterns,
   Diagram,
   Discussion,
-  RelatedPrinciples,
+  RelatedFactors,
   Interactions,
   References,
 };
-
-function getSlot(children, Slot) {
-  const match = Children.toArray(children).find(
-    (child) => isValidElement(child) && child.type === Slot,
-  );
-  return match?.props?.children ?? null;
-}
 
 /**
  * Structured template for a single Ten Factor Governance factor.
@@ -105,9 +139,9 @@ export default function GovernanceFactor({title, number, children}) {
   const negativeExamples = getSlot(children, SLOTS.NegativeExamples);
   const tools = getSlot(children, SLOTS.Tools);
   const antiPatterns = getSlot(children, SLOTS.AntiPatterns);
-  const diagram = getSlot(children, SLOTS.Diagram);
+  const diagram = getSlotElement(children, SLOTS.Diagram);
   const discussion = getSlot(children, SLOTS.Discussion);
-  const relatedPrinciples = getSlot(children, SLOTS.RelatedPrinciples);
+  const relatedFactors = getSlot(children, SLOTS.RelatedFactors);
   const interactions = getSlot(children, SLOTS.Interactions);
   const references = getSlot(children, SLOTS.References);
 
@@ -193,11 +227,11 @@ export default function GovernanceFactor({title, number, children}) {
       </Section>
 
       <Section
-        id="related-principles"
-        title="Related principles"
+        id="related-factors"
+        title="Related factors"
         bodyClassName={styles.listContent}
       >
-        {relatedPrinciples}
+        {relatedFactors}
       </Section>
 
       <Section id="interactions" title="Interactions" bodyClassName={styles.prose}>

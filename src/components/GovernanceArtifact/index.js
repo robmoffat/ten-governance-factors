@@ -4,6 +4,7 @@ import {
   Diagram,
   Discussion,
   References,
+  RelatedFactors,
 } from '@site/src/components/GovernanceFactor';
 import styles from './styles.module.css';
 
@@ -52,10 +53,9 @@ export const LinksUpstream = createSlot('LinksUpstream');
 export const LinksDownstream = createSlot('LinksDownstream');
 export const Example = createSlot('Example');
 export const RelatedArtifacts = createSlot('RelatedArtifacts');
-export const RelatedFactors = createSlot('RelatedFactors');
 
 // Shared with GovernanceFactor so MDX can register one Diagram / etc.
-export {AntiPatterns, Diagram, Discussion, References};
+export {AntiPatterns, Diagram, Discussion, References, RelatedFactors};
 
 const SLOTS = {
   Purpose,
@@ -74,11 +74,16 @@ const SLOTS = {
   References,
 };
 
-function getSlot(children, Slot) {
-  const match = Children.toArray(children).find(
-    (child) => isValidElement(child) && child.type === Slot,
+function getSlotElement(children, Slot) {
+  return (
+    Children.toArray(children).find(
+      (child) => isValidElement(child) && child.type === Slot,
+    ) ?? null
   );
-  return match?.props?.children ?? null;
+}
+
+function getSlot(children, Slot) {
+  return getSlotElement(children, Slot)?.props?.children ?? null;
 }
 
 function layerKey(layer) {
@@ -120,7 +125,7 @@ export default function GovernanceArtifact({
   const linksDownstream = getSlot(children, SLOTS.LinksDownstream);
   const example = getSlot(children, SLOTS.Example);
   const antiPatterns = getSlot(children, SLOTS.AntiPatterns);
-  const diagram = getSlot(children, SLOTS.Diagram);
+  const diagram = getSlotElement(children, SLOTS.Diagram);
   const discussion = getSlot(children, SLOTS.Discussion);
   const relatedArtifacts = getSlot(children, SLOTS.RelatedArtifacts);
   const relatedFactors = getSlot(children, SLOTS.RelatedFactors);

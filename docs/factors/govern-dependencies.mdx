@@ -85,18 +85,22 @@ Stopping at direct edges while compromise travels further down the chain.
 
 </AntiPatterns>
 
-<Diagram>
-
-Risk propagates across dependency edges—not only inside isolated nodes.
+<Diagram
+  title="How does risk propagate?"
+  description="Dependencies carry inherited governance posture across services, agents and third parties."
+>
 
 ```mermaid
-flowchart LR
-App --> Pipeline
-App --> Database
-Agent --> Tool
-Service --> Library
-Risk --> App
-Risk --> Agent
+graph LR
+  App[Customer app] --> API[Payments API]
+  App --> Agent[AI agent]
+  API --> Lib[Shared library]
+  API --> Vendor[Third-party KYC]
+  Agent --> Tool[Tool / MCP]
+  Tool --> Data[Customer data]
+  Lib -.->|inherits| GovL[Library controls]
+  Vendor -.->|inherits| GovV[Vendor attestations]
+  Tool -.->|inherits| GovT[Tool policy]
 ```
 
 </Diagram>
@@ -122,7 +126,7 @@ three separate conversations.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Relationships Matter
 - Dependencies Are First-Class
@@ -134,7 +138,7 @@ three separate conversations.
 - [Evidence by Default](/docs/factors/evidence-by-default)
 - [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

@@ -142,27 +142,20 @@ risk remains invisible.
 
 </AntiPatterns>
 
-<Diagram>
-
-Governance attaches to sensitive activities, regardless of how they are
-implemented underneath.
+<Diagram
+  title="Where should governance begin?"
+  description="Attach it to the sensitive steps in a business process—not only to the systems underneath. ★ marks sensitive activities where policy, ownership and evidence attach."
+>
 
 ```mermaid
-flowchart TB
-  subgraph activities [Organisation — sensitive activities]
-    A[Approve payments]
-    B[Deploy software]
-    C[Train AI models]
-    D[Access customer data]
-    E[Grant admin privileges]
-  end
-  G["Governance attaches here"]
-  subgraph impl [Implementation]
-    I[Applications · APIs · AI agents · Humans]
-    J[Cloud · Databases · Networks · Pipelines]
-  end
-  activities --> G
-  G --> impl
+flowchart LR
+Customer([Customer])
+    --> B[Submit Application]
+    --> D["★ Verify identity"]
+    --> E["★ Fraud assessment"]
+    --> F["★ Approve mortgage"]
+    --> H["★ Disburse funds"]
+    --> I[Notify Customer]
 ```
 
 </Diagram>
@@ -177,21 +170,16 @@ It requires changing *where* governance begins.
    incorrectly, without authorisation or without evidence.
 3. **Give each sensitive activity a clear business owner** accountable for its
    behaviour.
-4. **Define the policies, controls and evidence** that should apply to each
-   activity.
-5. **Use these activities as the foundation** for the remaining governance
-   factors—twins, continuous evidence and runtime policy enforcement.
-
-This factor deliberately stops short of explaining *how* these activities should
-be represented in software. The next factor,
-[Build a Governance Twin](/docs/factors/build-a-governance-twin), introduces the
-machine-readable representation that makes these activities governable by
-systems. Factor I is scope: **what deserves governance?** Factor II answers:
-**how do I represent that so software can reason about it?**
+4. **Use these activities as the foundation** for the following governance
+   factors.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
+
+This factor sets the **scope** of Ten Factor Governance. 
+
+Everything else hangs off the activities you choose to govern:
 
 - [Build a Governance Twin](/docs/factors/build-a-governance-twin) — how those activities are represented as persistent, machine-readable governance objects
 - [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — once identified, policies and controls for activities should be executable definitions, not documentation alone
@@ -199,22 +187,7 @@ systems. Factor I is scope: **what deserves governance?** Factor II answers:
 - [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out) — policies should govern how activities are performed at runtime, whether the actor is a human, application or AI agent
 - [Governance Has Owners](/docs/factors/governance-has-owners) — every sensitive activity needs an accountable human
 
-</RelatedPrinciples>
-
-<Interactions>
-
-This factor sets the **scope** of Ten Factor Governance. Everything else hangs
-off the activities you choose to govern:
-[Build a Governance Twin](/docs/factors/build-a-governance-twin) represents them;
-[Facts In, Decisions Out](/docs/factors/facts-in-decisions-out) and
-[Continuous Governance](/docs/factors/continuous-governance) decide and enforce
-at the moment of action;
-[Evidence by Default](/docs/factors/evidence-by-default) proves the activity
-stayed within bounds;
-[Governance Has Owners](/docs/factors/governance-has-owners) keeps accountability
-attached to the activity, not only to the servers underneath it.
-
-</Interactions>
+</RelatedFactors>
 
 <References>
 

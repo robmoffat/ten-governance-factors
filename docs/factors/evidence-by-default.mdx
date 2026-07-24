@@ -84,17 +84,26 @@ Permission granted with no durable, attributable decision record.
 
 </AntiPatterns>
 
-<Diagram>
-
-Actions, decisions, builds and dependencies emit evidence that accumulates on the twin.
+<Diagram
+  title="How do we prove compliance?"
+  description="Evidence is emitted as the activity happens, then consumed later by auditors and tooling—not reconstructed afterwards."
+>
 
 ```mermaid
-flowchart LR
-Action --> Evidence
-Decision --> Evidence
-Build --> Provenance
-Dependencies --> SBOM
-Evidence --> Twin
+sequenceDiagram
+  participant Actor
+  participant Activity
+  participant Policy as Policy engine
+  participant Store as Evidence store
+  participant Auditor
+
+  Actor->>Activity: Perform sensitive activity
+  Activity->>Policy: Submit facts
+  Policy-->>Activity: Decision + explanation
+  Activity->>Store: Record evidence automatically
+  Note over Store: Provenance · decision log · attestations
+  Auditor->>Store: Query evidence later
+  Store-->>Auditor: Attributable receipts
 ```
 
 </Diagram>
@@ -117,7 +126,7 @@ defensible governance artefacts.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Provenance Before Trust
 - SBOM Everywhere
@@ -127,7 +136,7 @@ defensible governance artefacts.
 - [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately)
 - [Continuous Governance](/docs/factors/continuous-governance)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

@@ -86,20 +86,33 @@ Status colours without a twin identity or attributable evidence behind them.
 
 </AntiPatterns>
 
-<Diagram>
-
-Real resources feed a twin that holds governance-relevant state: controls, risks, evidence and decisions.
+<Diagram
+  title="What does governance know?"
+  description="The twin is the live object that links an activity (or resource) to policies, controls, evidence, owners and dependencies."
+>
 
 ```mermaid
-flowchart LR
-Repo --> Twin
-Cluster --> Twin
-Dataset --> Twin
-Agent --> Twin
-Twin --> Controls
-Twin --> Risks
-Twin --> Evidence
-Twin --> Decisions
+classDiagram
+  class GovernanceTwin {
+    +id
+    +activityRef
+    +posture
+    +lastSynced
+  }
+  class Policy
+  class Control
+  class Evidence
+  class Owner
+  class Dependency
+  class RealWorldThing {
+    +repo / service / agent / dataset
+  }
+  RealWorldThing <|-- GovernanceTwin : represents
+  GovernanceTwin --> Policy : bound to
+  GovernanceTwin --> Control : assessed by
+  GovernanceTwin --> Evidence : accumulates
+  GovernanceTwin --> Owner : accountable
+  GovernanceTwin --> Dependency : inherits risk from
 ```
 
 </Diagram>
@@ -123,7 +136,7 @@ semantics to instances is the step from “policy” to “posture”.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Bind Governance to Real Resources
 - Resources Are First-Class
@@ -135,7 +148,7 @@ semantics to instances is the step from “policy” to “posture”.
 - [Governance Has Owners](/docs/factors/governance-has-owners)
 - [Continuous Governance](/docs/factors/continuous-governance)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

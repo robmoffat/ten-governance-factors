@@ -87,15 +87,22 @@ Silent changes with no review history, tests or rollback path.
 
 </AntiPatterns>
 
-<Diagram>
-
-Operational governance artefacts should move through draft, review, merge and deploy like code.
+<Diagram
+  title="How does governance evolve?"
+  description="Treat definitions like code: branch, review, merge and promote alongside the software they govern."
+>
 
 ```mermaid
-flowchart LR
-Draft --> Review --> Merge --> Deploy
-Merge --> Evidence
-Deploy --> Evaluation
+gitGraph
+  commit id: "baseline policy"
+  branch feature/tighten-controls
+  checkout feature/tighten-controls
+  commit id: "draft control change"
+  commit id: "peer review"
+  checkout main
+  merge feature/tighten-controls id: "merge to main"
+  commit id: "deploy to eval"
+  commit id: "promote to enforce"
 ```
 
 </Diagram>
@@ -119,7 +126,7 @@ source of truth should not be trapped in prose.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Governance as Code
 - Open Standards First
@@ -130,7 +137,7 @@ source of truth should not be trapped in prose.
 - [Evidence by Default](/docs/factors/evidence-by-default)
 - [Continuous Governance](/docs/factors/continuous-governance)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

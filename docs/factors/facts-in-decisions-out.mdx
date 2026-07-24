@@ -82,14 +82,17 @@ Opaque deny/allow with no rationale, obligations or inspectable inputs.
 
 </AntiPatterns>
 
-<Diagram>
-
-A structured request enters a policy engine; an explicit result—with reasons and obligations—comes out.
+<Diagram
+  title="How are decisions made?"
+  description="Facts enter a policy boundary; an explicit decision, action and explanation come out."
+>
 
 ```mermaid
 flowchart LR
-Request[Principal Action Resource Context] --> Engine
-Engine --> Result[Permit Deny Obligations Reasons]
+  Facts["Facts<br/>principal · action · resource · context"] --> Policy
+  Policy --> Decision["Decision<br/>permit / deny · obligations"]
+  Decision --> Action
+  Decision --> Explanation["Explanation<br/>reasons · evidence refs"]
 ```
 
 </Diagram>
@@ -112,7 +115,7 @@ governance becomes a vague mixture of scripts, tickets and human memory.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Separate Facts from Decisions
 - Typed Context In
@@ -123,7 +126,7 @@ governance becomes a vague mixture of scripts, tickets and human memory.
 - [Continuous Governance](/docs/factors/continuous-governance)
 - [Evidence by Default](/docs/factors/evidence-by-default)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

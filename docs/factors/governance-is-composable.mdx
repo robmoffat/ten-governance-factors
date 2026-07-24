@@ -84,15 +84,20 @@ Replacement culture instead of assembling from smaller artefacts.
 
 </AntiPatterns>
 
-<Diagram>
-
-Baselines, overlays and bindings assemble into the policy that is actually evaluated.
+<Diagram
+  title="How can governance be reused?"
+  description="Compose layered modules from organisation down to application into one evaluated model."
+>
 
 ```mermaid
-flowchart LR
-BasePolicy --> TeamProfile --> AppPolicy
-BaseCatalog --> Overlay --> Assessment
-Template --> Binding --> Decision
+flowchart TB
+  Org[Organisation baseline] --> BU[Business unit overlay]
+  BU --> Proj[Project profile]
+  Proj --> App[Application bindings]
+  App --> Model[Composed governance model]
+  Org -.-> Model
+  BU -.-> Model
+  Proj -.-> Model
 ```
 
 </Diagram>
@@ -116,7 +121,7 @@ traceable exceptions. That makes governance flexible without making it vague.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Federated Governance
 - Policy Layering
@@ -126,7 +131,7 @@ traceable exceptions. That makes governance flexible without making it vague.
 - [Governance Has Owners](/docs/factors/governance-has-owners)
 - [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

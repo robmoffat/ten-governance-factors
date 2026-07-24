@@ -177,6 +177,38 @@
   text-underline-offset: 2px;
 }
 
+.diagramBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.diagramHeading {
+  margin: 0;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--gf-tone, var(--ifm-color-primary));
+}
+
+.diagramLead {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--gf-ink-muted, var(--ifm-color-emphasis-700));
+}
+
+.diagramLead :global(p) {
+  margin: 0 0 0.65rem;
+}
+
+.diagramLead :global(p:last-child) {
+  margin-bottom: 0;
+}
+
+.diagramFigure :global(.docusaurus-mermaid-container),
+.diagramFigure :global(pre),
 .diagramContent :global(.docusaurus-mermaid-container),
 .diagramContent :global(pre) {
   margin: 1.1rem 0 0;

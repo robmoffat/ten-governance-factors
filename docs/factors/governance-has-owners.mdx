@@ -89,16 +89,31 @@ Remediation that cannot land because ownership was never modelled.
 
 </AntiPatterns>
 
-<Diagram>
-
-Ownership connects things to accountable humans: owners, approvers and escalation paths.
+<Diagram
+  title="Who is accountable?"
+  description="Activities link to owners and teams, with escalation when responsibility needs to move."
+>
 
 ```mermaid
-flowchart LR
-Thing --> Owner
-Thing --> Approver
-Thing --> Escalation
-Owner --> Decision
+erDiagram
+  ACTIVITY ||--|| OWNER : "accountable for"
+  OWNER }o--|| TEAM : "member of"
+  ACTIVITY ||--o{ APPROVER : "reviewed by"
+  OWNER ||--o{ ESCALATION : "escalates to"
+  ESCALATION }o--|| TEAM : "handled by"
+  ACTIVITY {
+    string id
+    string name
+    string riskLevel
+  }
+  OWNER {
+    string id
+    string name
+  }
+  TEAM {
+    string id
+    string name
+  }
 ```
 
 </Diagram>
@@ -126,7 +141,7 @@ than operational.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Everything Has an Owner
 - Accountability Is Explicit
@@ -136,7 +151,7 @@ than operational.
 - [Continuous Governance](/docs/factors/continuous-governance)
 - [Governance Is Composable](/docs/factors/governance-is-composable)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

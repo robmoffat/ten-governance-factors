@@ -10,7 +10,7 @@ import GovernanceFactor, {
   AntiPatterns,
   Diagram,
   Discussion,
-  RelatedPrinciples,
+  RelatedFactors,
   Interactions,
   References,
 } from '@site/src/components/GovernanceFactor';
@@ -24,7 +24,6 @@ import GovernanceArtifact, {
   LinksDownstream,
   Example,
   RelatedArtifacts,
-  RelatedFactors,
 } from '@site/src/components/GovernanceArtifact';
 import FactorList from '@site/src/components/FactorList';
 import RevealItem from '@site/src/components/RevealItem';
@@ -45,7 +44,7 @@ export default {
   AntiPatterns,
   Diagram,
   Discussion,
-  RelatedPrinciples,
+  RelatedFactors,
   Interactions,
   References,
   GovernanceArtifact,
@@ -58,7 +57,6 @@ export default {
   LinksDownstream,
   Example,
   RelatedArtifacts,
-  RelatedFactors,
   FactorList,
   RevealItem,
   LayerPill,

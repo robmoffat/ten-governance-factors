@@ -84,14 +84,19 @@ Post-hoc ceremony that cannot prevent what already occurred.
 
 </AntiPatterns>
 
-<Diagram>
-
-Evaluate and decide in the request path; audit existing state; record everything.
+<Diagram
+  title="How does governance operate continuously?"
+  description="A closed loop—observe, evaluate, explain, enforce, record—then observe again."
+>
 
 ```mermaid
-flowchart LR
-Request --> Evaluate --> Decide --> Enforce --> Record
-State --> Audit --> Record
+stateDiagram-v2
+  [*] --> Observe
+  Observe --> Evaluate: new facts / posture change
+  Evaluate --> Explain: decision produced
+  Explain --> Enforce: permit · deny · obligate
+  Enforce --> Record: evidence written
+  Record --> Observe: continue
 ```
 
 </Diagram>
@@ -121,7 +126,7 @@ governance twin stops being a model and starts behaving like a control plane.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - Continuous Evaluation
 - Inline Enforcement
@@ -132,7 +137,7 @@ governance twin stops being a model and starts behaving like a control plane.
 - [Evidence by Default](/docs/factors/evidence-by-default)
 - [Build a Governance Twin](/docs/factors/build-a-governance-twin)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

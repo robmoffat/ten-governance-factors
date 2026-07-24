@@ -76,17 +76,29 @@ Erases the boundary between how software is made and what it may do when running
 
 </AntiPatterns>
 
-<Diagram>
-
-The factory that produces artefacts and the product that runs them are connected, but separately twinned.
+<Diagram
+  title="Where does governance apply?"
+  description="Factory and product are connected by artefacts, but each domain has its own controls, twins and evidence."
+>
 
 ```mermaid
 flowchart LR
-Source --> BuildFactory
-BuildFactory --> Artifact
-Artifact --> RuntimeProduct
-BuildFactory --> FactoryTwin
-RuntimeProduct --> ProductTwin
+  subgraph factory [Software factory]
+    SRC[Source] --> BUILD[Build / CI]
+    BUILD --> PROV[Provenance · SBOM · signing]
+    PROV --> ART[Release artefact]
+    FG[Factory governance]
+    BUILD -.-> FG
+    PROV -.-> FG
+  end
+  ART --> RUN
+  subgraph product [Runtime product]
+    RUN[Deployed service] --> ACT[Sensitive activities]
+    ACT --> RT[AuthZ · admission · runtime policy]
+    PG[Product governance]
+    ACT -.-> PG
+    RT -.-> PG
+  end
 ```
 
 </Diagram>
@@ -110,7 +122,7 @@ them into a single misleading status badge.
 
 </Discussion>
 
-<RelatedPrinciples>
+<RelatedFactors>
 
 - The Factory Is Governed Too
 - Provenance Before Trust
@@ -121,7 +133,7 @@ them into a single misleading status badge.
 - [Evidence by Default](/docs/factors/evidence-by-default)
 - [Govern Dependencies](/docs/factors/govern-dependencies)
 
-</RelatedPrinciples>
+</RelatedFactors>
 
 <Interactions>
 

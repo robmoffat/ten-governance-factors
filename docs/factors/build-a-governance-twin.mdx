@@ -39,6 +39,9 @@ A Governance Twin places that governance definition alongside the software
 implementation. It creates a concrete, machine-readable representation of how
 one specific activity is expected to operate.
 
+See the section on [Governance Artifacts](../artifacts) to see how the governance twin 
+is modelled in practice.
+
 </Problem>
 
 <Characteristics>
@@ -60,37 +63,30 @@ but should not be hidden inside it.
 
 </RevealItem>
 
-<RevealItem title="Governance artefacts, not inventory metadata">
+<RevealItem title="Twins evolve together over the lifecycle">
 
-A Governance Twin binds the definitions that inform the activity. For mortgage
-approval, that may include:
+An activity’s Implementation Twin and Governance Twin are not set once and
+forgotten. They move together as requirements change.
 
-- **Guidance and principles** — fair lending expectations, responsible
-  decision-making principles and regulatory guidance.
-- **Controls and threats** — controls against discriminatory decisions,
-  unauthorised overrides, manipulated input data or unsuitable affordability
-  assessments.
-- **Policy and risk** — the lender’s mandatory approval policy, risk appetite,
-  permitted thresholds and exception rules.
+When the activity is first designed, the Implementation Twin names the intended
+components and flows; the Governance Twin records which guidance, controls and
+policy will apply. As the system is built and released, implementation details
+harden—new services, models or interfaces appear—and the Governance Twin must
+gain or tighten the definitions that authorise those behaviours.
 
-These correspond to Gemara’s definition layers:
+In operation, both twins accumulate change: runtime posture and configuration on
+the implementation side; evidence, exceptions and risk treatment on the
+governance side. A material change to how the activity works—a new decision
+path, a different data source, an AI model in the loop—should prompt a
+corresponding change to how it is governed, reviewed and versioned.
 
-- [Layer 1 — Guidance](/docs/artifacts/layer-1/guidance) — external guidance and
-  organisational [principles](/docs/artifacts/layer-1/principle).
-- [Layer 2 — Controls](/docs/artifacts/layer-2/control) —
-  [threats](/docs/artifacts/layer-2/threat), capabilities, controls and
-  verifiable assessment requirements.
-- [Layer 3 — Policy and Risk](/docs/artifacts/layer-3/policy) — the organisation’s
-  own mandatory rules, [risk](/docs/artifacts/layer-3/risk) definitions and
-  appetite.
-
-Gemara places those definitions above the
-[sensitive activity](/docs/artifacts/layer-4/sensitive-activity) itself (Layer
-4). The twin is how Layers 1–3 attach to one concrete Layer 4 activity.
+When the activity is retired or replaced, both twins should close together:
+governance definitions are withdrawn or superseded rather than left attached to
+software that no longer exists.
 
 </RevealItem>
 
-<RevealItem title="One twin per governed activity">
+<RevealItem title="Governance twins are Scoped to a single sensitive activity">
 
 A Governance Twin should be scoped to the sensitive activity being governed.
 
@@ -100,7 +96,7 @@ documents and disbursing funds.
 
 The Governance Twin for **Approve Mortgage** should describe the governance of
 that decision. It should not become a general model of the entire lending
-platform.
+platform (although see [Governance is Composable](governance-is-composable))
 
 Its dependencies may influence its governance, but those relationships are
 addressed explicitly in
@@ -275,10 +271,10 @@ factors reason about what attaches to the twin:
 <References>
 
 - [Gemara](/docs/tools/gemara) — layered governance artefacts bound to sensitive activities
-- [Sensitive Activity](/docs/artifacts/layer-4/sensitive-activity) — Layer 4 activity the twin governs
-- [Guidance](/docs/artifacts/layer-1/guidance) · [Principle](/docs/artifacts/layer-1/principle) — Layer 1 definitions
-- [Control](/docs/artifacts/layer-2/control) · [Threat](/docs/artifacts/layer-2/threat) — Layer 2 definitions
-- [Policy](/docs/artifacts/layer-3/policy) · [Risk](/docs/artifacts/layer-3/risk) — Layer 3 definitions
+- [Sensitive Activity](/docs/artifacts/activity/) — Layer 4 activity the twin governs
+- [Guidance](/docs/artifacts/definitions/guidance) · [Principle](/docs/artifacts/definitions/principle) — Layer 1 definitions
+- [Control](/docs/artifacts/definitions/control) · [Threat](/docs/artifacts/definitions/threat) — Layer 2 definitions
+- [Policy](/docs/artifacts/definitions/policy) · [Risk](/docs/artifacts/definitions/risk) — Layer 3 definitions
 - [OSCAL](/docs/tools/oscal) — portable control and assessment semantics
 
 </References>

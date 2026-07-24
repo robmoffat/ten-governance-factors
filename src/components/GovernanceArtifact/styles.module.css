@@ -37,9 +37,21 @@
   color: #fff;
   background: var(--gf-tone, var(--gf-ink, var(--ifm-font-color-base)));
   letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+a.layerBadge:hover {
+  color: #fff;
+  text-decoration: none;
+  filter: brightness(1.08);
+  opacity: 0.95;
 }
 
 [data-theme='dark'] .layerBadge {
+  color: var(--gf-surface, #121816);
+}
+
+[data-theme='dark'] a.layerBadge:hover {
   color: var(--gf-surface, #121816);
 }
 

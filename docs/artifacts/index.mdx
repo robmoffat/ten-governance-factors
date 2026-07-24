@@ -5,67 +5,11 @@ title: Governance Artifacts
 
 # Governance Artifacts
 
-[Gemara](/docs/tools/gemara) organises automated governance into typed, linkable
-artifacts across seven layers. Layers 1–3 **define** what good looks like;
-Layer 4 is the **sensitive activity** being governed; Layers 5–7 **measure**
-evaluation, enforcement and audit. Each layer has its own colour on artifact
-pages and in the map below.
+Governance artifacts are the typed records you maintain so a sensitive activity
+can be defined, operated and checked. This section covers three kinds:
 
-These pages explain what each artifact *is* and how it is used—not the field
-layout of the schema. Examples are drawn from a worked FOSS contribution
-programme and from published catalogs such as the
-[FINOS AI Governance Framework principles](https://grc.store/finos-aigf/air-prin/versions/0.2.0).
-For machine-readable shapes, see the
-[Gemara schemas](https://gemara.openssf.org/schema/).
-
-## How the artifacts connect
-
-
-The diagram below shows how those typed artifacts relate: definition catalogs
-feed policy and the sensitive activity; measurement logs then evaluate, enforce
-and audit against that activity.
-
-```mermaid
-erDiagram
-  Lexicon ||--o{ Principle : "terms used by"
-  Lexicon ||--o{ Guidance : "terms used by"
-  Lexicon ||--o{ Policy : "terms used by"
-
-  Principle ||--o{ Guidance : "orients"
-  Vector ||--o{ Guidance : "cited by"
-  Vector ||--o{ Threat : "attack path for"
-  Capability ||--o{ Threat : "enables"
-
-  Guidance ||--o{ Control : "implemented by"
-  Threat ||--o{ Control : "mitigated by"
-  Threat ||--o{ Risk : "materialises as"
-
-  Control ||--o{ Policy : "imported by"
-  Risk ||--o{ Policy : "mitigated or accepted"
-  Guidance ||--o{ Policy : "informs"
-
-  Guidance ||--o{ SensitiveActivity : "defines expectations for"
-  Control ||--o{ SensitiveActivity : "safeguards"
-  Policy ||--o{ SensitiveActivity : "authorises"
-
-  SensitiveActivity ||--o{ EvaluationLog : "evaluated as"
-  Policy ||--o{ EvaluationLog : "assessment plans for"
-  Control ||--o{ EvaluationLog : "requirements assessed by"
-
-  EvaluationLog ||--o{ EnforcementLog : "justifies"
-  Policy ||--o{ EnforcementLog : "enforcement methods for"
-
-  EvaluationLog ||--o{ AuditLog : "evidence for"
-  EnforcementLog ||--o{ AuditLog : "evidence for"
-  Policy ||--o{ AuditLog : "criteria for"
-  Control ||--o{ AuditLog : "criteria for"
-  Guidance ||--o{ AuditLog : "criteria for"
-
-  MappingDocument }o--o{ Guidance : "maps"
-  MappingDocument }o--o{ Control : "maps"
-  MappingDocument }o--o{ Threat : "maps"
-  MappingDocument }o--o{ Risk : "maps"
-```
+- **[Definitions](/docs/artifacts/definitions/)** — what good looks like: principles, guidance, threats, controls, risks and policy
+- **[Sensitive Activity](/docs/artifacts/activity/)** — the sensitive activity being governed
+- **[Measures](/docs/artifacts/measures/)** — evaluation, enforcement and audit records produced as the activity runs
 
 <ArtifactLayerMap />
-

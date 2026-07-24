@@ -1,0 +1,9 @@
+{
+  "label": "Governance Measures",
+  "position": 3,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "artifacts/measures/index"
+  }
+}

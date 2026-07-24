@@ -26,6 +26,17 @@
   color: var(--gf-tone, var(--ifm-color-primary));
 }
 
+.bandLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bandLink:hover {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .items {
   display: flex;
   flex-wrap: wrap;
@@ -63,42 +74,17 @@
   color: var(--gf-ink-muted, var(--ifm-color-emphasis-600));
 }
 
-.layer1 {
+.groupDefinitions {
   --gf-tone: var(--gf-layer-1);
   --gf-tone-soft: var(--gf-layer-1-soft);
 }
 
-.layer2 {
-  --gf-tone: var(--gf-layer-2);
-  --gf-tone-soft: var(--gf-layer-2-soft);
-}
-
-.layer3 {
-  --gf-tone: var(--gf-layer-3);
-  --gf-tone-soft: var(--gf-layer-3-soft);
-}
-
-.layer4 {
+.groupActivity {
   --gf-tone: var(--gf-layer-4);
   --gf-tone-soft: var(--gf-layer-4-soft);
 }
 
-.layer5 {
+.groupMeasures {
   --gf-tone: var(--gf-layer-5);
   --gf-tone-soft: var(--gf-layer-5-soft);
-}
-
-.layer6 {
-  --gf-tone: var(--gf-layer-6);
-  --gf-tone-soft: var(--gf-layer-6-soft);
-}
-
-.layer7 {
-  --gf-tone: var(--gf-layer-7);
-  --gf-tone-soft: var(--gf-layer-7-soft);
-}
-
-.layerCross {
-  --gf-tone: var(--gf-layer-cross);
-  --gf-tone-soft: var(--gf-layer-cross-soft);
 }

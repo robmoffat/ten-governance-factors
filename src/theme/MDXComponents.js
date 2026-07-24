@@ -20,6 +20,7 @@ import GovernanceArtifact, {
   LinksDownstream,
 } from '@site/src/components/GovernanceArtifact';
 import FactorList from '@site/src/components/FactorList';
+import ArtifactList from '@site/src/components/ArtifactList';
 import RevealItem from '@site/src/components/RevealItem';
 import LayerPill from '@site/src/components/LayerPill';
 import ArtifactLayerMap from '@site/src/components/ArtifactLayerMap';
@@ -46,6 +47,7 @@ export default {
   LinksUpstream,
   LinksDownstream,
   FactorList,
+  ArtifactList,
   RevealItem,
   LayerPill,
   ArtifactLayerMap,

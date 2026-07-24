@@ -92,8 +92,27 @@ function layerLabel(layer) {
   if (!key) {
     return null;
   }
-  return `Layer ${key}`;
+  return `Gemara Layer ${key}`;
 }
+
+/** Gemara docs that describe each top-level artifact type. */
+const GEMARA_DOCS = {
+  PrincipleCatalog: 'https://gemara.openssf.org/schema/principlecatalog.html',
+  VectorCatalog: 'https://gemara.openssf.org/schema/vectorcatalog.html',
+  GuidanceCatalog: 'https://gemara.openssf.org/schema/guidancecatalog.html',
+  CapabilityCatalog: 'https://gemara.openssf.org/schema/capabilitycatalog.html',
+  ThreatCatalog: 'https://gemara.openssf.org/schema/threatcatalog.html',
+  ControlCatalog: 'https://gemara.openssf.org/schema/controlcatalog.html',
+  RiskCatalog: 'https://gemara.openssf.org/schema/riskcatalog.html',
+  Policy: 'https://gemara.openssf.org/schema/policy.html',
+  SensitiveActivity:
+    'https://gemara.openssf.org/model/06-sensitive-activities.html',
+  EvaluationLog: 'https://gemara.openssf.org/schema/evaluationlog.html',
+  EnforcementLog: 'https://gemara.openssf.org/schema/enforcementlog.html',
+  AuditLog: 'https://gemara.openssf.org/schema/auditlog.html',
+  Lexicon: 'https://gemara.openssf.org/schema/lexicon.html',
+  MappingDocument: 'https://gemara.openssf.org/schema/mappingdocument.html',
+};
 
 /**
  * Structured template for a Gemara governance artifact type.
@@ -105,6 +124,7 @@ export default function GovernanceArtifact({
   title,
   gemaraType,
   layer,
+  gemaraUrl,
   children,
 }) {
   const purpose = getSlot(children, SLOTS.Purpose);
@@ -119,6 +139,8 @@ export default function GovernanceArtifact({
   const key = layerKey(layer);
   const layerText = layerLabel(layer);
   const layerClass = key ? styles[`layer${key === 'cross' ? 'Cross' : key}`] : '';
+  const docsUrl =
+    gemaraUrl || (gemaraType ? GEMARA_DOCS[gemaraType] : null) || null;
 
   return (
     <article
@@ -128,7 +150,21 @@ export default function GovernanceArtifact({
       <header className={styles.header}>
         <div className={styles.badges}>
           <p className={styles.eyebrow}>Governance artifact</p>
-          {layerText ? <p className={styles.layerBadge}>{layerText}</p> : null}
+          {layerText ? (
+            docsUrl ? (
+              <a
+                className={styles.layerBadge}
+                href={docsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Open ${gemaraType || title} on Gemara`}
+              >
+                {layerText}
+              </a>
+            ) : (
+              <p className={styles.layerBadge}>{layerText}</p>
+            )
+          ) : null}
           {gemaraType ? (
             <p className={styles.typeBadge}>
               <code>{gemaraType}</code>

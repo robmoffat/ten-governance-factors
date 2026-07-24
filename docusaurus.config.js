@@ -10,11 +10,11 @@ const config = {
   organizationName: 'robmoffat',
   projectName: 'ten-governance-factors',
 
-  onBrokenLinks: 'ignore',
+  onBrokenLinks: 'warn',
   markdown: {
     mermaid: true,
     hooks: {
-      onBrokenMarkdownLinks: 'ignore',
+      onBrokenMarkdownLinks: 'warn',
     },
   },
 
@@ -143,6 +143,9 @@ const config = {
       },
       mermaid: {
         theme: {light: 'neutral', dark: 'dark'},
+        options: {
+          securityLevel: 'loose',
+        },
       },
     }),
 };

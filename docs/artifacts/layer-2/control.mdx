@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 2
-description: "Safeguards with objectives and observable assessment requirements."
+description: "Technology-specific, threat-informed security controls for protecting information systems."
 ---
 
 <GovernanceArtifact
@@ -16,130 +16,99 @@ description: "Safeguards with objectives and observable assessment requirements.
 >
 
 <Purpose>
-Catalog of safeguards that mitigate threats and implement guidance, each with verifiable assessment requirements.
+
+Technology-specific, threat-informed security controls for protecting information
+systems.
+
 </Purpose>
 
-<LayerRole>
-Layer 2 — threats and controls. Controls define *what must be verified*; assessment requirements are written as observable outcomes, not process essays.
-</LayerRole>
+<Role>
 
-<WhyYouNeedThis>
-Without controls, policy cannot say what to evaluate. Without assessment requirements, evaluation logs have nothing precise to pass or fail.
-</WhyYouNeedThis>
+Controls are the safeguards: they mitigate threats, implement guidance, and
+carry verifiable assessment requirements that policy plans and evaluation logs
+can execute. “Non-public information review” or “intellectual property review”
+before a company-attributed contribution are controls—not principles and not yet
+a pass/fail log entry.
 
-<Contains>
+</Role>
 
-- **Control** — `id`, `title`, `objective`, `state`, `group`
-- **AssessmentRequirement** — `id`, `text`, `applicability`, `state`
-- Links to guidelines and threats
+<Examples>
 
-</Contains>
+<RevealItem title="Non-public information review" defaultOpen>
 
-<KeyFields>
+Before company-attributed publication, contribution material is reviewed so
+secrets, client data and other non-public information are not disclosed. The
+control mitigates the sensitive-disclosure threat and implements classification
+guidance; assessment requirements drive secret scanning and human review.
 
-- `assessment-requirements[]` as the contract for Layer 5
-- `guidelines` and `threats` mappings
-- Applicability groups on the catalog and requirements
+</RevealItem>
 
-</KeyFields>
+<RevealItem title="Intellectual property review">
+
+Legal or IP review records an approval disposition before contribution proceeds.
+When PR #417 is evaluated, that disposition is checked as evidence the control
+was applied.
+
+</RevealItem>
+
+<RevealItem title="OSPO inventory registration and project approval">
+
+Engagements are registered and approved before contribution—so ungoverned
+activity is not the default path. Applicability groups distinguish
+company-moderated, company-interest and personal contribution contexts.
+
+</RevealItem>
+
+</Examples>
 
 <LinksUpstream>
 
-- [Guidance](/docs/artifacts/layer-1/guidance), [Threat](/docs/artifacts/layer-2/threat)
+- [Guidance](/docs/artifacts/layer-1/guidance),
+  [Threat](/docs/artifacts/layer-2/threat)
 
 </LinksUpstream>
 
 <LinksDownstream>
 
-- [Policy](/docs/artifacts/layer-3/policy) assessment plans reference requirement ids
-- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log) records results against those plans
+- [Policy](/docs/artifacts/layer-3/policy) assessment plans reference requirement
+  ids
+- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log) records results against
+  those plans
 - [Audit Log](/docs/artifacts/layer-7/audit-log) may cite controls as criteria
 
 </LinksDownstream>
 
-<Example>
-
-Control that prevents non-public disclosure, with an assessment requirement used by policy plans and evaluation logs:
-
-```yaml
-controls:
-  - id: foss-ctl-008-data-leakage-review
-    title: Non-Public Information Review
-    objective: >
-      Prevent disclosure of non-public information through FOSS contributions.
-    group: information-protection
-    state: Active
-    assessment-requirements:
-      - id: foss-ctl-008-data-leakage-review.ar01
-        text: >
-          Pre-publication evaluation outputs MUST report no uncleared prohibited
-          disclosures before contribution content is published.
-        applicability:
-          - all-contributions
-        recommendation: >
-          Use secret scanning, sensitive-data detection, and reviewer sign-off
-          before publication; treat uncleared findings as non-compliance.
-        state: Active
-    guidelines:
-      - reference-id: foss-contribution-guidance
-        entries:
-          - reference-id: foss-guidance-information-classification
-    threats:
-      - reference-id: foss-contribution-threat-catalog
-        entries:
-          - reference-id: sensitive-data-disclosure
-```
-
-</Example>
-
 <AntiPatterns>
 
-- Assessment requirements that restate process rules instead of observable outcomes
-- Controls with objectives but no requirements
-- Controls that never cite a threat or guideline
+<RevealItem title="Controls without assessment requirements">
+
+A named safeguard that nothing can test. Evaluation and audit then invent ad-hoc
+checks.
+
+</RevealItem>
+
+<RevealItem title="One control for every project type">
+
+Ignoring applicability. Personal contribution identity rules should not be forced
+onto company-moderated pipelines unchanged—and vice versa.
+
+</RevealItem>
 
 </AntiPatterns>
 
-<Diagram>
-
-```mermaid
-flowchart LR
-  Guidance --> Control
-  Threat --> Control
-  Control --> AR[AssessmentRequirement]
-  AR --> PolicyPlan[Policy_AssessmentPlan]
-  PolicyPlan --> EvalLog[EvaluationLog]
-```
-
-</Diagram>
-
-<Discussion>
-
-Controls deliberately separate *intent* (objective, linked guidance) from *verification* (assessment requirement text). That split is what makes Layer 5 logs and Layer 3 plans interoperable.
-
-</Discussion>
-
-<RelatedArtifacts>
-
-- [Guidance](/docs/artifacts/layer-1/guidance)
-- [Threat](/docs/artifacts/layer-2/threat)
-- [Policy](/docs/artifacts/layer-3/policy)
-- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log)
-
-</RelatedArtifacts>
-
 <RelatedFactors>
 
-- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
-- [Evidence by Default](/docs/factors/evidence-by-default)
-- [Continuous Governance](/docs/factors/continuous-governance)
+- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out) — assessment becomes a decision boundary
+- [Evidence by Default](/docs/factors/evidence-by-default) — control results should be attributable
+- [Continuous Governance](/docs/factors/continuous-governance) — controls evaluated in the path of change
 
 </RelatedFactors>
 
 <References>
 
-- [Gemara model](https://gemara.openssf.org/model/)
-- [Gemara schemas — ControlCatalog](https://gemara.openssf.org/schema/)
+- [Gemara Control Catalog schema](https://gemara.openssf.org/schema/)
+- [OSCAL](/docs/tools/oscal)
+- [Gemara](/docs/tools/gemara)
 
 </References>
 

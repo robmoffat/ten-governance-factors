@@ -5,59 +5,106 @@ sidebar_label: II. Build a Governance Twin
 hide_title: true
 tags:
   - Factor
-description: "Maintain a continuously synchronised, machine-readable governance representation of the real resources, activities and relationships."
+description: "For every sensitive activity implemented in software, maintain a corresponding Governance Twin that defines how that activity must be governed."
 ---
 
 <GovernanceFactor title="Build a Governance Twin" number={2}>
 
 <Principle>
 
-Maintain a continuously synchronised, machine-readable governance representation
-of the real resources, activities and relationships you care about.
+For every sensitive activity implemented in software, maintain a corresponding
+Governance Twin that defines how that activity must be governed.
 
-Once sensitive activities are identified, they must resolve to something
-concrete—a twin that holds posture, evidence, owners and dependencies, not only
-policy text about categories in general.
+Scope the twin to the activity—not to the whole application, platform or
+enterprise.
 
 </Principle>
 
 <Problem>
 
-Factor I asks *what* deserves governance. Without a live representation of the
-things that perform those activities, the answer stays abstract. Policies that
-apply only to “object storage”, “applications” or “AI systems” never become
-posture: they never attach to a specific repository, bucket, agent or pipeline
-you can inspect, escalate or remediate.
+Identifying a sensitive activity does not make it governable.
 
-Inventories alone are not enough either. A CMDB row or catalogue entry without
-controls, risks, evidence and decisions is discoverable but not governable. A
-governance twin bridges the gap: it is synchronised with reality and carries the
-governance semantics that make accountability and proof possible.
+A mortgage approval may be implemented across an application form, decision
+service, affordability model and case-management system. The implementation
+knows how to execute the activity, but it does not necessarily describe why the
+activity is sensitive, which organisational policies apply, which risks must be
+controlled, or what requirements must be satisfied.
+
+Without a separate governance representation, that knowledge is scattered across
+regulations, policy documents, control catalogues, tickets and the assumptions of
+individual teams. The organisation may know that mortgage approval should be
+governed, but it cannot reliably determine what governing it entails.
+
+A Governance Twin places that governance definition alongside the software
+implementation. It creates a concrete, machine-readable representation of how
+one specific activity is expected to operate.
 
 </Problem>
 
 <Characteristics>
 
-<RevealItem title="Bound to real things" defaultOpen>
+<RevealItem title="Two twins of the same activity" defaultOpen>
 
-A twin identifies a concrete resource or activity instance—not a vague category.
-If you cannot name the repo, dataset, agent or pipeline, you do not yet have a
-twin.
+The Implementation Twin and Governance Twin describe the same activity from
+different perspectives.
+
+The Implementation Twin describes how the activity is performed: its software
+components, inputs, outputs, decisions and runtime behaviour.
+
+The Governance Twin describes how the activity is governed: the guidance it
+follows, the risks it creates, the controls it requires and the organisational
+policy that authorises it.
+
+Neither replaces the other. Governance must remain connected to implementation,
+but should not be hidden inside it.
 
 </RevealItem>
 
-<RevealItem title="Governance semantics, not only inventory">
+<RevealItem title="Governance artefacts, not inventory metadata">
 
-Technical metadata is necessary but insufficient. The twin also holds controls,
-risks, evidence, decisions, exceptions and relationships that matter for
-governance.
+A Governance Twin binds the definitions that inform the activity. For mortgage
+approval, that may include:
+
+- **Guidance and principles** — fair lending expectations, responsible
+  decision-making principles and regulatory guidance.
+- **Controls and threats** — controls against discriminatory decisions,
+  unauthorised overrides, manipulated input data or unsuitable affordability
+  assessments.
+- **Policy and risk** — the lender’s mandatory approval policy, risk appetite,
+  permitted thresholds and exception rules.
+
+These correspond to Gemara’s definition layers:
+
+- [Layer 1 — Guidance](/docs/artifacts/layer-1/guidance) — external guidance and
+  organisational [principles](/docs/artifacts/layer-1/principle).
+- [Layer 2 — Controls](/docs/artifacts/layer-2/control) —
+  [threats](/docs/artifacts/layer-2/threat), capabilities, controls and
+  verifiable assessment requirements.
+- [Layer 3 — Policy and Risk](/docs/artifacts/layer-3/policy) — the organisation’s
+  own mandatory rules, [risk](/docs/artifacts/layer-3/risk) definitions and
+  appetite.
+
+Gemara places those definitions above the
+[sensitive activity](/docs/artifacts/layer-4/sensitive-activity) itself (Layer
+4). The twin is how Layers 1–3 attach to one concrete Layer 4 activity.
 
 </RevealItem>
 
-<RevealItem title="Continuously synchronised">
+<RevealItem title="One twin per governed activity">
 
-Posture drifts when the twin is a quarterly snapshot. Useful twins update as
-source systems, pipelines and ownership change.
+A Governance Twin should be scoped to the sensitive activity being governed.
+
+A lending platform may perform many activities: receiving applications,
+verifying identity, calculating affordability, approving mortgages, issuing
+documents and disbursing funds.
+
+The Governance Twin for **Approve Mortgage** should describe the governance of
+that decision. It should not become a general model of the entire lending
+platform.
+
+Its dependencies may influence its governance, but those relationships are
+addressed explicitly in
+[Govern Dependencies](/docs/factors/govern-dependencies).
 
 </RevealItem>
 
@@ -65,141 +112,173 @@ source systems, pipelines and ownership change.
 
 <PositiveExamples>
 
-<RevealItem title="A repository twin with provenance, owner and release gates">
-Release posture bound to a concrete repo identity—who owns it, what provenance
-it emits, and which gates apply—rather than a generic “application” policy.
+<RevealItem title="Mortgage approval in a lending platform">
+The Implementation Twin describes the decision service, application inputs and
+resulting approval decision. The Governance Twin attaches fair-lending guidance,
+approval controls, affordability policy and the risks of discriminatory or
+unsuitable lending.
 </RevealItem>
 
-<RevealItem title="A data twin for a regulated bucket">
-Storage policy resolved to a specific dataset with controls, risks and evidence
-attached, so auditors and operators see the same object.
+<RevealItem title="Trade execution in an order-management system">
+The Implementation Twin describes the order, execution venue, trader or
+algorithm and resulting trade. The Governance Twin attaches market-conduct
+guidance, pre-trade controls, permitted trading policy and risks such as
+manipulation or unauthorised trading.
 </RevealItem>
 
-<RevealItem title="An AI-agent twin showing approved tools and current exceptions">
-Agent posture made inspectable: which tools are allowed, which deviations are
-live, and who accepted the risk.
+<RevealItem title="Privileged-access approval in an identity platform">
+The Implementation Twin describes the access request, approver, target system and
+granted permissions. The Governance Twin attaches least-privilege guidance,
+approval and segregation-of-duties controls, access policy and the risk of
+unauthorised administrative access.
 </RevealItem>
 
-<RevealItem title="A build twin for a release pipeline">
-Factory governance state represented separately from the product it ships, so
-pipeline failure cannot hide behind a green runtime badge.
+<RevealItem title="AI-generated credit recommendation">
+The Implementation Twin describes the model, supplied customer facts,
+recommendation and confidence information. The Governance Twin attaches
+responsible-AI principles, bias and explainability controls, credit policy and
+risks arising from unfair or unreliable recommendations.
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="Policies that apply only to “object storage” in general">
-Never resolve to a bucket, owner or live posture you can act on.
+<RevealItem title="A twin of the lending platform as a whole">
+One governance object covering mortgage approval, identity verification,
+document production and fund disbursement—too broad to say which requirements
+apply to which decision.
 </RevealItem>
 
-<RevealItem title="CMDB rows with no controls or risks">
-Inventory without governance semantics—discoverable, but not governable.
+<RevealItem title="Fair-lending policy with no link to the approval activity">
+Organisational policy and controls exist, but nothing associates them with the
+actual approval activity in the lending system.
 </RevealItem>
 
-<RevealItem title="Spreadsheets of “critical apps” with no live links to reality">
-Static lists that drift away from the systems they claim to describe.
+<RevealItem title="Decision-service config treated as the policy">
+Technical behaviour is assumed to express organisational intent, so nobody can
+tell whether the implementation satisfies the policy.
 </RevealItem>
 
 </NegativeExamples>
 
 <AntiPatterns>
 
-<RevealItem title="Governance without inventory">
+<RevealItem title="Governing the application rather than the activity">
 
-Beautiful policy catalogues that never resolve to instances. Nobody can say
-which real systems the rules cover today.
-
-</RevealItem>
-
-<RevealItem title="Inventory without semantics">
-
-Rich asset lists that stop at hostname and owner nickname. No controls, risks,
-evidence or decisions—so nothing to evaluate.
+A single “Lending Platform Governance Twin” combines mortgage approval, identity
+verification, document production and fund disbursement. The resulting
+governance definition is too broad to say which requirements apply to which
+decision.
 
 </RevealItem>
 
-<RevealItem title="One giant undifferentiated enterprise model">
+<RevealItem title="Governance disconnected from implementation">
 
-A twin of everything that becomes nobody’s twin. Scope twins to the activities
-and resources that actually introduce risk.
+The organisation has fair-lending policies and mortgage controls, but nothing
+associates them with the actual approval activity in the lending system.
+
+</RevealItem>
+
+<RevealItem title="Implementation treated as its own governance definition">
+
+The decision service’s configuration is assumed to express organisational
+policy. Technical behaviour and governance intent become inseparable, making it
+difficult to identify whether the implementation actually satisfies the policy.
+
+</RevealItem>
+
+<RevealItem title="A twin with no governance artefacts">
+
+The activity has a catalogue entry, owner and technical metadata, but no linked
+guidance, controls, risks or policy. It is an inventory record, not a Governance
+Twin.
 
 </RevealItem>
 
 </AntiPatterns>
 
 <Diagram
-  title="What does governance know?"
-  description="The twin is the live object that links an activity (or resource) to policies, controls, evidence, owners and dependencies."
+  title="How it works ↔ how it is governed"
+  description="The Implementation Twin and Governance Twin describe the same sensitive activity from different perspectives."
 >
 
 ```mermaid
 classDiagram
-  class GovernanceTwin {
-    +id
-    +activityRef
-    +posture
-    +lastSynced
-  }
-  class Policy
-  class Control
-  class Evidence
-  class Owner
-  class Dependency
-  class RealWorldThing {
-    +repo / service / agent / dataset
-  }
-  RealWorldThing <|-- GovernanceTwin : represents
-  GovernanceTwin --> Policy : bound to
-  GovernanceTwin --> Control : assessed by
-  GovernanceTwin --> Evidence : accumulates
-  GovernanceTwin --> Owner : accountable
-  GovernanceTwin --> Dependency : inherits risk from
+direction LR
+
+class ImplementationTwin {
+  Activity: Approve Mortgage
+  System: Lending Platform
+  Inputs: Application + affordability result
+  Decision: Approve / decline / refer
+  Output: Mortgage decision
+}
+
+class GovernanceTwin {
+  Activity: Approve Mortgage
+  Guidance: Fair lending principles
+  Controls: Decision and override controls
+  Policy: Mortgage approval policy
+  Risks: Discrimination, fraud, unaffordable lending
+}
+
+ImplementationTwin "1" -- "1" GovernanceTwin : describes the same activity
 ```
 
 </Diagram>
 
 <Discussion>
 
-Applying this principle means building the representation layer that Factor I
-scoped.
+A Governance Twin is the governance definition of a specific sensitive activity,
+maintained alongside the software that implements it.
 
-1. **Choose the instances** that perform your sensitive activities—repos,
-   services, agents, datasets, pipelines.
-2. **Give each a twin identity** that systems and people can refer to stably.
-3. **Attach governance state**: controls, risks, evidence, decisions, owners and
-   dependencies.
-4. **Synchronise** with source systems so posture is not a spreadsheet lagging
-   reality.
-5. **Use twins as the substrate** for versioned policy, continuous evaluation and
-   evidence.
+Factor I identifies activities that deserve governance—for example, mortgage
+approval. Factor II requires the lending system’s implementation of that
+activity to have a corresponding governance representation: what the
+organisation expects of the activity, why, and under what conditions it may
+operate.
 
-This factor deliberately stops short of saying how definitions are stored as
-code or how decisions are computed at runtime. Those come next. Factor II
-answers: **how do I represent what Factor I said deserves governance?**
+Putting this into practice:
+
+1. **Start from a Factor I activity** — name the sensitive activity, not the
+   platform that hosts it.
+2. **Describe the Implementation Twin** — the components, inputs, decisions and
+   outputs that perform the activity.
+3. **Build the Governance Twin beside it** — bind guidance, controls, threats,
+   policy and risk to that same activity.
+4. **Keep the scope tight** — one twin per governed activity; do not collapse
+   every platform capability into one object.
+5. **Leave later concerns for later factors** — owners, evidence, continuous
+   evaluation and dependency graphs attach to this substrate; they are not what
+   makes it a Governance Twin.
+
+This factor deliberately stops short of version control, decision engines and
+runtime enforcement. Those come next. Factor II answers: **what is the
+governance definition of the activity Factor I named?**
 
 </Discussion>
 
 <RelatedFactors>
 
-This factor turns scope into representation. Everything that follows reasons
-about twins:
+This factor turns identified activities into governable definitions. Later
+factors reason about what attaches to the twin:
 
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — which activities the twin exists to govern
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — which activities need a twin
 - [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — how twin-bound definitions evolve as artefacts
-- [Govern Dependencies](/docs/factors/govern-dependencies) — how risk propagates across twin relationships
+- [Govern Dependencies](/docs/factors/govern-dependencies) — how related activities and systems influence governance
 - [Governance Has Owners](/docs/factors/governance-has-owners) — who is accountable for each twin
-- [Continuous Governance](/docs/factors/continuous-governance) — how twins are evaluated and updated in the path of change
+- [Evidence by Default](/docs/factors/evidence-by-default) — how the twin accumulates proof over time
 
 </RelatedFactors>
 
 <References>
 
-- [Backstage](/docs/tools/backstage) — typed catalogue entities with owners and relations
-- [AWS Config](/docs/tools/aws-config) — continuous cloud resource and relationship inventory
-- [ServiceNow CMDB](/docs/tools/servicenow-cmdb) — enterprise CI inventory and ownership
-- [Cloud Asset Inventory](/docs/tools/cloud-asset-inventory) — cross-project cloud asset graphs
-- [Gemara](/docs/tools/gemara) — layered governance semantics a twin can bind to instances
+- [Gemara](/docs/tools/gemara) — layered governance artefacts bound to sensitive activities
+- [Sensitive Activity](/docs/artifacts/layer-4/sensitive-activity) — Layer 4 activity the twin governs
+- [Guidance](/docs/artifacts/layer-1/guidance) · [Principle](/docs/artifacts/layer-1/principle) — Layer 1 definitions
+- [Control](/docs/artifacts/layer-2/control) · [Threat](/docs/artifacts/layer-2/threat) — Layer 2 definitions
+- [Policy](/docs/artifacts/layer-3/policy) · [Risk](/docs/artifacts/layer-3/risk) — Layer 3 definitions
 - [OSCAL](/docs/tools/oscal) — portable control and assessment semantics
 
 </References>

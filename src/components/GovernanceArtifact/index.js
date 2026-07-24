@@ -1,8 +1,6 @@
 import React, {Children, isValidElement} from 'react';
 import {
   AntiPatterns,
-  Diagram,
-  Discussion,
   References,
   RelatedFactors,
 } from '@site/src/components/GovernanceFactor';
@@ -45,31 +43,21 @@ function createSlot(displayName) {
 }
 
 export const Purpose = createSlot('Purpose');
-export const LayerRole = createSlot('LayerRole');
-export const WhyYouNeedThis = createSlot('WhyYouNeedThis');
-export const Contains = createSlot('Contains');
-export const KeyFields = createSlot('KeyFields');
+export const Role = createSlot('Role');
+export const Examples = createSlot('Examples');
 export const LinksUpstream = createSlot('LinksUpstream');
 export const LinksDownstream = createSlot('LinksDownstream');
-export const Example = createSlot('Example');
-export const RelatedArtifacts = createSlot('RelatedArtifacts');
 
-// Shared with GovernanceFactor so MDX can register one Diagram / etc.
-export {AntiPatterns, Diagram, Discussion, References, RelatedFactors};
+// Shared with GovernanceFactor so MDX can register one set of slots.
+export {AntiPatterns, References, RelatedFactors};
 
 const SLOTS = {
   Purpose,
-  LayerRole,
-  WhyYouNeedThis,
-  Contains,
-  KeyFields,
+  Role,
+  Examples,
   LinksUpstream,
   LinksDownstream,
-  Example,
   AntiPatterns,
-  Diagram,
-  Discussion,
-  RelatedArtifacts,
   RelatedFactors,
   References,
 };
@@ -109,6 +97,9 @@ function layerLabel(layer) {
 
 /**
  * Structured template for a Gemara governance artifact type.
+ *
+ * Canonical sections: Purpose, Role, Examples, Links Upstream,
+ * Links Downstream, Anti-Patterns, Related Factors, References.
  */
 export default function GovernanceArtifact({
   title,
@@ -117,17 +108,11 @@ export default function GovernanceArtifact({
   children,
 }) {
   const purpose = getSlot(children, SLOTS.Purpose);
-  const layerRole = getSlot(children, SLOTS.LayerRole);
-  const whyYouNeedThis = getSlot(children, SLOTS.WhyYouNeedThis);
-  const contains = getSlot(children, SLOTS.Contains);
-  const keyFields = getSlot(children, SLOTS.KeyFields);
+  const role = getSlot(children, SLOTS.Role);
+  const examples = getSlot(children, SLOTS.Examples);
   const linksUpstream = getSlot(children, SLOTS.LinksUpstream);
   const linksDownstream = getSlot(children, SLOTS.LinksDownstream);
-  const example = getSlot(children, SLOTS.Example);
   const antiPatterns = getSlot(children, SLOTS.AntiPatterns);
-  const diagram = getSlotElement(children, SLOTS.Diagram);
-  const discussion = getSlot(children, SLOTS.Discussion);
-  const relatedArtifacts = getSlot(children, SLOTS.RelatedArtifacts);
   const relatedFactors = getSlot(children, SLOTS.RelatedFactors);
   const references = getSlot(children, SLOTS.References);
 
@@ -159,25 +144,17 @@ export default function GovernanceArtifact({
         )}
       </header>
 
-      <Section id="layer-role" title="Layer role" variant="accent" bodyClassName={styles.prose}>
-        {layerRole}
+      <Section id="role" title="Role" variant="accent" bodyClassName={styles.prose}>
+        {role}
       </Section>
 
       <Section
-        id="why-you-need-this"
-        title="Why you need this"
+        id="examples"
+        title="Examples"
         variant="accent"
-        bodyClassName={styles.prose}
+        bodyClassName={`${styles.listContent} ${styles.revealList}`}
       >
-        {whyYouNeedThis}
-      </Section>
-
-      <Section id="contains" title="Contains" bodyClassName={styles.listContent}>
-        {contains}
-      </Section>
-
-      <Section id="key-fields" title="Key fields" bodyClassName={styles.listContent}>
-        {keyFields}
+        {examples}
       </Section>
 
       <Section
@@ -197,42 +174,12 @@ export default function GovernanceArtifact({
       </Section>
 
       <Section
-        id="example"
-        title="Example"
-        variant="accent"
-        bodyClassName={`${styles.prose} ${styles.diagramContent}`}
-      >
-        {example}
-      </Section>
-
-      <Section
         id="anti-patterns"
         title="Anti-patterns"
         variant="warn"
-        bodyClassName={styles.listContent}
+        bodyClassName={`${styles.listContent} ${styles.revealList}`}
       >
         {antiPatterns}
-      </Section>
-
-      <Section
-        id="diagram"
-        title="Diagram"
-        variant="accent"
-        bodyClassName={`${styles.prose} ${styles.diagramContent}`}
-      >
-        {diagram}
-      </Section>
-
-      <Section id="discussion" title="Discussion" bodyClassName={styles.prose}>
-        {discussion}
-      </Section>
-
-      <Section
-        id="related-artifacts"
-        title="Related artifacts"
-        bodyClassName={styles.listContent}
-      >
-        {relatedArtifacts}
       </Section>
 
       <Section

@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 1
-description: "Foundational values that guidance and policy should not contradict."
+description: "Foundational values that guide governance, design, and operational decisions."
 ---
 
 <GovernanceArtifact
@@ -16,107 +16,101 @@ description: "Foundational values that guidance and policy should not contradict
 >
 
 <Purpose>
-Catalog of foundational values that orient guidance and organisational stance.
+
+Foundational values that guide governance, design, and operational decisions.
+
 </Purpose>
 
-<LayerRole>
-Layer 1 — definition. Principles sit above technology-specific controls; they explain *why* guidance exists.
-</LayerRole>
+<Role>
 
-<WhyYouNeedThis>
-Without explicit principles, every guideline becomes an orphan rule. Reviews cannot tell which values a control is protecting, and composition across teams loses a shared north star.
-</WhyYouNeedThis>
+Principles sit at the top of the definition stack. They state *why* the
+organisation cares, before guidance turns those values into observable
+expectations and controls turn them into safeguards. A principle does not tell
+you how to scan a pull request; it tells you that contribution must produce
+company benefit, that risk must be managed, or that AI systems must minimise
+unnecessary data exposure.
 
-<Contains>
+</Role>
 
-- **Principle** — `id`, `title`, `description`, optional `group`, `rationale`
+<Examples>
 
-</Contains>
+<RevealItem title="Contribute when there is company benefit" defaultOpen>
 
-<KeyFields>
+In an open source contribution programme, the _Open Source Program Office (OSPO)_ 
+records a principle that the company
+supports public contribution only when it advances business objectives and does
+not create unmanaged exposure. That value orients every later guideline about
+registration, approval and personal-versus-company activity.
 
-- Catalog `title` and `metadata` envelope
-- Optional `groups[]` for organising principles
-- Optional link to a [Lexicon](/docs/artifacts/cross-cutting/lexicon)
+</RevealItem>
 
-</KeyFields>
+<RevealItem title="Centralized Open Source Governance">
+
+The same programme states that the Open Source Program Office owns FOSS
+contribution strategy and governance. Downstream guidance and policy can then
+require inventory registration and approval without re-arguing who is
+accountable.
+
+</RevealItem>
+
+<RevealItem title="Proactive Data Sanitization">
+
+The [FINOS AI Governance Framework principle catalog](https://grc.store/finos-aigf/air-prin/versions/0.2.0)
+includes *Proactive Data Sanitization*: filter and anonymise data before it
+enters an AI pipeline or external endpoint. Companion principles such as *Least
+Exposure* and *Defense in Depth* give AI mitigations a shared set of base values.
+
+</RevealItem>
+
+</Examples>
 
 <LinksUpstream>
 
-- Organisational charters, ethics statements, OSPO mandates
+- Organisational charters, ethics statements, mandates, governance
+  frameworks
+- Shared [Lexicon](/docs/artifacts/cross-cutting/lexicon) terms where wording
+  must stay consistent
 
 </LinksUpstream>
 
 <LinksDownstream>
 
-- [Guidance](/docs/artifacts/layer-1/guidance) guidelines cite principles (`guidelines[].principles`)
-- Informal influence on [Policy](/docs/artifacts/layer-3/policy) scope and risk appetite
+- [Guidance](/docs/artifacts/layer-1/guidance) guidelines cite the principles
+  they uphold
 
 </LinksDownstream>
 
-<Example>
-
-Principles for employee FOSS contribution — centralized OSPO ownership, and a hard separation between personal and company activity:
-
-```yaml
-principles:
-  - id: ospo-governance
-    title: Centralized OSPO Governance
-    group: governance
-    description: >
-      The Open Source Program Office establishes, evolves, and executes FOSS
-      contribution strategy and governance under direction of the guidelines
-      owner.
-    rationale: >
-      Consistent oversight enables scalable review, inventory management, and
-      accountability across engagements.
-
-  - id: separation-personal-company
-    title: Separation of Personal and Company Activity
-    group: conduct
-    description: >
-      Personal FOSS contributions must be distinguishable from company
-      contributions in identity, infrastructure, representation, and
-      intellectual property use.
-    rationale: >
-      Blurred boundaries create conflict-of-interest, attribution, and IP risk.
-```
-
-</Example>
-
 <AntiPatterns>
 
-- Principles that are slogans with no id or description
-- Principles restated as if they were enforceable controls
-- One giant principle that cannot be cited by guidance
+<RevealItem title="Principles that are really controls">
+
+“Run a secret scan on every PR” is a control, not a principle. Principles should
+survive a change of tooling.
+
+</RevealItem>
+
+<RevealItem title="Orphan principles">
+
+A catalogue of values that no guideline, control or policy ever cites. If nothing
+downstream refers to them, they are decoration.
+
+</RevealItem>
 
 </AntiPatterns>
 
-<Discussion>
-
-Principles are cheap to author and expensive to violate. In Gemara they remain Layer 1: they do not evaluate builds or block merges by themselves. They give guidance and later audits a stable vocabulary of intent.
-
-</Discussion>
-
-<RelatedArtifacts>
-
-- [Lexicon](/docs/artifacts/cross-cutting/lexicon)
-- [Guidance](/docs/artifacts/layer-1/guidance)
-- [Vector](/docs/artifacts/layer-1/vector)
-
-</RelatedArtifacts>
-
 <RelatedFactors>
 
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
-- [Governance Has Owners](/docs/factors/governance-has-owners)
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — principles explain why an activity matters
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — guidance and principles bind to the twin
+- [Governance Is Composable](/docs/factors/governance-is-composable) — reusable principle catalogues across programmes
 
 </RelatedFactors>
 
 <References>
 
-- [Gemara model](https://gemara.openssf.org/model/)
-- [Gemara schemas — PrincipleCatalog](https://gemara.openssf.org/schema/)
+- [Gemara Principle Catalog schema](https://gemara.openssf.org/schema/)
+- [FINOS-AIGF/AIR-PRIN on grc.store](https://grc.store/finos-aigf/air-prin/versions/0.2.0)
+- [Gemara](/docs/tools/gemara)
 
 </References>
 

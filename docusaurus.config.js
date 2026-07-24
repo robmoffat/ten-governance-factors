@@ -5,10 +5,10 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config
-  url: 'https://finos.org',
-  baseUrl: '/governance-factors/',
-  organizationName: 'finos',
-  projectName: 'governance-factors',
+  url: 'https://10-factor-governance.netlify.app',
+  baseUrl: '/',
+  organizationName: 'robmoffat',
+  projectName: 'ten-governance-factors',
 
   onBrokenLinks: 'ignore',
   markdown: {

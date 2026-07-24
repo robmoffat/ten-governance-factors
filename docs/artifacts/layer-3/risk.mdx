@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 3
-description: "Organisational risks aggregated from Layer 2 threats."
+description: "Organizational risk categories, severity levels, and risk appetite definitions."
 ---
 
 <GovernanceArtifact
@@ -16,32 +16,41 @@ description: "Organisational risks aggregated from Layer 2 threats."
 >
 
 <Purpose>
-Catalog of organisational risks linked to Layer 2 threats for policy-level treatment.
+
+Organizational risk categories, severity levels, and risk appetite definitions.
+
 </Purpose>
 
-<LayerRole>
-Layer 3 — risk and policy. Risks translate technical threats into organisational language: severity, appetite, owners.
-</LayerRole>
+<Role>
 
-<WhyYouNeedThis>
-Policy that only lists controls cannot explain *why* the organisation cares. Risk entries give mitigated/accepted treatment a named exposure with severity and ownership.
-</WhyYouNeedThis>
+Risks are how the organisation talks about exposure it owns—severity, appetite,
+owners and the Layer 2 threats that materialise them. Policy then mitigates or
+accepts those risks. “Disclosure of non-public information” as a High severity
+risk with Low appetite is Layer 3; the contribution threat that feeds it is
+Layer 2.
 
-<Contains>
+</Role>
 
-- **Risk** — `id`, `title`, `description`, `severity`, optional impact
-- Links to threats; optional owner / RACI
-- Risk categories with appetite / max severity where used
+<Examples>
 
-</Contains>
+<RevealItem title="Disclosure of non-public or sensitive information" defaultOpen>
 
-<KeyFields>
+A FOSS risk catalog records data-leakage as High severity under an Information
+Protection group with Low appetite, owned jointly by contributors and project
+administrators, and linked to the sensitive-data-disclosure threat. Policy lists
+it as a mitigated risk with assessment and enforcement methods.
 
-- `threats` mappings into [Threat](/docs/artifacts/layer-2/threat)
-- Severity and ownership fields for accountability
-- Catalog metadata and groups
+</RevealItem>
 
-</KeyFields>
+<RevealItem title="Appetite by risk group">
+
+Operational governance risks may carry Moderate appetite and a higher max
+severity than information-protection risks. That difference tells policy authors
+where exceptions are thinkable and where they are not.
+
+</RevealItem>
+
+</Examples>
 
 <LinksUpstream>
 
@@ -56,71 +65,36 @@ Policy that only lists controls cannot explain *why* the organisation cares. Ris
 
 </LinksDownstream>
 
-<Example>
-
-Organisational data-leakage risk aggregating the sensitive-data-disclosure threat, with owners:
-
-```yaml
-risks:
-  - id: data-leakage
-    title: Disclosure of Non-Public or Sensitive Information
-    group: information-protection
-    severity: High
-    description: >
-      A contributor may disclose confidential, proprietary, client, customer,
-      security-sensitive, regulated, credential, key, architectural, or other
-      non-public information through a public FOSS contribution.
-    impact: >
-      Could result in regulatory breach, client harm, security exposure,
-      contractual breach, reputational damage, and loss of trust.
-    threats:
-      - reference-id: foss-contribution-threat-catalog
-        entries:
-          - reference-id: sensitive-data-disclosure
-    owner:
-      responsible:
-        - name: FOSS Contributor
-        - name: FOSS Project Administrator
-      accountable:
-        - name: Open Source Program Office
-          affiliation: Company OSPO
-```
-
-</Example>
-
 <AntiPatterns>
 
-- Risks with no linked threats
-- Treating risk catalogs as another control checklist
-- Severity labels with no owner who can accept residual risk
+<RevealItem title="Risks with no owners">
+
+A severity label and no accountable human. Appetite without ownership is a
+spreadsheet, not governance.
+
+</RevealItem>
+
+<RevealItem title="Threat catalogue renamed as risk">
+
+Copying Layer 2 threat titles into Layer 3 without organisational severity,
+appetite or owners. The layers collapse.
+
+</RevealItem>
 
 </AntiPatterns>
 
-<Discussion>
-
-Risks are the organisational face of Layer 2. They should be few, named, and tied to threats—so policy can mitigate or accept them without inventing a parallel universe of concerns.
-
-</Discussion>
-
-<RelatedArtifacts>
-
-- [Threat](/docs/artifacts/layer-2/threat)
-- [Policy](/docs/artifacts/layer-3/policy)
-- [Control](/docs/artifacts/layer-2/control)
-
-</RelatedArtifacts>
-
 <RelatedFactors>
 
-- [Governance Has Owners](/docs/factors/governance-has-owners)
-- [Govern Dependencies](/docs/factors/govern-dependencies)
+- [Governance Has Owners](/docs/factors/governance-has-owners) — risk owners are mandatory
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — risks bind to the activity twin
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — risk follows the activity
 
 </RelatedFactors>
 
 <References>
 
-- [Gemara model](https://gemara.openssf.org/model/)
-- [Gemara schemas — RiskCatalog](https://gemara.openssf.org/schema/)
+- [Gemara Risk Catalog schema](https://gemara.openssf.org/schema/)
+- [Gemara](/docs/tools/gemara)
 
 </References>
 

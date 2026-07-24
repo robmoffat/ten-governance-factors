@@ -14,14 +14,10 @@ import GovernanceFactor, {
 } from '@site/src/components/GovernanceFactor';
 import GovernanceArtifact, {
   Purpose,
-  LayerRole,
-  WhyYouNeedThis,
-  Contains,
-  KeyFields,
+  Role,
+  Examples,
   LinksUpstream,
   LinksDownstream,
-  Example,
-  RelatedArtifacts,
 } from '@site/src/components/GovernanceArtifact';
 import FactorList from '@site/src/components/FactorList';
 import RevealItem from '@site/src/components/RevealItem';
@@ -45,14 +41,10 @@ export default {
   References,
   GovernanceArtifact,
   Purpose,
-  LayerRole,
-  WhyYouNeedThis,
-  Contains,
-  KeyFields,
+  Role,
+  Examples,
   LinksUpstream,
   LinksDownstream,
-  Example,
-  RelatedArtifacts,
   FactorList,
   RevealItem,
   LayerPill,

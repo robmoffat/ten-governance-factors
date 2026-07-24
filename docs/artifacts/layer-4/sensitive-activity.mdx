@@ -6,101 +6,111 @@ hide_title: true
 tags:
   - Artifact
   - Layer 4
-description: "Actions that introduce risk—the hinge between definition and measurement."
+description: "Actions that might introduce risk—the hinge between definition and measurement."
 ---
 
 <GovernanceArtifact
   title="Sensitive Activity"
+  gemaraType="SensitiveActivity"
   layer={4}
 >
 
 <Purpose>
-Name and bound the actions that introduce risk; the hinge between definition layers and measurement layers.
+
+Actions that might introduce risk—the hinge between definition layers and
+measurement layers.
+
 </Purpose>
 
-<LayerRole>
-Layer 4 — sensitive activities. In Gemara this layer is conceptual (no dedicated schema by design): it is the activity being evaluated, not another catalog file.
-</LayerRole>
+<Role>
 
-<WhyYouNeedThis>
-Definition catalogs without an activity focus drift into documentation. Measurement logs without a named activity cannot explain *what* was evaluated. Layer 4 keeps both sides honest.
-</WhyYouNeedThis>
+Layer 4 names the activity being governed. Definitions above (guidance,
+controls, policy) describe what good looks like; measurements below
+(evaluation, enforcement, audit) inspect instances of the activity. In Ten
+Factor terms, this is where Factor I’s sensitive activity meets Factor II’s
+Governance Twin: the activity is the shared identity of implementation and
+governance.
 
-<Contains>
+</Role>
 
-- Activity descriptions and scope (prose / twin / request model)—not a Gemara catalog type
-- Binding to actors, targets, context and environment when evaluated
+<Examples>
 
-</Contains>
+<RevealItem title="Employee FOSS contribution" defaultOpen>
 
-<KeyFields>
+Writing open source software and attempting to contribute it from within the
+organisation—across company-moderated, company-interest and personal contexts.
+Catalogs and logs organise around that activity: registration, review, merge
+gates and quarterly audit all refer to contribution instances, not to “GitHub”
+in the abstract.
 
-- Clear activity identity in operational systems (e.g. “contribute company-interest PR”)
-- Links into policy applicability and evaluation `target` resources
+</RevealItem>
 
-</KeyFields>
+<RevealItem title="Mortgage approval in a lending platform">
+
+Approving or declining a mortgage application is the sensitive activity. The
+Governance Twin binds fair-lending guidance, controls and policy to that
+decision; evaluation and enforcement attach to each approval instance.
+
+</RevealItem>
+
+<RevealItem title="AI-generated credit recommendation">
+
+Producing a credit recommendation from a model is the activity. Principles such
+as least exposure and auditability, plus bias and explainability controls,
+govern that recommendation—not the ML platform as a whole.
+
+</RevealItem>
+
+</Examples>
 
 <LinksUpstream>
 
-- [Guidance](/docs/artifacts/layer-1/guidance), [Control](/docs/artifacts/layer-2/control), [Policy](/docs/artifacts/layer-3/policy) define what good looks like for the activity
+- [Guidance](/docs/artifacts/layer-1/guidance),
+  [Control](/docs/artifacts/layer-2/control),
+  [Policy](/docs/artifacts/layer-3/policy) define what good looks like for the
+  activity
 
 </LinksUpstream>
 
 <LinksDownstream>
 
-- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log) inspects instances of the activity
+- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log) inspects instances
 - [Enforcement Log](/docs/artifacts/layer-6/enforcement-log) acts on those results
+- [Audit Log](/docs/artifacts/layer-7/audit-log) reviews programme conformance
 
 </LinksDownstream>
 
-<Example>
-
-The sensitive activity being governed is employee contribution of open source software from within the organisation. Catalogs and logs organise around that activity — for example:
-
-- **Activity:** writing open source software and attempting to contribute it from within the organisation
-- **Capabilities that create surface:** `public-source-publication`, `company-infrastructure-contribution`
-- **Vectors that can go wrong:** `accidental-sensitive-commit`, `ungoverned-project-contribution`
-- **Control on the path:** `foss-ctl-008-data-leakage-review` (non-public information review before publish)
-- **Policy frequency:** `ap-foss-008-data-leakage-review` runs `per-contribution`
-
-Instances of the activity look like a named engagement and pull request, for example `example-corp/internal-tools` PR #417 in a company-moderated environment — the same target referenced by evaluation and enforcement logs.
-
-</Example>
-
 <AntiPatterns>
 
-- Treating “application” inventory as if it were the sensitive activity
-- Skipping Layer 4 and jumping from policy text to screenshots
-- Activities so broad that no assessment plan can apply
+<RevealItem title="Naming a platform instead of an activity">
+
+“Lending platform” or “AI stack” as the Layer 4 object. You cannot say which
+decision was governed.
+
+</RevealItem>
+
+<RevealItem title="Activity with no definition above it">
+
+A named activity that no guidance, control or policy attaches to. Measurement
+then has nothing to evaluate against.
+
+</RevealItem>
 
 </AntiPatterns>
 
-<Discussion>
-
-Sensitive activity is also Factor I of Ten Factor Governance. Gemara’s Layer 4 exists so automated governance stays centred on actions—not only on documents. Pair this page with governance twins and structured requests when you operationalise it.
-
-</Discussion>
-
-<RelatedArtifacts>
-
-- [Policy](/docs/artifacts/layer-3/policy)
-- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log)
-- [Control](/docs/artifacts/layer-2/control)
-
-</RelatedArtifacts>
-
 <RelatedFactors>
 
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin)
-- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — identifying Layer 4
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — twin scoped to the activity
+- [Continuous Governance](/docs/factors/continuous-governance) — instances evaluated in the path of change
 
 </RelatedFactors>
 
 <References>
 
-- [Gemara model — sensitive activities](https://gemara.openssf.org/model/)
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities)
+- [Gemara Sensitive Activities](https://gemara.openssf.org/adrs/0009-sensitive-activities)
+- [Gemara model](https://gemara.openssf.org/model/)
+- [Gemara](/docs/tools/gemara)
 
 </References>
 

@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 1
-description: "Guideline statements describing what people and systems are expected to do."
+description: "High-level guidance on cybersecurity measures from industry groups and standards bodies."
 ---
 
 <GovernanceArtifact
@@ -16,112 +16,105 @@ description: "Guideline statements describing what people and systems are expect
 >
 
 <Purpose>
-Catalog of guideline statements adapted from human-readable policy into linkable entries.
+
+High-level guidance on cybersecurity measures from industry groups and standards
+bodies.
+
 </Purpose>
 
-<LayerRole>
-Layer 1 — definition. Guidance is the readable “what we expect” layer that controls later implement.
-</LayerRole>
+<Role>
 
-<WhyYouNeedThis>
-PDF guidelines alone cannot be imported by policy, cited by controls, or proven in audits. Without a guidance catalog, Layer 2 controls float free of the narrative people actually read.
-</WhyYouNeedThis>
+Guidance turns principles into linkable expectations—often adapted from
+human-readable policy, frameworks or standards. A guideline is still definition,
+not enforcement: it says what should be true (classify information before
+publication; register FOSS engagements with the OSPO) so controls and policy can
+implement and assess it.
 
-<Contains>
+</Role>
 
-- **Guideline** — `id`, `title`, `objective`, `state`, `group`
-- **Statement** — atomic `text` under a guideline
-- Optional rationale, exemptions, recommendations, applicability
+<Examples>
 
-</Contains>
+<RevealItem title="Information classification before publication" defaultOpen>
 
-<KeyFields>
+FOSS contribution guidance requires contributors to classify material before it
+becomes public, so non-public information is not released through a commit or
+document. Controls later attach assessment requirements—such as secret scanning
+and IP review—to that expectation.
 
-- Links to [Principle](/docs/artifacts/layer-1/principle) and [Vector](/docs/artifacts/layer-1/vector) via multi-entry mappings
-- `see-also` between guidelines
-- Catalog `metadata.lexicon` when terms are shared
+</RevealItem>
 
-</KeyFields>
+<RevealItem title="OSPO programme objective and scope">
+
+Guidelines establish that the company supports certain FOSS contribution
+activities when they benefit the company and do not present unacceptable risk,
+and they carve out FOSS *consumption* as out of scope. Policy and inventory
+controls inherit that boundary.
+
+</RevealItem>
+
+<RevealItem title="AI mitigations upholding AIR principles">
+
+In the FINOS AI Governance Framework, mitigations (guidelines) are written to
+uphold catalogued principles such as *Least Exposure* and *Auditability*. The
+guidance layer is where “filter before the model sees data” becomes an
+expectation controls can implement.
+
+</RevealItem>
+
+</Examples>
 
 <LinksUpstream>
 
-- [Principle](/docs/artifacts/layer-1/principle), [Vector](/docs/artifacts/layer-1/vector), [Lexicon](/docs/artifacts/cross-cutting/lexicon)
-- Human-readable source documents (e.g. FOSS contribution guidelines)
+- [Principle](/docs/artifacts/layer-1/principle) and [Vector](/docs/artifacts/layer-1/vector)
+- [Lexicon](/docs/artifacts/cross-cutting/lexicon)
+- Human-readable source documents (contribution guidelines, AI frameworks,
+  standards)
 
 </LinksUpstream>
 
 <LinksDownstream>
 
-- [Control](/docs/artifacts/layer-2/control) entries list guidelines they implement
+- [Control](/docs/artifacts/layer-2/control) entries list guidelines they
+  implement
+- [Policy](/docs/artifacts/layer-3/policy) and
+  [Sensitive Activity](/docs/artifacts/layer-4/sensitive-activity) bind to those
+  expectations
 - [Audit Log](/docs/artifacts/layer-7/audit-log) may cite guidelines as criteria
 
 </LinksDownstream>
 
-<Example>
-
-Guidance for information classification before publication, with observable statements and linked vectors:
-
-```yaml
-guidelines:
-  - id: foss-guidance-information-classification
-    title: Information Classification for Publication
-    group: compliance
-    state: Active
-    objective: >
-      Review and approve company moderated and company interest contributions
-      before transmitting material out of the company network.
-    statements:
-      - id: foss-guidance-information-classification.1
-        text: >
-          Contributions must be associated to an inventoried FOSS project
-          registered in the OSPO FOSS inventory.
-      - id: foss-guidance-information-classification.2
-        text: >
-          Contributions containing material non-public information, non-standard
-          cryptography, or non-standard authentication mechanisms must be
-          remediated before approval.
-    vectors:
-      - reference-id: foss-contribution-vectors
-        entries:
-          - reference-id: accidental-sensitive-commit
-          - reference-id: unreviewed-public-release
-```
-
-</Example>
-
 <AntiPatterns>
 
-- Guidance that is secretly a control assessment requirement
-- Unversioned wiki pages as the only guidance source of truth
-- Guidelines with no ids, so controls cannot cite them
+<RevealItem title="Unlinkable prose dumps">
+
+Pasting a PDF policy into a catalogue without stable guideline ids. Nothing
+downstream can cite “what was required.”
+
+</RevealItem>
+
+<RevealItem title="Guidance that is secretly policy">
+
+Organisation-specific mandatory rules, thresholds and exception handling belong
+in [Policy](/docs/artifacts/layer-3/policy). Guidance should stay reusable across
+contexts where possible.
+
+</RevealItem>
 
 </AntiPatterns>
 
-<Discussion>
-
-Guidance bridges people and machines. Contributors still need readable expectations; Gemara insists those expectations also exist as entries with ids so controls and audits can point at them precisely.
-
-</Discussion>
-
-<RelatedArtifacts>
-
-- [Principle](/docs/artifacts/layer-1/principle)
-- [Vector](/docs/artifacts/layer-1/vector)
-- [Control](/docs/artifacts/layer-2/control)
-
-</RelatedArtifacts>
-
 <RelatedFactors>
 
-- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled)
-- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
+- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — guidance as reviewable artefacts
+- [Governance Is Composable](/docs/factors/governance-is-composable) — profiles and overlays over shared guidance
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — Layer 1 definitions on the twin
 
 </RelatedFactors>
 
 <References>
 
-- [Gemara model](https://gemara.openssf.org/model/)
-- [Gemara schemas — GuidanceCatalog](https://gemara.openssf.org/schema/)
+- [Gemara Guidance Catalog schema](https://gemara.openssf.org/schema/)
+- [Gemara](/docs/tools/gemara)
+- [FINOS AI Governance Framework](https://air-governance-framework.finos.org)
 
 </References>
 

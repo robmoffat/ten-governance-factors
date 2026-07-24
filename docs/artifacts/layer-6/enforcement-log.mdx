@@ -6,7 +6,7 @@ hide_title: true
 tags:
   - Artifact
   - Layer 6
-description: "Actions taken when evaluations fail—or explicit clears when they pass."
+description: "Prevention or remediation based on assessment findings."
 ---
 
 <GovernanceArtifact
@@ -16,32 +16,40 @@ description: "Actions taken when evaluations fail—or explicit clears when they
 >
 
 <Purpose>
-Record preventive or remediative actions taken in response to evaluation results.
+
+Prevention or remediation based on assessment findings.
+
 </Purpose>
 
-<LayerRole>
-Layer 6 — measurement. Enforcement closes the loop: block, notify, remediate, or explicitly clear, with justification back to Layer 5.
-</LayerRole>
+<Role>
 
-<WhyYouNeedThis>
-Failed evaluations that nobody acts on are theatre. Enforcement logs prove the gate or remediation fired—and why—using policy method ids and evaluation justification.
-</WhyYouNeedThis>
+Enforcement records what was done after evaluation: block a merge, open a
+ticket, notify owners, require remediation. Methods should be those declared on
+policy, justified by assessment results. Without an enforcement log, denials and
+fixes exist only as chat noise or ephemeral CI annotations.
 
-<Contains>
+</Role>
 
-- **ActionResult** entries with disposition, steps, timestamps
-- Links to enforcement/evaluation methods
-- Justification pointing at assessment logs / requirements / plans
+<Examples>
 
-</Contains>
+<RevealItem title="Merge blocked after PR #417 secret-scan failure" defaultOpen>
 
-<KeyFields>
+When the evaluation log fails data-leakage checks, enforcement blocks the pull
+request merge, posts a failing check run, and notifies the contributor and
+OSPO—citing the policy enforcement method and the failed assessment as
+justification.
 
-- `method` referencing policy enforcement methods
-- `justification.assessments[]` → evaluation log + requirement + plan
-- Disposition and step history
+</RevealItem>
 
-</KeyFields>
+<RevealItem title="Remediation notification, not only hard deny">
+
+Enforcement can obligate follow-up (notify, ticket, re-run) rather than only
+refuse. The log still records disposition, method and timing so audit can see
+the closed loop.
+
+</RevealItem>
+
+</Examples>
 
 <LinksUpstream>
 
@@ -53,100 +61,40 @@ Failed evaluations that nobody acts on are theatre. Enforcement logs prove the g
 <LinksDownstream>
 
 - [Audit Log](/docs/artifacts/layer-7/audit-log) cites enforcement evidence
-- Operational ticketing / merge gates consuming the same dispositions
+- Operational ticketing and merge gates consuming the same dispositions
 
 </LinksDownstream>
 
-<Example>
-
-Enforcement after the failed data-leakage evaluation: merge blocked and contributor/OSPO notified:
-
-```yaml
-metadata:
-  id: foss-enforcement-internal-tools-pr417
-  type: EnforcementLog
-  date: "2026-07-06T09:15:10Z"
-  description: >
-    Enforcement actions taken after failed data-leakage evaluation for PR #417
-
-disposition: Enforced
-
-target:
-  id: foss-engagement-internal-tools
-  name: example-corp/internal-tools
-  environment: company-moderated
-
-actions:
-  - disposition: Enforced
-    method:
-      reference-id: foss-contribution-policy
-      entry-id: em-foss-block-merge
-    message: >
-      Blocked merge of pull request #417: secret scan reported uncleared AWS
-      access key (GL-2026-07-06-00417-01).
-    steps:
-      - ospo/enforcement/github.setPullRequestMergeBlocked
-      - ospo/enforcement/github.postCheckRunFailure
-    justification:
-      assessments:
-        - result: Failed
-          requirement:
-            reference-id: foss-contribution-controls
-            entry-id: foss-ctl-008-data-leakage-review.ar01
-          plan:
-            reference-id: foss-contribution-policy
-            entry-id: ap-foss-008-data-leakage-review
-          log:
-            reference-id: foss-eval-internal-tools-pr417
-            entry-id: foss-ctl-008-data-leakage-review
-
-  - disposition: Enforced
-    method:
-      reference-id: foss-contribution-policy
-      entry-id: em-foss-notify-noncompliance
-    message: >
-      Notified contributor and OSPO of failed secret-scan finding on PR #417.
-    steps:
-      - ospo/enforcement/notify.emailContributor
-      - ospo/enforcement/notify.postOspoSlackAlert
-```
-
-</Example>
-
 <AntiPatterns>
 
-- Enforcement with no link back to an evaluation
-- Chat-only blocks with no log artifact
-- Methods invented ad hoc outside policy
+<RevealItem title="Enforcement without evaluation">
+
+Blocking or remediating with no cited assessment. You cannot show the action was
+policy-justified.
+
+</RevealItem>
+
+<RevealItem title="Silent CI failure">
+
+A red check that leaves no durable enforcement record. Weeks later, nobody can
+prove what was blocked or why.
+
+</RevealItem>
 
 </AntiPatterns>
 
-<Discussion>
-
-Enforcement is how Continuous Governance becomes substantive. Gemara’s insistence on justification links is what keeps gates explainable instead of mysterious red builds.
-
-</Discussion>
-
-<RelatedArtifacts>
-
-- [Evaluation Log](/docs/artifacts/layer-5/evaluation-log)
-- [Policy](/docs/artifacts/layer-3/policy)
-- [Audit Log](/docs/artifacts/layer-7/audit-log)
-
-</RelatedArtifacts>
-
 <RelatedFactors>
 
-- [Continuous Governance](/docs/factors/continuous-governance)
-- [Evidence by Default](/docs/factors/evidence-by-default)
-- [Facts In, Decisions Out](/docs/factors/facts-in-decisions-out)
+- [Continuous Governance](/docs/factors/continuous-governance) — enforcement in the path of change
+- [Evidence by Default](/docs/factors/evidence-by-default) — dispositions as attributable receipts
+- [Governance Has Owners](/docs/factors/governance-has-owners) — who is notified and who remediates
 
 </RelatedFactors>
 
 <References>
 
-- [Gemara model](https://gemara.openssf.org/model/)
-- [Gemara schemas — EnforcementLog](https://gemara.openssf.org/schema/)
+- [Gemara Enforcement Log schema](https://gemara.openssf.org/schema/)
+- [Gemara](/docs/tools/gemara)
 
 </References>
 

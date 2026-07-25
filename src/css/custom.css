@@ -261,3 +261,14 @@ body {
 .breadcrumbs__link {
   font-size: 0.85rem;
 }
+
+/* Homepage MDX page — strip default article/container chrome */
+.homepage main.container {
+  max-width: none;
+  padding: 0;
+  margin: 0 !important;
+}
+
+.homepage article {
+  max-width: none;
+}

@@ -1,0 +1,181 @@
+---
+title: Ten Factor Governance
+description: Ten Factor Governance
+wrapperClassName: homepage
+hide_table_of_contents: true
+---
+
+import HomepageHeader from '@site/src/components/HomepageHeader';
+import styles from './index.module.css';
+
+<HomepageHeader />
+
+<main className={styles.main}>
+  <section className={styles.section}>
+    <div className={styles.sectionInner}>
+      <div className={styles.manifesto}>
+
+Modern software increasingly operates in environments where trust,
+accountability and compliance are not optional—they are fundamental
+requirements. Whether building systems for financial services, healthcare,
+critical infrastructure or government, organisations are expected to
+demonstrate not only that their software works, but that it is secure,
+resilient, auditable and governed throughout its lifecycle.
+
+Ten Factor Governance provides a practical architectural blueprint for
+building systems that can meet these expectations by design.
+
+<aside className={styles.revealAside} aria-labelledby="why-now-heading">
+<h2 id="why-now-heading" className={styles.revealAsideTitle}>
+  Why Now?
+</h2>
+
+<RevealItem title="Software is making increasingly important decisions." defaultOpen>
+
+Applications, automation and **AI agents** now approve payments, deploy
+infrastructure, access sensitive data and influence business outcomes with
+little or no human intervention.
+
+</RevealItem>
+
+<RevealItem title="Regulation is shifting from documentation to demonstrable governance.">
+
+Frameworks such as DORA, the EU AI Act, NIS2 and industry-specific regulations
+increasingly expect continuous evidence, traceability and accountability—not
+annual compliance exercises.
+
+</RevealItem>
+
+<RevealItem title="Software supply chains have become part of the attack surface.">
+
+Modern applications depend on open source, cloud services, AI models and
+automated build pipelines. Governing the runtime alone is no longer sufficient.
+
+</RevealItem>
+
+<RevealItem title="Governance remains fragmented.">
+
+Policies live in documents, controls in spreadsheets, inventories in CMDBs,
+evidence in CI/CD systems and decisions inside application code. Organisations
+struggle to answer simple questions about what is governed and why.
+
+</RevealItem>
+
+<RevealItem title="Machine-readable governance is finally possible.">
+
+Open standards for policy, provenance, observability, identity and governance—and
+the ability of LLMs to author, explain and operate over those artefacts—now make
+it practical to treat governance as an architectural concern rather than a
+manual process.
+
+</RevealItem>
+
+<RevealItem title="Governance must become part of software architecture.">
+
+Just as [The Twelve-Factor App](https://12factor.net/) (Adam Wiggins, 2011)
+defined principles for building cloud-native software, modern systems need
+architectural principles for making governance continuous, observable and
+automatable.
+
+</RevealItem>
+
+</aside>
+
+      </div>
+    </div>
+  </section>
+
+  <section className={styles.section}>
+    <div className={styles.sectionInner}>
+      <h2 className={styles.sectionTitle}>The Factors</h2>
+      <p className={styles.sectionLead}>
+        Each factor in Ten Factor Governance names a property of operable
+        governance that scales with modern platforms—not a product checklist,
+        but a design stance.
+      </p>
+      <FactorList />
+    </div>
+  </section>
+
+  <section className={styles.section}>
+    <div className={styles.sectionInner}>
+      <aside className={styles.revealAside} aria-labelledby="related-projects-heading">
+        <h2 id="related-projects-heading" className={styles.revealAsideTitle}>
+          Related Works
+        </h2>
+
+        <RevealItem title="Risk-First">
+
+A methodology for managing software delivery through a shared vocabulary of
+risk. Ten Factor Governance inherits its emphasis on naming exposure so teams
+can reason about it together.
+
+[riskfirst.org](https://riskfirst.org)  [Agentic Software Development](https://agentic-software-development.riskfirst.org)
+
+
+</RevealItem>
+
+        <RevealItem title="FINOS">
+
+The Fintech Open Source Foundation—home to collaborative projects across
+financial services, including this work and several of the catalogs and
+frameworks linked below.
+
+[finos.org](https://www.finos.org)
+
+</RevealItem>
+
+        <RevealItem title="CCC">
+
+[Common Cloud Controls](https://ccc.finos.org)—FINOS catalogs of capabilities,
+threats and controls for cloud services such as object storage, written once for
+use across providers.
+
+[ccc.finos.org](https://ccc.finos.org)
+
+</RevealItem>
+
+        <RevealItem title="AI Governance">
+
+The FINOS [AI Governance Framework](https://air-governance-framework.finos.org)
+(AIR)—principles, risks and controls for responsible AI in financial services,
+including machine-readable artefacts such as AIR-PRIN.
+
+[air-governance-framework.finos.org](https://air-governance-framework.finos.org)
+
+</RevealItem>
+
+        <RevealItem title="OpenSSF">
+
+The [Open Source Security Foundation](https://openssf.org/)—a Linux Foundation
+project advancing security for open source software. Host of Gemara and related
+standards for secure supply chains and governance tooling.
+
+[openssf.org](https://openssf.org/)
+
+</RevealItem>
+
+        <RevealItem title="Gemara">
+
+An OpenSSF model and schemas for layered governance artefacts—from principles
+and controls through evaluation, enforcement and audit—used throughout the
+artifact pages on this site.
+
+[gemara.openssf.org](https://gemara.openssf.org)
+
+</RevealItem>
+
+        <RevealItem title="CALM">
+
+[Common Architecture Language Model](https://calm.finos.org)—a FINOS standard
+for describing architectures in a machine-readable way so governance and
+controls can attach to real system structure.
+
+[calm.finos.org](https://calm.finos.org)
+
+</RevealItem>
+
+      </aside>
+    </div>
+  </section>
+</main>

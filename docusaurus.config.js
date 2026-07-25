@@ -81,6 +81,11 @@ const config = {
             position: 'right',
           },
           {
+            href: 'https://openssf.org',
+            label: 'OpenSSF',
+            position: 'right',
+          },
+          {
             href: 'https://gemara.openssf.org',
             label: 'Gemara',
             position: 'right',

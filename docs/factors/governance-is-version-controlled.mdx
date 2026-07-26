@@ -70,40 +70,45 @@ remains visible, auditable and temporary.
 
 <PositiveExamples>
 
-<RevealItem title="Policies in Git">
-Plaintext policy that can be diffed, reviewed and promoted like any other code
-change, with history that auditors can follow.
+<RevealItem title="Mortgage Approval Policy">
+The approval thresholds for mortgage decisions are stored in Git, reviewed
+through pull requests and promoted through development, test and production
+environments alongside the lending platform.
 </RevealItem>
 
-<RevealItem title="Machine-readable control profiles">
-Control catalogues and profiles that tools can validate and compose without
-reconstructing PDF narratives.
+<RevealItem title="Production Release Controls">
+The controls governing software releases are versioned with the build pipeline.
+Every deployment records exactly which control definition authorised it.
 </RevealItem>
 
-<RevealItem title="Exceptions with pull requests and expiry dates">
-Deviations tracked as reviewable artefacts with an explicit lifecycle, not
-tribal memory.
+<RevealItem title="AI Model Approval Policy">
+The governance rules controlling when a model may be promoted are reviewed and
+versioned independently of the model itself.
 </RevealItem>
 
-<RevealItem title="Signed provenance and assessment results">
-Build claims and assessment outputs stored as first-class, verifiable artefacts.
+<RevealItem title="Privileged Access Exceptions">
+Temporary administrative access is granted through version-controlled exception
+artefacts with owners, expiry dates and approval history.
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="Screenshot-based evidence packs">
-Evidence that cannot be diffed, verified or regenerated from the system of
-record.
+<RevealItem title="Lending Policy in Word Documents">
+Mortgage approval rules exist in Word documents while the implementation
+changes independently. Nobody knows whether production reflects the documented
+policy.
 </RevealItem>
 
-<RevealItem title="PDF-only controls">
-Controls trapped in prose formats that machines cannot execute or compose.
+<RevealItem title="Emergency Production Changes">
+Firewall or deployment policies are edited directly in production, leaving no
+review history or reproducible baseline.
 </RevealItem>
 
-<RevealItem title="Untracked policy edits in wikis">
-Silent changes with no review history, tests or rollback path.
+<RevealItem title="Email-Based Exceptions">
+Critical production exceptions are approved over email and never incorporated
+into the governance baseline.
 </RevealItem>
 
 </NegativeExamples>
@@ -128,6 +133,13 @@ enterprise standard is a rumour.
 
 Definitions and results exist only when someone remembers to write them down for
 an audit—too late to govern change.
+
+</RevealItem>
+
+<RevealItem title="Governance Snapshot">
+
+Governance is exported from operational systems into PDFs for an audit, then
+forgotten until the next assessment.
 
 </RevealItem>
 
@@ -158,15 +170,12 @@ gitGraph
 Applying this principle means putting operational governance on the same rails
 as software delivery.
 
-1. **Store** twin-bound policies, controls and exceptions as plaintext artefacts.
-2. **Review** changes through the same pull-request discipline as application code.
-3. **Test** where possible—schema validation, policy unit tests, dry-run evaluation.
-4. **Promote** through environments; do not hot-edit production definitions.
-5. **Retain history** so evidence can cite which definition was in force when a
-   decision was made.
-
-This factor does not claim every moral judgement becomes code. It claims the
-operational part of governance should be versioned like the systems it governs.
+For each Governance Twin:
+- store its governance artefacts in version control;
+- review proposed changes;
+- validate schemas and policy definitions;
+- promote changes through environments;
+- record which version produced which governance decision.
 
 </Discussion>
 

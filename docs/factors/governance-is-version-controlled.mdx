@@ -12,48 +12,57 @@ description: "Treat governance artefacts as code: versioned, testable, reviewabl
 
 <Principle>
 
-Treat governance artefacts as code: versioned, testable, reviewable, composable
+Treat governance artefacts with the same care and approach as code: it should be versioned, testable, reviewable, composable
 and deployable.
-
-Human-readable policy still matters, but the operational source of truth—controls,
-exceptions, assessment results, provenance—must move with the disciplines that
-already make software reliable.
 
 </Principle>
 
 <Problem>
 
-When the operational part of governance lives in screenshots, PDFs, spreadsheets
-or untracked wiki edits, it cannot be diffed, reviewed, validated or deployed
-with the systems it governs. Teams then govern by attachment and tribal memory
-while delivery velocity races ahead.
+Software changes continuously. Governance often does not.
 
-Modern platforms expect change to be reviewable and reversible. Governance that
-cannot keep that pace becomes either theatre or a bottleneck. Version control is
-how definitions stay trustworthy as twins, activities and organisations evolve.
+As applications evolve, governance captured in documents, spreadsheets or wiki pages gradually diverges from the systems it is supposed to describe. Engineers implement new behaviour while policies remain unchanged, exceptions accumulate without review and evidence becomes difficult to relate to the version of the system that produced it.
+
+In regulated environments this creates a fundamental problem: organisations can no longer answer simple questions such as "Which governance definition authorised this deployment?" or "Which version of the approval policy was in force when this decision was made?"
+
+Governance that cannot evolve with software inevitably becomes either documentation or bureaucracy.
 
 </Problem>
 
 <Characteristics>
 
-<RevealItem title="Plaintext and reviewable" defaultOpen>
+<RevealItem title="Review Like Code" defaultOpen>
 
-Operational artefacts should be readable by people and tools: diffs, pull
-requests and rollback paths, not opaque binary packs.
-
-</RevealItem>
-
-<RevealItem title="Testable and deployable">
-
-Like software, governance changes should be validated before promotion and
-deployed through environments—not pasted into production by hand.
+Governance changes should be proposed, reviewed and approved before they become
+operational. Pull requests, peer review and approval workflows create a
+transparent history of who changed governance, why it changed and when it took
+effect.
 
 </RevealItem>
 
-<RevealItem title="Lifecycle for exceptions">
+<RevealItem title="Test Before You Trust">
 
-Deviations need the same discipline as baselines: review, expiry, ownership and
-history—not silent spreadsheet rows.
+Governance should be validated before it is relied upon. Policies, controls and
+governance artefacts should be automatically checked for correctness and
+exercised against representative scenarios to ensure they behave as intended.
+
+</RevealItem>
+
+<RevealItem title="Promote Through Environments">
+
+Governance should move through development, testing and production alongside the
+systems it governs. Promoting governance through controlled environments
+improves confidence while providing a clear record of which governance
+definition was active at any point in time.
+
+</RevealItem>
+
+<RevealItem title="Manage Exceptions Explicitly">
+
+Temporary departures from normal governance should be treated as governance
+artefacts in their own right. Every exception should have an owner, a rationale,
+an approval, a defined scope and an expiry date so that exceptional behaviour
+remains visible, auditable and temporary.
 
 </RevealItem>
 
@@ -179,6 +188,7 @@ Version control is how definitions stay honest as the rest of the model scales:
 - [Gemara](/docs/tools/gemara) — versioned layered GRC artefacts
 - [Open Policy Agent](/docs/tools/open-policy-agent) — policies as testable code
 - [Cedar](/docs/tools/cedar) — reviewable authorisation policy as code
+- [CI/CD](/docs/tools/ci-cd) — validate and promote governance through environments
 - [SLSA](/docs/tools/slsa) — provenance as a verifiable artefact
 - [in-toto](/docs/tools/in-toto) — signed supply-chain layouts and links
 

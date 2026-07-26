@@ -55,12 +55,6 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'defaultSidebar',
-            position: 'left',
-            label: 'Docs',
-          },
-          {
             href: 'https://riskfirst.org',
             label: 'Risk-First',
             position: 'right',

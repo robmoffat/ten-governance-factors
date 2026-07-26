@@ -1,0 +1,29 @@
+---
+sidebar_position: 20
+title: CI/CD
+sidebar_label: CI/CD
+hide_title: true
+tags:
+  - Tool
+description: "Continuous integration and continuous delivery—automated pipelines that validate change and promote it through environments."
+---
+
+<Tool
+  name="CI/CD"
+  homepage="https://en.wikipedia.org/wiki/CI/CD"
+  description="Continuous integration and continuous delivery—automated pipelines that validate change and promote it through environments."
+>
+
+<HelpsWith to="/docs/factors/governance-is-version-controlled" title="Governance is Version Controlled">
+Runs the same validate-then-promote discipline on governance artefacts that teams already apply to application code.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/continuous-governance" title="Continuous Governance">
+Puts evaluation and policy gates in the path of merge and deploy, not only in later reports.
+</HelpsWith>
+
+<HelpsWith to="/docs/factors/govern-factory-and-product-separately" title="Govern the Factory and the Product Separately">
+Is the factory path itself: build, test and release controls belong here, separate from runtime product governance.
+</HelpsWith>
+
+</Tool>

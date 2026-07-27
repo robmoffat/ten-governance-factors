@@ -12,49 +12,45 @@ description: "Governance should run continuously and, where appropriate, in the 
 
 <Principle>
 
-Governance should run continuously and, where appropriate, in the path of change
-and execution.
+Apply the principles of Continuous Integration and Continuous Delivery to governance.
 
-Observational reporting is not enough. Where risk is created by change, evaluation
-should be able to interrupt, condition or remediate—not only describe what already
-went wrong.
+Governance should be continuously developed, tested, promoted and verified alongside the systems it governs. 
 
-TODO: verifiable governance, CSPM etc.
+Build, UAT and production should each provide progressively more representative feedback loops, ensuring governance evolves with the implementation rather than lagging behind it.
 
 </Principle>
 
 <Problem>
 
-Governance that only generates reports is observational. Quarterly-only
-assessments, failed checks nobody consumes, and approvals that happen after the
-action leave risk in the path of change without interruption or remediation.
+Governance often receives feedback too late. Policies are written separately from software, exercised only during periodic audits, and first encounter real workloads in production. As a result, governance defects are discovered after they have already created operational risk.
 
-A twin with stale posture and decision engines that never sit between request and
-mutation produce the same failure mode: you learn about risk too late to govern
-it.
+Modern software engineering solved the same problem through Continuous Integration and Continuous Delivery: shorten feedback loops and validate continuously.  Governance should follow the same pattern, with progressively richer verification throughout build, UAT and production.
 
 </Problem>
 
 <Characteristics>
 
-<RevealItem title="In the path of change" defaultOpen>
+<RevealItem title="Build-time governance" defaultOpen>
 
-Where appropriate, evaluate before unsafe state is persisted—admission, promotion,
-tool invocation—not only afterwards.
-
-</RevealItem>
-
-<RevealItem title="Closed loop">
-
-Observe → evaluate → explain → enforce → record → observe again. Signals without
-consumption are not continuous governance.
+Governance definitions should be verified as they are developed. Unit tests, policy tests, schema validation and decision-function tests provide rapid feedback that governance behaves as expected before it is promoted further through the lifecycle.
 
 </RevealItem>
 
-<RevealItem title="More than hard deny">
+<RevealItem title="Integration-time governance">
 
-Inline control can permit with obligations, escalate for human review, or open
-remediation—not only block.
+Governance should be exercised against representative implementations in development and UAT. Behavioural tests validate that real software, infrastructure, configuration and organisational processes conform to their Governance Twins before reaching production.
+
+</RevealItem>
+
+<RevealItem title="Production-time governance">
+
+Production systems should continuously produce evidence that is verified against the expected governance posture. Rather than periodic audits, governance becomes an operational capability that detects drift, exceptions and emerging risks as they occur.
+
+</RevealItem>
+
+<RevealItem title="Continuous improvement">
+
+Each stage forms a feedback loop. Build failures improve governance definitions, UAT failures improve implementations and configuration, and production verification improves both governance and future software changes. Governance therefore evolves continuously alongside the systems it governs.
 
 </RevealItem>
 
@@ -62,110 +58,140 @@ remediation—not only block.
 
 <PositiveExamples>
 
-<RevealItem title="Admission-time checks on deploys">
-Inline evaluation before unsafe state is persisted.
+<RevealItem title="Policy Unit Tests">
+Every change to the Governance Twin runs automated policy and decision-function
+tests during the build. Governance defects are found within minutes, long before
+they can affect deployed systems.
 </RevealItem>
 
-<RevealItem title="Run-time audits of existing resources">
-Continuous re-checking of what already exists, not only what is changing.
+<RevealItem title="UAT Behavioural Testing">
+A representative cloud deployment is exercised using Common Cloud Controls
+behavioural tests before release. The implementation, configuration and
+governance are verified together, producing evidence that the system conforms to
+its Governance Twin.
 </RevealItem>
 
-<RevealItem title="A denied release that opens remediation">
-Enforcement that connects denial to workflow: escalate, fix, re-evaluate.
+<RevealItem title="Production Drift Detection">
+A live payment platform continuously verifies production evidence against its
+expected governance posture. Configuration drift and failed controls are detected
+automatically rather than waiting for the next compliance review.
 </RevealItem>
 
-<RevealItem title="Conditional permit with logging and approval">
-Inline control that is not only hard deny—obligations and human review in the
-path.
+<RevealItem title="Governance Promotion Pipeline">
+Changes to governance definitions are versioned, tested, promoted through
+development and UAT, and released alongside the software they govern. Both twins
+evolve together using the same engineering lifecycle.
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="Quarterly-only assessments">
-Observational cadence that cannot interrupt risky change in time.
+<RevealItem title="Annual Compliance Programme">
+Governance is reviewed once a year through a formal compliance exercise. Problems
+are discovered long after they were introduced, making them expensive to
+understand and correct.
 </RevealItem>
 
-<RevealItem title="Reports with no effect">
-Governance output that nobody consumes to enforce or remediate.
+<RevealItem title="Production as the Test Environment">
+A new governance policy is first exercised against live production systems after
+deployment. The organisation has no confidence that the policy behaves correctly
+before it begins affecting real users and services.
 </RevealItem>
 
-<RevealItem title="Approvals that happen after the action">
-Post-hoc ceremony that cannot prevent what already occurred.
+<RevealItem title="Untested Configuration Changes">
+An application passes all software tests, but a small production configuration
+change bypasses an important governance control. The implementation was tested,
+but the deployed socio-technical system was never verified against its Governance
+Twin.
+</RevealItem>
+
+<RevealItem title="Governance by Committee">
+Governance changes are approved through meetings and documentation reviews but
+are never exercised against representative systems before release. The
+organisation validates the paperwork rather than the behaviour.
+</RevealItem>
+
+<RevealItem title="Passing Infrastructure Tests">
+A cloud deployment successfully provisions through Infrastructure-as-Code and all
+resources are created correctly. However, no behavioural verification is
+performed, so the organisation knows the infrastructure exists but not whether it
+actually conforms to its intended governance.
 </RevealItem>
 
 </NegativeExamples>
 
 <AntiPatterns>
 
-<RevealItem title="Governance as reporting only">
+<RevealItem title="Testing only one stage">
 
-Dashboards and PDFs that never sit in the path of change. Useful for awareness;
-insufficient for control.
-
-</RevealItem>
-
-<RevealItem title="Deny-only thinking">
-
-Treating continuous governance as a wall of hard blocks. Conditional permit,
-obligations and remediation are part of the same loop.
+Assuming governance only needs to be verified during build, only in UAT or only in production. Each stage provides different feedback, and removing one weakens the overall governance lifecycle.
 
 </RevealItem>
 
-<RevealItem title="Post-hoc enforcement">
+<RevealItem title="Treating every stage the same">
 
-Discovering violations after the fact and calling it control. Detection without
-timely intervention is observation.
+Running identical governance checks everywhere. Build, pre-production and production should each verify different aspects of governance using increasingly representative implementations and evidence.
+
+</RevealItem>
+
+<RevealItem title="Blocking everything">
+
+Good governance uses a range of responses, including warnings, obligations, remediation and observation, depending on the stage and the risk.
+
+</RevealItem>
+
+<RevealItem title="Ignoring feedback">
+
+Collecting evidence and posture but never using it to improve governance definitions, implementations or operational practices. Continuous governance is a feedback system, not simply continuous measurement.
 
 </RevealItem>
 
 </AntiPatterns>
 
 <Diagram
-  title="How does governance operate continuously?"
-  description="A closed loop—observe, evaluate, explain, enforce, record—then observe again."
+  title="Governance Through the Lifecycle"
+  description="The Implementation Twin and Governance Twin progress together through build, pre-production and production, with each stage providing increasingly representative verification and feedback.
+"
 >
 
-```mermaid
-stateDiagram-v2
-  [*] --> Observe
-  Observe --> Evaluate: new facts / posture change
-  Evaluate --> Explain: decision produced
-  Explain --> Enforce: permit · deny · obligate
-  Enforce --> Record: evidence written
-  Record --> Observe: continue
-```
+| Stage              | Implementation Activities                                            | Governance Activities                                                                                         |
+| ------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Build**          | Build and unit-test the **Implementation Twin**.                     | Validate the **Governance Twin** and decision functions.                                                      |
+| **Pre-production** | Deploy representative instances of the **Implementation Twin**.      | Exercise the **Governance Twin** against representative implementations.                                      |
+| **Production**     | Operate the live **Implementation Twin** and emit evidence receipts. | Continuously verify the **Implementation Twin** against the **Governance Twin**, updating governance posture. |
 
 </Diagram>
 
 <Discussion>
 
-Applying this principle means putting evaluation where change happens—and closing
-the loop.
+Continuous Governance applies the principles of Continuous Integration and Continuous Delivery to governance itself.
 
-1. **Place decision points** on deploy, promote, invoke and other sensitive paths.
-2. **Audit continuously** what already exists, not only what is changing.
-3. **Connect denials and obligations to workflow**—escalate, remediate, re-evaluate.
-4. **Update twin posture** as the loop runs so the next decision sees current
-   state.
-5. **Prefer explainable inline control** over silent post-hoc reporting.
+Software engineers do not wait until production to discover whether their implementation works. They build fast feedback loops throughout the delivery lifecycle, progressively increasing confidence as software moves from build to development, pre-production and finally production. Governance should follow exactly the same pattern.
 
-Admission controllers and audit modes (OPA, Gatekeeper, Kubernetes) show both
-halves: evaluate before persistence, and continuously check what already exists.
-That is where the twin stops being a model and behaves like a control plane.
+Each stage of the lifecycle exercises a different aspect of the system. Build verifies the Governance Twin itself: schemas, policy definitions and decision functions. Pre-production verifies that representative implementations, configurations and organisational processes conform to their Governance Twins using behavioural tests. Production completes the loop by continuously verifying operational evidence, updating governance posture and identifying drift as the socio-technical system evolves.
+
+Applying this principle means:
+
+1. **Develop governance as an engineering artefact**, versioning, reviewing and testing it alongside the software it governs.
+2. **Verify governance continuously throughout the delivery lifecycle**, not just before release or during periodic audits.
+3. **Use increasingly representative environments**, validating governance definitions in build, implementations in pre-production and operational behaviour in production.
+4. **Produce evidence at every stage**, allowing governance to be explained, verified and improved using objective data rather than manual attestations.
+5. **Close the feedback loop**, using verification results to improve both the Governance Twin and the Implementation Twin before promoting further changes.
+
+This follows the same engineering principle described in [Risk-First's Cadence Chapter](https://riskfirst.org/thinking/Cadence): feedback loops should operate at the cadence appropriate to the decisions they influence. Fast loops provide cheap, rapid correction during development, while slower loops validate behaviour under increasingly realistic conditions. Continuous Governance therefore uses multiple nested feedback loops rather than relying on a single production monitoring loop or periodic compliance review.
 
 </Discussion>
 
 <RelatedFactors>
 
-Continuous operation is where prior factors become control:
+Continuous Governance brings the previous factors together into an engineering lifecycle:
 
-- [Context In, Decisions Out](/docs/factors/context-in-decisions-out) — the decision shape evaluated in the path
-- [Evidence by Default](/docs/factors/evidence-by-default) — what the loop records
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — posture the loop updates
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — which paths deserve inline control
-- [Governance Has Owners](/docs/factors/governance-has-owners) — who remediates when the loop escalates
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — identifies which activities require continuous verification throughout the lifecycle.
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — provides the governance artefacts that are developed, tested and promoted alongside the implementation.
+- [Context In, Decisions Out](/docs/factors/context-in-decisions-out) — defines the decision functions exercised during build, pre-production and production.
+- [Evidence by Default](/docs/factors/evidence-by-default) — provides the evidence that drives verification, posture and continuous improvement.
+- [Governance Has Owners](/docs/factors/governance-has-owners) — ensures verification results lead to remediation and governance improvements.
 
 </RelatedFactors>
 

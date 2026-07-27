@@ -12,47 +12,53 @@ description: "Make evidence a normal exhaust of the system, not a special exerci
 
 <Principle>
 
-Make evidence a normal exhaust of the system, not a special exercise before an
-audit.
+Every sensitive activity should produce evidence as a normal consequence of performing work.
 
-If posture cannot be explained by attributable receipts, governance is theatre—
-no matter how many dashboards you have.
+Evidence is not created for auditors. It is a first-class architectural output of governed systems, allowing decisions to be explained, posture to be verified and governance to be trusted.
 
 </Principle>
 
 <Problem>
 
-If an audit starts with screenshots, you are already too late. Evidence created
-only on request—chat approvals, manual attestation spreadsheets, “evidence
-week”—cannot explain posture with receipts. It reconstructs a story after the
-fact instead of recording what happened when it happened.
+Governance cannot be verified without evidence.
 
-Governed activities and decisions produce facts worth keeping. When those facts
-are not emitted automatically into durable, attributable form, the twin has
-nothing to show and continuous evaluation has nothing to cite.
+Too many organisations generate evidence only when an audit approaches: screenshots are collected, spreadsheets completed and approvals reconstructed from emails or chat messages. These artefacts describe what people believe happened rather than what the system actually recorded.
+
+Governed work should produce its own receipts. Every sensitive activity should automatically emit the evidence needed to explain what happened, who performed it, which governance applied and why the outcome was considered acceptable.
 
 </Problem>
 
 <Characteristics>
 
-<RevealItem title="Emitted in the path of work" defaultOpen>
+<RevealItem title="Evidence is produced automatically" defaultOpen>
 
-Evidence is produced as the activity or decision runs—not assembled in a scramble
-before an auditor arrives.
-
-</RevealItem>
-
-<RevealItem title="Attributable and machine-readable">
-
-Who, what, when and integrity matter. Formats tools can verify beat images and
-chat logs that cannot.
+Evidence is emitted as a normal consequence of performing governed work—not assembled later for an audit.
 
 </RevealItem>
 
-<RevealItem title="Bound to twins and decisions">
+<RevealItem title="Evidence explains activities">
 
-Receipts attach to concrete instances and cite the definition versions and
-decision results they support.
+Evidence should explain what happened, who performed it, when it occurred, which governance applied and why the outcome was permitted.
+
+</RevealItem>
+
+<RevealItem title="Evidence is attributable">
+
+Evidence should be machine-readable, attributable and tamper-evident so it can be independently verified.
+
+</RevealItem>
+
+<RevealItem title="Evidence is non-repudiable">
+
+Evidence should be sufficiently trustworthy that participants cannot credibly deny the activity occurred or dispute the governance under which it was performed. Digital signatures, trusted timestamps, provenance and tamper-evident logs all strengthen non-repudiation.
+
+Digital signatures, software attestations, SLSA provenance, transparency logs and trusted timestamps are all mechanisms for strengthening non-repudiation.
+
+</RevealItem>
+
+<RevealItem title="Evidence is reusable">
+
+The same evidence should support operational dashboards, incident response, compliance reporting and formal audits without being recreated.
 
 </RevealItem>
 
@@ -60,59 +66,76 @@ decision results they support.
 
 <PositiveExamples>
 
-<RevealItem title="Build provenance emitted automatically">
-Release evidence produced as part of the build, not assembled afterwards.
+<RevealItem title="Mortgage approval receipt">
+Approval, decision, approver, policy version and customer identifiers are recorded
+automatically when the mortgage is approved.
 </RevealItem>
 
-<RevealItem title="SBOMs attached to releases">
-Composition evidence that travels with the artefact consumers will verify.
+<RevealItem title="Release provenance">
+Build provenance, SBOMs and signatures are produced automatically as part of
+creating a software release.
 </RevealItem>
 
-<RevealItem title="Policy decision logs">
-Telemetry of what was asked, which policy applied, and what was decided.
+<RevealItem title="Payment authorisation log">
+Every payment records the governance decision, obligations satisfied and
+resulting transaction identifiers.
 </RevealItem>
 
-<RevealItem title="Signed assessment results">
-Control assessment outputs that are attributable and machine-readable.
+<RevealItem title="AI tool invocation">
+Each tool invocation records the requesting agent, governing decision, data
+accessed and resulting actions.
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="Screenshot collections">
-Unverifiable images that stand in for system-emitted evidence.
+<RevealItem title="Screenshot Evidence">
+A compliance team assembles screenshots before an audit to demonstrate that
+controls are configured correctly. The screenshots cannot explain what actually
+happened or be regenerated from the governed system.
 </RevealItem>
 
-<RevealItem title="Manual attestation spreadsheets">
-Human-typed claims disconnected from identity, time and integrity.
+<RevealItem title="Spreadsheet Attestations">
+Control owners complete quarterly spreadsheets declaring systems to be compliant.
+The evidence is disconnected from the activities it claims to describe.
 </RevealItem>
 
-<RevealItem title="Approvals that exist only in chat">
-Permission granted with no durable, attributable decision record.
+<RevealItem title="Chat-Based Approvals">
+Production releases are approved in a chat channel without generating a durable
+governance record. Future reviewers cannot determine exactly what was approved or
+under which governance.
 </RevealItem>
 
 </NegativeExamples>
 
 <AntiPatterns>
 
-<RevealItem title="Audit theatre">
+<RevealItem title="Audit Theatre">
 
-Producing a pack of artefacts that look compliant without being regenerable from
-the system of record.
-
-</RevealItem>
-
-<RevealItem title="Unverifiable claims">
-
-Statements of posture that cannot be checked against provenance, signatures or
-decision logs.
+Evidence is created for auditors instead of being produced by the governed
+system.
 
 </RevealItem>
 
-<RevealItem title="Evidence created only on request">
+<RevealItem title="Evidence by Exception">
 
-A scramble that proves evidence was never a normal exhaust of operations.
+Receipts are generated only for unusual events rather than every sensitive
+activity.
+
+</RevealItem>
+
+<RevealItem title="Unattributable Evidence">
+
+Logs and reports cannot be traced back to a specific activity, governance
+version or responsible identity.
+
+</RevealItem>
+
+<RevealItem title="Disposable Evidence">
+
+Operational telemetry, provenance and decision logs are discarded once the
+activity completes, preventing future verification.
 
 </RevealItem>
 
@@ -124,52 +147,66 @@ A scramble that proves evidence was never a normal exhaust of operations.
 >
 
 ```mermaid
-sequenceDiagram
-  participant Actor
-  participant Activity
-  participant Policy as Policy engine
-  participant Store as Evidence store
-  participant Auditor
+flowchart LR
 
-  Actor->>Activity: Perform sensitive activity
-  Activity->>Policy: Submit facts
-  Policy-->>Activity: Decision + explanation
-  Activity->>Store: Record evidence automatically
-  Note over Store: Provenance · decision log · attestations
-  Auditor->>Store: Query evidence later
-  Store-->>Auditor: Attributable receipts
+  SV["<b>Implementation Twin</b><br/>software version"]
+  GV["<b>Governance Twin</b><br/>governance version"]
+  D["<b>Decision</b><br/>permit · deny · obligations"]
+
+  SV -->|implements| A
+  GV -->|governs| A
+  D -->|authorises| A
+
+  A["<b>Sensitive Activity</b><br/>performed by person · software · AI"]
+
+  A -->|emits| R
+
+  R["<b>Evidence Receipt</b><br/><br/>
+  implementation version<br/>
+  governance version<br/>
+  decision<br/>
+  business context<br/>
+  identity<br/>
+  timestamp<br/>
+  outcome<br/>
+  integrity proof"]
+
+  R -->|supports| C["<b>Governance Functions</b><br/>
+  Operations<br/>
+  Security<br/>
+  Verification<br/>
+  Compliance & Audit"]
 ```
 
 </Diagram>
 
 <Discussion>
 
-Applying this principle means treating evidence as product of normal operation.
+Every sensitive activity should produce two outputs: a business outcome and an evidence receipt.
 
-1. **Instrument** sensitive activities and decision boundaries to emit receipts.
-2. **Prefer machine-readable, attributable formats**—provenance, SBOMs, decision
-   logs, assessment results.
-3. **Store evidence against twins** so posture is explained by what accumulated,
-   not by memory.
-4. **Cite definition versions** so a receipt can say which policy was in force.
-5. **Refuse screenshot-first audits** as the primary control story—use them only
-   as illustrations of regenerable artefacts.
+The business outcome is why the activity was performed—a mortgage is approved, a payment is transferred, a software release is deployed. The evidence receipt explains how that outcome came about by recording the implementation version, governance version, decision, identity, timestamp and resulting outcome. Rather than embedding governance definitions themselves, the receipt references the versions that governed the activity, allowing the complete context to be reconstructed later.
 
-Supply-chain standards (SLSA, in-toto, CycloneDX) and OSCAL assessment results
-show the same pattern: evidence generated as part of the work, not stitched
-together later.
+Evidence should therefore be treated as a first-class architectural output rather than an administrative afterthought. It should be emitted automatically by the governed system as the activity occurs, not assembled later for compliance exercises or audits. If evidence has to be reconstructed from screenshots, spreadsheets or chat logs, the system has already failed this principle.
 
+Applying this principle means:
+
+1. **Treat every sensitive activity as producing an evidence receipt.**
+2. **Record immutable references** to the Implementation Twin, Governance Twin, governing decision and the business context needed to explain the activity.
+3. Include sufficient information to establish **attribution, integrity and non-repudiation.**
+4. **Allow multiple governance functions to consume the same evidence**, including operations, security, verification and audit.
+
+This pattern already appears in many successful governance technologies. SLSA provenance, in-toto attestations, software signatures, transparency logs, OpenTelemetry traces and audit logs all generate evidence as part of normal operation. The Governance Factors extend this idea beyond software supply chains to every governed sensitive activity.
 </Discussion>
 
 <RelatedFactors>
 
-Evidence makes the rest of the model defensible:
+Evidence connects governance decisions and resultant activity to governance verification.
 
-- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — definitions that receipts can cite
-- [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately) — provenance vs runtime receipts stay in their domains
-- [Context In, Decisions Out](/docs/factors/context-in-decisions-out) — decision logs as first-class exhaust
-- [Continuous Governance](/docs/factors/continuous-governance) — the loop that records as it enforces
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — where evidence accumulates
+- [Context In, Decisions Out] — governance decisions authorise activities; evidence records what actually happened.
+- [Governance Must Be Verifiable] — verification evaluates evidence to determine governance posture.
+- [Build a Governance Twin] — evidence becomes part of the Governance Twin's operational state.
+- [Governance Is Version Controlled] — evidence should reference the governance definitions under which it was produced.
+- [Govern the Factory and the Product Separately] — build provenance and runtime evidence belong to different governance domains.
 
 </RelatedFactors>
 

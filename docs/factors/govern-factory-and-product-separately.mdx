@@ -12,9 +12,7 @@ description: "The system you run and the system that produces it are different s
 
 <Principle>
 
-The system you run and the system that produces it are different sensitive
-activities.
-
+The software factory and the running product are different sensitive activities.
 Govern the factory (how artefacts are built, signed and released) separately
 from the product (what the running system may do). They are connected, but they
 are not the same governance object.
@@ -23,14 +21,16 @@ are not the same governance object.
 
 <Problem>
 
-Collapsing build-time and run-time into one score produces misleading posture. A
-green product badge can hide a compromised pipeline; release provenance mixed
-into end-user access controls obscures which domain failed and who owns the fix.
+Building software and operating software create different organisational risks:
 
-Supply chains and runtime environments introduce different risks, evidence and
-decision points. Treating CI/CD and production as one blob erases that boundary
-and leaves teams unable to answer whether failure was in how software was made
-or in what it was allowed to do once running.
+ - A compromised build pipeline may introduce malicious code into every future release. 
+ - A compromised runtime system may expose customer data or execute unauthorised business decisions. 
+ 
+Although these events are related, they require different controls, different evidence and often different _owners_ (see [Governance Has Owners](governance-has-owners)).
+
+Regulations increasingly expect organisations to demonstrate both **how software was produced** and **how it behaves once deployed**. 
+
+Collapsing these into a single governance model obscures where failures occurred, which controls were bypassed and which teams are accountable for remediation.
 
 </Problem>
 
@@ -38,23 +38,16 @@ or in what it was allowed to do once running.
 
 <RevealItem title="Separate sensitive activities" defaultOpen>
 
-Building, signing and releasing are factory activities. Serving users, sharing
-data and invoking tools are product activities. Each set deserves its own scope.
+The software factory performs activities such as building, signing and releasing software. The running product performs activities such as approving payments, serving customers or invoking AI tools. These activities create different risks and should be governed independently.
 
 </RevealItem>
 
 <RevealItem title="Separate twins and evidence">
 
-Factory posture is provenance, signing and pipeline controls. Product posture is
-authorisation, admission and runtime behaviour. Do not force one dashboard to
-mean both.
+The software factory performs sensitive activities such as building, signing and releasing software. 
+The running product might perform sensitive activities such as approving payments or serving customers.
 
-</RevealItem>
-
-<RevealItem title="Connected by artefacts">
-
-The release artefact is the bridge—not a licence to merge the two governance
-domains into a single misleading status.
+Build provenance, SBOMs and signing records belong to the factory. Runtime decisions, authorisation events and operational telemetry belong to the product. Mixing evidence reduces clarity and weakens auditability.
 
 </RevealItem>
 
@@ -62,36 +55,39 @@ domains into a single misleading status.
 
 <PositiveExamples>
 
-<RevealItem title="A build twin with provenance, branch protection and signing">
-Factory integrity shown on its own terms: how artefacts were produced and gated
-before anyone talks about runtime greenness.
+<RevealItem title="Mortgage Platform">
+The factory twin governs how the mortgage platform is built, reviewed and
+released. The product twin governs mortgage approvals, customer data access and
+fund disbursement.
 </RevealItem>
 
-<RevealItem title="A run-time twin with authorisation posture and incident history">
-Product governance: what the running system may do and how it has behaved, apart
-from how it was shipped.
+<RevealItem title="AI Fraud Detection">
+One governance domain covers model training, evaluation and promotion. The other
+governs production inference, decision overrides and customer impact.
 </RevealItem>
 
-<RevealItem title="Separate policies for model training and inference endpoints">
-Training-pipeline risk kept distinct from production inference risk—both
-governed, neither collapsed.
+<RevealItem title="Trading Platform">
+The build pipeline governs signed releases and dependency provenance. The
+runtime governs trade execution, market controls and operational resilience.
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="One “green” score for an app whose build pipeline is compromised">
-A single badge that hides factory failure behind product status.
+<RevealItem title="One Governance Dashboard">
+A single "green" status hides the fact that the release pipeline has failed
+supply-chain validation while production appears healthy.
 </RevealItem>
 
-<RevealItem title="Release provenance mixed into end-user access controls">
-Two domains collapsed so neither set of evidence or owners stays clear.
+<RevealItem title="Shared Policies">
+The same governance policies are applied to both deployment pipelines and
+customer-facing applications, leaving neither domain properly governed.
 </RevealItem>
 
-<RevealItem title="Treating CI/CD and production as one blob">
-Erases the boundary between how software is made and what it may do when
-running.
+<RevealItem title="Shared Ownership">
+The same team is assumed to own software production and runtime governance,
+making accountability unclear when incidents occur.
 </RevealItem>
 
 </NegativeExamples>
@@ -118,50 +114,65 @@ A product traffic light that never surfaces signing, SBOM or pipeline failures.
 
 </RevealItem>
 
+<RevealItem title="Different Governance for Every Environment">
+
+Creating separate governance definitions for Development, UAT and Production instead of promoting a common governance baseline through progressively more representative environments.  See [Continuous Governance](continuous-governance) for more.
+
+</RevealItem>
+
 </AntiPatterns>
 
 <Diagram
   title="Where does governance apply?"
-  description="Factory and product are connected by artefacts, but each domain has its own controls, twins and evidence."
+  description="Factory and product are both sensitive activities, with their own governance twins."
 >
 
 ```mermaid
-flowchart LR
-  subgraph factory [Software factory]
-    SRC[Source] --> BUILD[Build / CI]
-    BUILD --> PROV[Provenance · SBOM · signing]
-    PROV --> ART[Release artefact]
-    FG[Factory governance]
-    BUILD -.-> FG
-    PROV -.-> FG
-  end
-  ART --> RUN
-  subgraph product [Runtime product]
-    RUN[Deployed service] --> ACT[Sensitive activities]
-    ACT --> RT[AuthZ · admission · runtime policy]
-    PG[Product governance]
-    ACT -.-> PG
-    RT -.-> PG
-  end
-```
+classDiagram
+direction LR
 
+class FIT["Factory Implementation Twin"] {
+  Build
+  Test
+  Package
+  Release
+}
+
+class FGT["Factory Governance Twin"] {
+  Build controls
+  Release policy
+  Provenance requirements
+  Factory evidence
+}
+
+class PIT["Product Implementation Twin"] {
+  Deployed configuration
+  Runtime components
+  Sensitive activities
+  Dependencies
+}
+
+class PGT["Product Governance Twin"] {
+  Product policy
+  Runtime controls
+  Assessment requirements
+  Product evidence
+}
+
+FIT "1" -- "1" FGT : governed by
+FIT --> PIT : delivers
+FIT --> PGT : delivers
+PIT "1" -- "1" PGT : governed by
+```
 </Diagram>
 
 <Discussion>
 
-Applying this principle means splitting scope deliberately.
+The software factory and the running product are separate governance domains because they perform different sensitive activities.
 
-1. **Name factory activities** (build, sign, release) and **product activities**
-   (serve, share, invoke) as separate sensitive-activity sets.
-2. **Give each domain its own twins** and owners.
-3. **Collect evidence in the domain that produced it**—provenance in the factory,
-   decision logs in the product.
-4. **Connect domains via artefacts**, not via a single composite score.
-5. **Report posture separately** so green in one place cannot hide red in the
-   other.
+The **Factory Implementation Twin** describes how software is built, tested and released. It is governed by the **Factory Governance Twin**, which defines the controls, policies and evidence required before a release may leave the factory. This is where governance is developed, reviewed and verified alongside the implementation.
 
-The vivid test: the product can be green while the factory is red. If your
-governance cannot show that, the domains are still collapsed.
+When a release is promoted, the factory delivers more than executable code:  it delivers the **Product Implementation Twin** together with the **Product Governance Twin** that defines how the deployed software should be governed. The governance created in the factory therefore becomes part of the released product.
 
 </Discussion>
 

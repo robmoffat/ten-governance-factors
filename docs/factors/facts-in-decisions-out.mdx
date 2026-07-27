@@ -8,50 +8,60 @@ tags:
 description: "Governance decisions should be computed from structured requests and return explicit results."
 ---
 
-<GovernanceFactor title="Facts In, Decisions Out" number={5}>
+<GovernanceFactor title="Context In, Decisions Out" number={5}>
 
 <Principle>
 
-Governance decisions should be computed from structured requests and return
-explicit results.
+Governance decisions should be based on the context surrounding a sensitive activity and return an explicit outcome.
 
-A visible decision boundary—facts in, permit/deny/obligations out—turns
-governance from tribal memory into something you can inspect, reuse and prove.
+Whether an activity is performed by software, people or AI agents, these decisions should be deterministic and inspectable. 
+
+Given the same governance context, you should always expect the same result. This makes governance explainable, testable, reproducible and verifiable.
 
 </Principle>
 
 <Problem>
+Too often, governance is hidden inside application code, workflow definitions and operational procedures. The conditions under which a sensitive activity is permitted become implicit rather than explicit, making them difficult to review, test or explain.
 
-Without a defined request shape and an inspectable result, governance becomes a
-mixture of scripts, tickets and human memory. Hidden chains and UI-only toggles
-cannot explain why they permitted or denied—or what obligations followed.
-
-Sensitive activities need concrete questions: may this principal perform this
-action on this resource in this context? If the answer is only a silent state
-change, you have automation, not governance.
-
+A governance system should expose those decisions as explicit evaluations over structured facts. Instead of asking "what did this workflow happen to do?", organisations should be able to ask – after the fact – "given these facts, what governance decision should have been made?"
 </Problem>
 
 <Characteristics>
 
-<RevealItem title="Structured facts" defaultOpen>
+<RevealItem title="Decisions are functions over context" defaultOpen>
 
-Inputs have a shape: principal, action, resource and context. Engines and humans
-can see what was considered.
-
-</RevealItem>
-
-<RevealItem title="Explicit decisions">
-
-Outputs are more than a boolean when needed: permit, deny, obligations, reasons
-and references to evidence.
+Governance evaluates the complete context surrounding a sensitive activity: the
+principal, action, resource and any human, organisational or technical context
+required to make the decision.
 
 </RevealItem>
 
-<RevealItem title="A visible boundary">
+<RevealItem title="Decisions are deterministic">
 
-Policy evaluation is a named step between request and action—not an opaque side
-effect buried in a workflow.
+Given the same governance context, the same decision should always be produced.
+This makes governance predictable, explainable, testable and reusable across
+people, software and AI agents.
+
+</RevealItem>
+
+<RevealItem title="Decisions are explicit">
+
+Decisions should be a distinct step between request and action—not an
+opaque side effect buried inside application code or organisational processes.
+Every decision should have a clear input, an explicit outcome and an
+understandable explanation.
+
+</RevealItem>
+
+<RevealItem title="Decisions are reproducible">
+
+By recording both the context used to make a decision and the decision itself, organisations can reproduce, audit and explain governance decisions long after they were originally made.
+
+</RevealItem>
+
+<RevealItem title="Decisions are side-effect free">
+
+Evaluating governance should never change the state of the system. The decision function should simply evaluate the context and return a decision. Performing the activity—and any resulting side effects such as updating records, sending notifications or transferring funds—belongs to the implementation, not the governance evaluation.
 
 </RevealItem>
 
@@ -59,104 +69,147 @@ effect buried in a workflow.
 
 <PositiveExamples>
 
-<RevealItem title="“May this agent call this tool on this dataset?”">
-A concrete question with principal, action, resource and context—answerable by an
-engine and explainable afterwards.
+<RevealItem title="Mortgage Approval">
+The governance decision function evaluates the applicant's identity, affordability,
+regulatory constraints and organisational policy before returning a decision to
+approve, decline or refer the application.
 </RevealItem>
 
-<RevealItem title="“May this branch be promoted?”">
-A promotion decision that returns permit/deny, reasons and any obligations.
+<RevealItem title="Production Deployment">
+Before a release is deployed, governance evaluates provenance, approvals,
+vulnerability posture and change policy, producing an explicit decision to
+deploy, reject or require further review.
 </RevealItem>
 
-<RevealItem title="Permit with obligations">
-A decision that is more than a boolean—encrypt, notify, record—travelling with
-the permit into the path of execution.
+<RevealItem title="AI Tool Invocation">
+Before an AI agent accesses customer information, governance evaluates the
+user's authority, data classification, model permissions and organisational
+policy to determine whether the request is permitted.
+</RevealItem>
+
+<RevealItem title="Payment Authorisation">
+The governance decision function evaluates payment amount, customer risk profile,
+fraud indicators and approval requirements before authorising or denying the
+transfer.
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="Hidden script chains">
-Outcomes produced by opaque automation with no request/response boundary.
+<RevealItem title="Hidden Mortgage Rules">
+
+A mortgage application decides whether to approve a customer using business rules
+embedded throughout the application code. The decision cannot be reviewed, tested
+or reused independently of the implementation or without expert assistance.
+
 </RevealItem>
 
-<RevealItem title="Approval by tribal knowledge">
-Decisions that live only in people’s heads and cannot be audited or reused.
+<RevealItem title="Manual Production Deployment Judgement">
+
+An operations engineer decides whether a production deployment should proceed by
+interpreting a written runbook. Different engineers may reach different conclusions
+because the governance has no explicit decision function.
+
 </RevealItem>
 
-<RevealItem title="UI-only toggles with no decision record">
-State changes that look like policy but leave no facts, reasons or evidence.
+<RevealItem title="Workflow Encoded Governance">
+
+A workflow routes requests through several approval steps, but the conditions for
+approval are embedded inside the workflow itself. Changing the parameters of a decision 
+now means changing the workflow itself rather than updating the governance.
+
+</RevealItem>
+
+<RevealItem title="AI Agents Making Policy">
+
+An AI agent decides for itself whether it is allowed to invoke a customer database
+or payment service. Governance has effectively become part of the agent's reasoning
+instead of an independent decision.
+
 </RevealItem>
 
 </NegativeExamples>
 
 <AntiPatterns>
 
-<RevealItem title="Policy as workflow">
+<RevealItem title="Hidden Governance">
 
-Treating a ticket queue as the decision engine. Workflow can orchestrate
-remediation; it should not replace an inspectable policy evaluation.
-
-</RevealItem>
-
-<RevealItem title="Assumptions instead of facts">
-
-Evaluating on implied context that was never stated in the request—so nobody can
-reproduce why the decision went the way it did.
+Governance decisions are buried inside application code, SQL queries or workflow
+definitions where they cannot be reviewed independently.
 
 </RevealItem>
 
-<RevealItem title="Allow/deny with no rationale">
+<RevealItem title="Side-Effecting Decisions">
 
-Opaque results that cannot cite inputs, rules or obligations. Unexplainable
-decisions are unverifiable ones.
+The decision function updates databases, sends emails or performs business
+actions instead of simply returning a decision.
+
+</RevealItem>
+
+<RevealItem title="Non-deterministic Decisions">
+
+The same governance context sometimes produces different decisions because hidden
+state or external behaviour influences the result.
+
+</RevealItem>
+
+<RevealItem title="Implicit Inputs">
+
+The decision depends on information that is not explicitly supplied as part of
+the governance context, making it impossible to explain or reproduce.
 
 </RevealItem>
 
 </AntiPatterns>
 
 <Diagram
-  title="How are decisions made?"
-  description="Facts enter a policy boundary; an explicit decision, action and explanation come out."
+  title="How are governance decisions made?"
+  description="Governance evaluates the socio-technical context surrounding a sensitive activity and produces an explicit decision."
 >
 
 ```mermaid
 flowchart LR
-  Facts["Facts<br/>principal · action · resource · context"] --> Policy
-  Policy --> Decision["Decision<br/>permit / deny · obligations"]
-  Decision --> Action
-  Decision --> Explanation["Explanation<br/>reasons · evidence refs"]
+  C["<b>Implementation Twin Context</b><br/>human · software · organisation · resources"]
+  -->|is input to| F["<b>Decision function</b><br/><i>Decision = f(Context)</i>"]
+
+  F -->|produces| D["<b>Explicit decision</b><br/>permit · deny · obligations · reasons"]
+
+  D -->|authorises or constrains| A["<b>Sensitive activity</b><br/>person · software · AI agent"]
+
+  G["<b>Governance Twin</b><br/>policies · controls · risks · version "]
+  -.->|supplies| F
 ```
 
 </Diagram>
 
 <Discussion>
 
-Applying this principle means making every governance decision look like a
-question with an answer.
+Every sensitive activity should have a visible governance decision boundary. Rather than embedding governance inside application code, workflows or human procedures, the implementation should present the relevant context to a decision function and receive an explicit outcome in return. This separates **performing work** from **deciding whether that work is permitted**, allowing governance to be developed, reviewed and tested independently of the implementation.
 
-1. **Define the request shape** for each sensitive activity you evaluate.
-2. **Put policy evaluation on a visible boundary** between request and action.
-3. **Return structured results**—permit/deny, obligations, reasons.
-4. **Record the facts and the decision** so evidence can cite them later.
-5. **Keep workflow for remediation and escalation**, not as a substitute for
-   decisioning.
+The decision function should evaluate the complete socio-technical context surrounding the activity, including the human, software, organisational and resource context represented by the Implementation Twin. The Governance Twin provides the policies, controls, risks and decision authority that guide the evaluation. Given the same context and the same Governance Twin, the function should always produce the same decision.
 
-The lineage is familiar: XACML, Cedar, OPA and DMN differ in style but agree that
-the decision boundary must be visible and the request must have a defined shape.
+Applying this principle means:
+
+1. **Define the governance context** required to evaluate each sensitive activity.
+2. **Expose governance as an explicit decision function** between request and action.
+3. **Return structured decisions** including outcomes, obligations and reasons.
+4. **Keep decision-making free of side effects**; performing the activity remains the responsibility of the implementation.
+5. **Record both the context and the resulting decision** so it can later be verified, explained and audited.
+
+This pattern already exists in many successful governance technologies. **XACML**, **Cedar** and **OPA** all expose policy evaluation as an explicit decision function over structured context. **DMN** applies the same principle to business decisions, separating decision logic from workflow and process orchestration. 
+
+Although these technologies differ in scope and implementation, they embody the same architectural ideas: governance should be a visible, deterministic decision boundary and governance decisions are essentially [pure functions](https://en.wikipedia.org/wiki/Pure_function).
 
 </Discussion>
 
 <RelatedFactors>
 
-Concrete decisions sit on top of scoped activities and feed continuous control:
-
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — which questions deserve a decision boundary
-- [Continuous Governance](/docs/factors/continuous-governance) — where those decisions interrupt or condition change
-- [Evidence by Default](/docs/factors/evidence-by-default) — decision logs as normal exhaust
-- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — policy logic stored as artefacts
-- [Governance Is Composable](/docs/factors/governance-is-composable) — how layered policies combine into one evaluation
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — identifies the business activities that require explicit governance decisions.
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — provides the policies, controls, risks and decision authority consumed by the decision function.
+- [Governance Is Version Controlled](/docs/factors/governance-is-version-controlled) — ensures decision logic evolves safely, can be reviewed and is reproducible over time.
+- [Evidence by Default](/docs/factors/evidence-by-default) — records the governance context and resulting decisions to provide auditability and explainability.
+- [Continuous Governance](/docs/factors/continuous-governance) — decisions form part of an ongoing, continuous record of the system over time.
 
 </RelatedFactors>
 

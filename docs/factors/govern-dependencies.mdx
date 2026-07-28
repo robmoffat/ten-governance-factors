@@ -12,47 +12,29 @@ description: "Your risks are inherited from your dependencies."
 
 <Principle>
 
-Your risks are inherited from your dependencies.
+Your sensitive activity inherits trust from the things it depends upon.
 
-A green local status on a red edge is not a green system. Governance must follow
-`depends on` relationships across libraries, services, tools, models, pipelines
-and organisations.
+Whether performed by people, software or AI agents, no activity exists in isolation.  Governance must therefore follow dependency relationships across software, data, services, infrastructure, organisations and other activities, ensuring decisions reflect the complete supply chain rather than just the local component.
 
 </Principle>
 
 <Problem>
 
-Systems inherit risk from the things they depend upon. Flat inventories and
-“just libraries” thinking leave pipelines, tools, models, services and
-organisations off the graph—so a green local status can sit on a red edge.
+Modern software engineering manages complexity by decomposing systems into smaller activities, services, teams and organisations. This distributes responsibility—and with it, risk.
 
-Modern incidents often look like
-`Dependency → Dependency → Dependency → Compromise` or
-`Agent → Tool → Data → Exfiltration`. If the twin cannot represent those edges,
-posture cannot propagate and decisions cannot reason about inherited risk.
+While [every sensitive activity should have a clear owner](governance-has-owners), no activity exists in isolation. Each activity inherits trust, obligations and risk from the upstream activities, systems and organisations upon which it depends. 
+
+If each participant in that supply chain manages its own local risks then no participant manages the risk of the system as a whole and changes that are locally beneficial may unintentionally invalidate the governance assumptions made by downstream activities. 
+
+Your governance twin must therefore reconstruct the workflow supply chain, allowing decisions to consider inherited trust, obligations and risk rather than only the activity immediately in front of them.
 
 </Problem>
 
 <Characteristics>
 
-<RevealItem title="Dependencies are first-class" defaultOpen>
+<RevealItem title="Governance follows the workflow supply chain" defaultOpen>
 
-Not only libraries: services, tools, models, pipelines, keys, vendors and
-organisations belong on the trust graph.
-
-</RevealItem>
-
-<RevealItem title="Posture propagates">
-
-Inherited risk and evidence travel along edges. Local status without upstream
-context is incomplete.
-
-</RevealItem>
-
-<RevealItem title="Transitive, not only direct">
-
-Compromise travels further than the first hop. Governance that stops at direct
-edges understates attack paths.
+Every sensitive activity inherits trust, obligations and risk from the upstream activities, systems and organisations upon which it depends. Your Governance Twin should therefore reconstruct the workflow supply chain, allowing governance decisions to reason about the complete chain of trust rather than only the activity immediately in front of them.
 
 </RevealItem>
 
@@ -60,124 +42,159 @@ edges understates attack paths.
 
 <PositiveExamples>
 
-<RevealItem title="SBOM-backed release gates">
-Promotion decisions that consume dependency evidence, not just local tests.
+<RevealItem title="Log4Shell and the open source supply chain">
+
+A bank's trading platform is fully tested and locally compliant, yet inherits a critical vulnerability through an upstream logging library.   Governance follows the software supply chain:  inherited vulnerabilities therefore influence release decisions and patching efforts.
+
 </RevealItem>
 
-<RevealItem title="App twins showing upstream services and data stores">
-Inherited posture made visible across service and data edges.
+<RevealItem title="Governance follows the AI workflow supply chain">
+
+Model versions, evaluation results, tool behaviour and data quality are treated as dependencies of the sensitive activity. Changes anywhere in the AI supply chain trigger re-evaluation before governance assumptions can become stale.
+
 </RevealItem>
 
-<RevealItem title="AI-agent policy that distinguishes approved tools">
-Agent risk governed through the tools and models it depends on.
+<RevealItem title="An international payment workflow">
+
+Governance follows the financial workflow supply chain. Identity verification, fraud detection, sanctions screening, payment networks and correspondent banks all contribute trust, obligations and risk to the decision to execute a payment.
+
 </RevealItem>
 
-<RevealItem title="Service catalogues with dependency relations">
-Catalogue graphs that let governance follow `depends on` links.
+<RevealItem title="A cloud-hosted trading platform">
+
+Governance follows the cloud service supply chain. Changes to managed identity, databases, key management and platform services automatically influence governance posture, ensuring the application is governed in the context of the platform upon which it depends.
+
 </RevealItem>
 
 </PositiveExamples>
 
 <NegativeExamples>
 
-<RevealItem title="Treating dependencies as “just libraries”">
-Ignores services, tools, models, pipelines and organisations on the trust graph.
+<RevealItem title="Treating dependencies as 'just libraries'">
+
+An organisation scans open source dependencies before every release, but ignores the cloud services, AI models, data sources and third-party organisations upon which the application also depends. Governance covers only part of the workflow supply chain, leaving inherited trust and risk outside the decision.
+
 </RevealItem>
 
-<RevealItem title="Green status on a service with a red pipeline">
-Local posture that hides inherited factory or upstream failure.
+<RevealItem title="Green application, red supply chain">
+
+A payment service reports a healthy governance posture, despite depending on a compromised build pipeline and an upstream fraud service operating outside policy. Local governance appears green because inherited posture is never considered.
+
 </RevealItem>
 
-<RevealItem title="Approving an agent without tool or model provenance">
-Agent trust without knowing what it depends on to act.
+<RevealItem title="Approving an AI agent without governing its dependencies">
+
+An AI agent is approved to perform sensitive activities without considering the provenance of its model, tools or external data sources. The governance decision applies only to the agent itself, not to the workflow supply chain that actually determines its behaviour.
+
+</RevealItem>
+
+<RevealItem title="Unpinned AI models">
+
+A mortgage approval workflow depends on "the latest" version of a language model. A routine upstream model update changes the behaviour of the workflow, invalidating its governance assumptions without any change to the organisation's own software.
+
 </RevealItem>
 
 </NegativeExamples>
 
 <AntiPatterns>
 
-<RevealItem title="Flat inventories">
+<RevealItem title="Stopping at the first dependency">
 
-Asset lists without relationships. You can name things and still miss how risk
-moves between them.
-
-</RevealItem>
-
-<RevealItem title="First-order thinking">
-
-Governing only the direct edge while transitive compromise remains invisible.
+Only considering the activities or systems directly connected to a sensitive activity. Governance should follow the workflow supply chain until inherited trust, obligations and risk can no longer materially affect the decision.
 
 </RevealItem>
 
-<RevealItem title="Isolating assets from their graph">
+<RevealItem title="Treating organisational boundaries as trust boundaries">
 
-Evaluating a twin as if it stood alone. Composition creates risk; isolation
-hides it.
+Assuming risk ends when responsibility passes to another team, supplier or organisation. Ownership can be delegated, but downstream activities still inherit the consequences of upstream decisions.
+
+</RevealItem>
+
+<RevealItem title="Treating every dependency equally">
+
+Every dependency does not contribute the same trust, obligations or risk. Governance should distinguish critical dependencies from incidental ones rather than modelling the entire supply chain with equal weight.
+
+</RevealItem>
+
+<RevealItem title="Static supply chains">
+
+Treating dependency relationships as documentation rather than part of the Governance Twin. Workflow supply chains evolve continuously, and governance should detect and respond when upstream changes invalidate downstream assumptions.
 
 </RevealItem>
 
 </AntiPatterns>
-
 <Diagram
-  title="How does risk propagate?"
-  description="Dependencies carry inherited governance posture across services, agents and third parties."
+  title="Governance follows the workflow supply chain"
+  description="Each sensitive activity trusts the activities that precede it, while contributing obligations and risk to those that follow"
 >
 
+Let's say you have these four sensitive activities:
+
 ```mermaid
-graph LR
-  App[Customer app] --> API[Payments API]
-  App --> Agent[AI agent]
-  API --> Lib[Shared library]
-  API --> Vendor[Third-party KYC]
-  Agent --> Tool[Tool / MCP]
-  Tool --> Data[Customer data]
-  Lib -.->|inherits| GovL[Library controls]
-  Vendor -.->|inherits| GovV[Vendor attestations]
-  Tool -.->|inherits| GovT[Tool policy]
+flowchart LR
+
+    ID["Verify Identity"]
+    FR["Fraud Screening"]
+    CR["Credit Assessment"]
+    AP["Approve Mortgage"]
+
+    ID --> FR
+    FR --> CR
+    CR --> AP
 ```
+
+The Governance Twin reconstructs this supply chain so governance decisions reflect inherited trust, obligations and risk across the complete workflow.
+
+| **Sensitive Activity** | **Trusts (Upstream Supply Chain)**                                          | **Obligations (Downstream Supply Chain)**                   | **Risks (Downstream Supply Chain)**                  |
+| ---------------------- | -------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------- |
+| **Verify Identity**    | Customer identity documents                                    | Record identity evidence                       | Identity fraud                          |
+| **Fraud Screening**    | Identity verification                                          | Manual review if fraud score exceeds threshold | Fraud loss                              |
+| **Credit Assessment**  | Identity verification<br/>Fraud assessment                      | Apply approved lending criteria                | Credit default                          |
+| **Approve Mortgage**   | Identity verification<br/>Fraud assessment<br />Credit assessment | Record approval and retain evidence            | Regulatory breach<br />Financial exposure |
 
 </Diagram>
 
 <Discussion>
 
-Applying this principle means putting relationships into the twin and into
-decisions.
+Modern software engineering manages complexity by decomposing systems into smaller, independently owned activities. This allows teams to work autonomously, but it also distributes trust, obligations and risk. 
 
-1. **Model `depends on` edges** for services, libraries, tools, models, pipelines
-   and vendors—not only package lists.
-2. **Attach inherited posture** so a consumer can see upstream red without
-   pretending local green is enough.
-3. **Feed dependency evidence into gates**—SBOMs, attestations, catalogue relations.
-4. **Follow transitive paths** for high-risk activities, especially agents and
-   supply chains.
-5. **Keep factory and product edges distinct** where the dependency is build-time
-   versus run-time.
+The same principle already exists in software supply chains. Modern build systems reconstruct the activities that produced a software artefact—source control, dependencies, build pipelines, testing, signing and release—so software can be governed in the context of its complete factory rather than simply the binary that was produced. 
 
-Catalogue graphs, cloud inventories and SBOMs make the same idea operational:
-posture follows relationships.
+As we saw in the [Govern Factory and Product Separately](govern-factory-and-product-separately) factor, runtime governance and building software are both sensitive activities, so let's compare how a runtime product and a well-run software factory treat this principle:
+
+| **Governance Principle** | **Runtime Product** | **Software Factory** |
+|--------------------------|---------------------|----------------------|
+| **Model the workflow supply chain** | Model the sensitive activities, systems and organisations that implement the business process. | Model the activities that produce software: source control, build, testing, signing, packaging and release. |
+| **Model governance dependencies** | The Governance Twin reconstructs which upstream activities each sensitive activity trusts, together with the obligations and risks inherited from them. | The Governance Twin reconstructs which packages, build activities, test results, signatures and release activities each software artefact trusts. |
+| **Evaluate activities in context** | Governance decisions consider the complete workflow supply chain rather than only the local activity. | Release decisions consider the complete software supply chain rather than only the software artefact being released. |
+| **Allow governance to propagate** | Changes to upstream activities automatically influence the governance posture of downstream activities that trust them. | New vulnerabilities, dependency updates or policy changes automatically propagate re-evaluation of affected software artefacts. |
+| **Optimise the system, not the parts** | Governance optimises the behaviour of the complete business workflow rather than allowing each activity to optimise only its own local risks. | Supply chain security optimises the complete software factory rather than focusing solely on application source code or individual build steps. |
+
+Although software engineers often think about software supply chains and business workflows as separate concerns, they are examples of the same architectural pattern. 
+
+Implementation decomposes systems into independently owned activities; the Governance Twin reconstructs the resulting supply chain so governance can reason about inherited trust, obligations and risk across the system as a whole.
 
 </Discussion>
 
 <RelatedFactors>
 
-Dependencies sharpen twin, evidence and factory/product boundaries:
+Governance supply chains build on the previous factors:
 
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — relationships live on twins
-- [Evidence by Default](/docs/factors/evidence-by-default) — SBOMs and attestations as edge evidence
-- [Govern the Factory and the Product Separately](/docs/factors/govern-factory-and-product-separately) — supply-chain vs service edges
-- [Context In, Decisions Out](/docs/factors/context-in-decisions-out) — decisions that include dependency facts
-- [Continuous Governance](/docs/factors/continuous-governance) — gates that consume inherited posture
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — reconstructs the workflow supply chain and its governance relationships.
+- [Govern Factory and Product Separately](/docs/factors/govern-factory-and-product-separately) — applies the same principles independently to software factories and runtime products.
+- [Context In, Decisions Out](/docs/factors/context-in-decisions-out) — evaluates sensitive activities using inherited trust, obligations and risk.
+- [Evidence by Default](/docs/factors/evidence-by-default) — records evidence throughout the supply chain, allowing trust relationships to be verified.
+- [Continuous Governance](/docs/factors/continuous-governance) — propagates upstream changes through the supply chain and continuously re-evaluates downstream governance.
 
 </RelatedFactors>
-
 <References>
 
-- [CycloneDX](/docs/tools/cyclonedx) — machine-readable dependency composition
-- [Backstage](/docs/tools/backstage) — entity relations on the catalogue graph
-- [AWS Config](/docs/tools/aws-config) — cloud resource relationship inventory
-- [Cloud Asset Inventory](/docs/tools/cloud-asset-inventory) — cross-project asset graphs
-- [ServiceNow CMDB](/docs/tools/servicenow-cmdb) — CI relationships and ownership
-- [NIST C-SCRM](/docs/tools/nist-c-scrm) — supply-chain risk as inherited dependency risk
+- [CycloneDX](/docs/tools/cyclonedx) — reconstructs software supply chains from dependency relationships and software bills of materials.
+- [Backstage](/docs/tools/backstage) — models services, systems and ownership relationships across the software estate.
+- [AWS Config](/docs/tools/aws-config) — discovers cloud resource relationships and tracks how configuration changes propagate.
+- [Cloud Asset Inventory](/docs/tools/cloud-asset-inventory) — reconstructs dependency relationships across Google Cloud resources.
+- [ServiceNow CMDB](/docs/tools/servicenow-cmdb) — records configuration items, ownership and operational dependencies across enterprise systems.
+- [NIST C-SCRM](/docs/tools/nist-c-scrm) — applies supply chain risk management to software, suppliers and third-party dependencies.
 
 </References>
 

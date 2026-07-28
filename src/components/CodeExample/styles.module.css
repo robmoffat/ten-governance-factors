@@ -1,0 +1,168 @@
+.item {
+  margin: 1rem 0;
+  border: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+  border-radius: 8px;
+  background: var(--gf-surface-raised, var(--ifm-background-surface-color));
+  overflow: hidden;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::marker {
+  content: '';
+}
+
+.summary:hover {
+  background: var(--gf-accent-soft, rgba(31, 107, 58, 0.06));
+}
+
+.header {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.title {
+  min-width: 0;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.pill {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-contrast-background);
+  border: 1px solid var(--ifm-color-primary-lightest);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.caption {
+  min-width: 0;
+  color: var(--gf-ink-muted, var(--ifm-color-content-secondary));
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.chevron {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+  opacity: 0.85;
+}
+
+.item[open] .chevron {
+  transform: rotate(225deg);
+  margin-top: 0.2rem;
+}
+
+.body {
+  padding: 0.75rem 0.9rem 0.9rem;
+  border-top: 1px solid var(--gf-rule, var(--ifm-color-emphasis-200));
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body > :last-child {
+  margin-bottom: 0;
+}
+
+.body :global(pre) {
+  margin: 0;
+}
+
+.outputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.outputSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.outputOption {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.outputInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.outputLabel {
+  display: inline-block;
+  padding: 0.22rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gf-ink-muted, var(--ifm-color-content-secondary));
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.outputOption:hover .outputLabel {
+  border-color: var(--ifm-color-primary-light);
+}
+
+.outputOptionSelected .outputLabel {
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-contrast-background);
+  border-color: var(--ifm-color-primary-lightest);
+}
+
+.outputBody > :first-child {
+  margin-top: 0;
+}
+
+.outputBody > :last-child {
+  margin-bottom: 0;
+}

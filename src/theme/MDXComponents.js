@@ -22,6 +22,7 @@ import GovernanceArtifact, {
 import FactorList from '@site/src/components/FactorList';
 import ArtifactList from '@site/src/components/ArtifactList';
 import RevealItem from '@site/src/components/RevealItem';
+import CodeExample, {Output, Outputs} from '@site/src/components/CodeExample';
 import LayerPill from '@site/src/components/LayerPill';
 import ArtifactLayerMap from '@site/src/components/ArtifactLayerMap';
 import Tool, {HelpsWith} from '@site/src/components/Tool';
@@ -49,6 +50,9 @@ export default {
   FactorList,
   ArtifactList,
   RevealItem,
+  CodeExample,
+  Outputs,
+  Output,
   LayerPill,
   ArtifactLayerMap,
   Tool,

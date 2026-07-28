@@ -243,6 +243,34 @@ output: {
 }
 ```
 
+
+<Outputs defaultValue="dev">
+<Output value="dev" label="DEV">
+```yaml
+controls:
+  - id: Org.PersonalData.Dev.CN01
+    group: Personal Data
+    title: Prevent Replication of Personal Data Outside Approved Jurisdictions
+    objective: >
+      Ensure object storage containing synthetic data in the development
+      environment cannot replicate data to jurisdictions not approved by the
+      organisation's privacy policy.
+    threats:
+      - reference-id: ccc-core-threats
+        entries:
+          - reference-id: CCC.Core.TH06
+            remarks: Data is Lost or Corrupted
+            strength: 1
+    assessment-requirements:
+      - id: Org.PersonalData.Dev.CN01.AR01
+        text: >
+          Replication destinations MUST be restricted to GB or IE.
+      - id: Org.PersonalData.Dev.CN01.AR02
+        text: >
+          Evidence of replication-policy evaluation MUST be retained for at
+          least 30 days.
+```
+
 </Output>
 <Output value="uat" label="UAT">
 ```yaml
@@ -297,8 +325,6 @@ controls:
           least 2555 days.
 ```
 
-
-
 </Output>
 </Outputs>
 
@@ -310,14 +336,74 @@ controls:
 
 <RevealItem title="Compose through contracts">
 
-Large organisations rarely standardise on a single governance language or
-execution engine. Governance should therefore compose through common schemas,
-decision interfaces and evidence contracts rather than common implementations.
+Governance is often produced by other teams, organisations and suppliers using
+their own governance models, tools and execution engines. Consumers should not
+expect every governance producer to adopt the same implementation technology.
 
-For example, a Governance Twin may combine Gemara governance objects from
-**grc.store**, OSCAL control catalogues, OPA decision services and manual
-organisational processes into a single governance model without requiring every
-component to use the same technology.
+Instead, governance should be exchanged through stable contracts. Like a
+software API, a governance contract defines the information a producer promises
+to provide—such as governance definitions, decisions, evidence or obligations—
+without prescribing how those results are produced. Consumers remain free to
+interpret that information within their own Governance Twins.
+
+For example, a bank may consume cloud governance published as OSCAL, AI
+governance published as Gemara, authorisation decisions from an OPA service and
+manual approvals from a third-party supplier. Each component exposes a
+different implementation but fulfils an agreed governance contract, allowing
+them to participate in the same governance architecture without rewriting their
+native representations.
+
+<CodeExample title="Consuming OSCAL in Gemara" type="Gemara" caption="The Common Cloud Controls consume a governance contract published by the Cloud Controls Matrix. CCC interprets the published control identifiers within its own governance model without requiring CSA to adopt Gemara or FINOS to adopt OSCAL.">
+
+```yaml
+metadata:
+  id: CCC.Core
+  title: Common Cloud Controls Core
+  ... 
+  mapping-references:
+    - id: CCM
+      title: Cyber Controls Matrix
+      version: v4.0
+      description: |
+        The Cloud Controls Matrix (CCM) is a cybersecurity framework developed
+        by the Cloud Security Alliance (CSA) to provide a structured and
+        standardized set of security controls for cloud computing environments.
+        The primary purpose of CCM is to help organizations assess the overall
+        security posture of their cloud infrastructure and services.
+      url: https://our.server/docs/CCMv4.1.0-oscal_catalog.json
+    ...
+
+controls:
+ - id: CCC.Core.CN06
+    group: Data
+    title: Restrict Deployments to Trust Perimeter
+    ...
+    guidelines:
+      - reference-id: CCM
+        entries:
+          - reference-id: DSP-19
+            remarks: Data Location (specify and document processing and backup locations)
+            strength: 10  
+
+```
+
+</CodeExample>
+
+</RevealItem>
+
+<RevealItem title="Publish versioned governance artefacts">
+
+Reusable governance should be published to a shared governance repository rather
+than embedded inside individual Governance Twins. Publishing gives governance a
+stable identity, version history, ownership and release lifecycle, allowing
+other Governance Twins to consume released governance exactly as software
+consumes published libraries.
+
+For example, organisations may publish approved governance artefacts to an
+internal governance registry, while industry initiatives such as
+[grc.store](/docs/tools/grc.store) allow communities to publish reusable
+governance objects for wider adoption. Governance Twins reference these
+published releases rather than maintaining private copies.
 
 </RevealItem>
 
@@ -455,43 +541,76 @@ flowchart LR
 
 </Diagram>
 
+
 <Discussion>
 
-Applying this principle means assembling governance instead of replacing it.
+In modern software engineering, systems are built by composing independently developed, versioned and published components. Each component has a clear owner, release lifecycle and public interface, allowing large systems to evolve without every team changing every
+part at once.
 
-1. **Publish stable baselines** as versioned catalogues and templates.
-2. **Specialise via profiles and overlays**, not forks of the whole stack.
-3. **Define precedence** so composed evaluation can show which rule won.
-4. **Bound local parameters** (principals, resources, twins) without rewriting
-   shared logic.
-5. **Track exceptions as overlays** with owners and expiry.
+Governance faces exactly the same challenge. Enterprise governance is too large
+to be developed, versioned and owned as a single artefact. Instead, Governance
+Twins should be assembled from reusable governance modules published by teams,
+projects, regulators and industry initiatives. Each module can evolve
+independently while remaining consumable by the Governance Twins that depend
+upon it.
 
-OSCAL profiles, XACML combining algorithms and Cedar templates all encode the
-same idea: federated organisations need composition, not replacement.
+This approach naturally separates the responsibilities of governance producers
+and governance consumers. Producers are responsible for authoring, testing,
+versioning and publishing governance modules. Consumers are responsible for
+selecting appropriate releases, composing them into Governance Twins and
+interpreting them within their own governance context.
+
+Like software, governance composition depends upon a small number of proven
+engineering principles:
+
+| **Software Engineering** | **Governance Engineering** |
+|--------------------------|----------------------------|
+| Publish reusable libraries | Publish reusable governance artefacts |
+| Import dependencies | Reference released governance |
+| Extend base classes and interfaces | Specialise shared governance |
+| Configure deployments | Parameterise governance patterns |
+| Publish APIs | Publish governance contracts |
+| Compose applications | Compose Governance Twins |
+
+Software engineering did not solve reuse by standardising on one programming
+language. It solved it by defining stable interfaces (APIs) between independently
+evolving components. 
+
+Governance should do the same: teams, suppliers and
+regulators should remain free to publish governance using their own native
+representations, while Governance Twins consume those artefacts through stable
+contracts rather than common implementations.
 
 </Discussion>
 
 <RelatedFactors>
 
-Composition keeps versioned artefacts scalable and owned:
+Composable governance builds on the previous engineering principles:
 
-- [Governance is Version Controlled](/docs/factors/governance-is-version-controlled) — composable parts stored as artefacts
-- [Governance Has Owners](/docs/factors/governance-has-owners) — who owns each layer and exception
-- [Context In, Decisions Out](/docs/factors/context-in-decisions-out) — composed policies evaluated at a decision boundary
-- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — where bindings attach to instances
-- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — scope that profiles specialise
+- [Build a Governance Twin](/docs/factors/build-a-governance-twin) — Governance Twins are assembled from reusable governance modules.
+- [Govern Sensitive Activities](/docs/factors/govern-sensitive-activities) — individual Governance Twins become reusable modules within larger business workflows.
+- [Continuous Governance](/docs/factors/continuous-governance) — composed Governance Twins can be evaluated consistently throughout the software lifecycle.
+- [Govern Dependencies](/docs/factors/govern-dependencies) — governance modules inherit trust, obligations and risk from the governance upon which they depend.
+- [Governance Has Owners](/docs/factors/governance-has-owners) — every published governance module requires clear ownership and an independent release lifecycle.
 
 </RelatedFactors>
-
 <References>
 
-- [OSCAL](/docs/tools/oscal) — profiles that import, merge and modify catalogues
-- [Common Cloud Controls](/docs/tools/common-cloud-controls) — shared control baselines specialised for different cloud services and environments
-- [Cedar](/docs/tools/cedar) — reusable policy templates with local bindings
-- [XACML](/docs/tools/xacml) — policy and rule-combining algorithms
-- [Gemara](/docs/tools/gemara) — layered artefacts and mappings
-- [grc.store](/docs/tools/grc-store) — versioned distribution of reusable governance artefacts
-- [Open Policy Agent](/docs/tools/open-policy-agent) — modular policy packages composed at evaluation time
+Governance publication and composition:
+
+- [Gemara](/docs/tools/gemara) — reusable governance objects, imports and mappings.
+- [grc.store](/docs/tools/grc-store) — versioned publication and distribution of governance artefacts.
+
+Governance standards:
+
+- [OSCAL](/docs/tools/oscal) — reusable control catalogues, profiles and assessment artefacts.
+- [Common Cloud Controls](/docs/tools/common-cloud-controls) — shared cloud governance specialised for different providers and environments.
+
+Governance execution:
+
+- [Cedar](/docs/tools/cedar) — policy templates and parameterised authorisation.
+- [Open Policy Agent](/docs/tools/open-policy-agent) — modular policy packages evaluated at runtime.
+- [XACML](/docs/tools/xacml) — policy composition and rule-combining algorithms.
 
 </References>
 

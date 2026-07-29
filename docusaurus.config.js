@@ -89,6 +89,12 @@ const config = {
             label: 'CALM',
             position: 'right',
           },
+          {
+            href: 'https://github.com/risk-first/ten-factor-governance',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+          },
         ],
       },
       footer: {
@@ -120,7 +126,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/finos/governance-factors',
+                href: 'https://github.com/risk-first/ten-factor-governance',
               },
             ],
           },
@@ -138,7 +144,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} FINOS.`,
+        copyright: `Copyright © ${new Date().getFullYear()} FINOS / Rob Moffat`,
       },
       mermaid: {
         theme: {light: 'neutral', dark: 'dark'},
